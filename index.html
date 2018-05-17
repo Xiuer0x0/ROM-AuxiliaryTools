@@ -4,20 +4,25 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/mystyle.css">
     <link rel="stylesheet" href="css/mystyle-color.css">
-    <title>ROM Auxiliary tools</title>
+    <title>ROM Auxiliary Tools</title>
 </head>
 
 <body>
     <div class="container align-middle">
-        <h1>治癒術 <span class="label label-defult">試算工具</span><span>EP 3.5</span></h1>
-
+        
+        <div class="d-flex flex-row">
+            <div class="align-self-end h1">計算機</div>
+            <div class="align-self-end label-tag">治癒術</div>
+            <div class="align-self-end label-tag bg-deep-purple lighten-4">EP 3.5</div>
+        </div>
+        
         <!--基本素質***************************************************-->
         <form class="row block" onclick="readBaseValue()" onmouseup="readBaseValue()">
             <div class="col-12 type-title">基本素質</div>
@@ -26,8 +31,14 @@
                     <var></var>
                     <div class="type-label">Base 等級</div>
                     <div class="btn btn-xs border-rounded-left w-30px bg-brown lighten-2" onclick="btnLimit('BaseLevel', 1, 99)">▕◀</div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold" onmousedown="btnRangeDown('BaseLevel', 'less', 1, 99, 1)"
-                        onmouseup="btnRangeUp()">━</div>
+                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                        onmousedown="btnRangeDown('BaseLevel', 'less', 1, 99, 1)"
+                        ontouchstart="btnRangeDown('BaseLevel', 'less', 1, 99, 1)"
+                        onmouseup="btnRangeUp()"
+                        onmouseout="btnRangeUp()"
+                        ontouchend="btnRangeUp()"
+                        ontouchcancel="btnRangeUp()"
+                        ontouchmove="CancelEvent(event)" >━</div>
                     <div class="number" id="BaseLevel">99</div>
                     <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold" onmousedown="btnRangeDown('BaseLevel', 'plus', 1, 99, 1)"
                         onmouseup="btnRangeUp()">✚</div>

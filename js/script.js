@@ -1,3 +1,5 @@
+function CancelEvent(e) { e.preventDefault(); }
+
 function numberFormat(value, type, float) {
     value = value.toString();
     if(value.charAt(value.length - 1) == "%") { value = Number(value.replace("%", "") / 100); }
@@ -109,12 +111,16 @@ function readEquipment() {
             value_BackHolyAtk = 0.03;
             break;
         case 2:     //賢者之書
+            value_BackCureAddition = 0;    
             value_BackHolyAtk = 0.05;
             break;
         case 3:     //金色聖誕鈴鐺
+            value_BackCureAddition = 0;
             value_BackHolyAtk = 0.08;
             break;
-        default:
+        default:    //無
+            value_BackCureAddition = 0;
+            value_BackHolyAtk = 0;
             break;
     }
     value_PetSkill = Number(document.getElementById("PetSkill").innerHTML);
