@@ -29,7 +29,7 @@ function selectBar(id, max) {
     document.getElementById(id + "Bar").style.width = numberFormat(num / max, "%", 0);
 }
 
-var timer;
+var timer = 0;
 function btnRangeDown(id, type, min, max, step) {
     var item = document.getElementById(id);
     var num = item.innerHTML;
@@ -223,6 +223,7 @@ function CalculationFinallyCure() {
     var sum = BaseCureSum * (1 +  CureAdditionSum) * (1 + HolyAtkSum) * (1 + CureBoostSum) * (1 + CureSkillEffectUp);
     
     document.getElementById("FinallyCure").innerHTML = numberFormat(sum, "", 1);
+    console.log(sum);
 }
 
 readBaseValue();
