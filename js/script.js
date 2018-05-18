@@ -223,7 +223,6 @@ function CalculationFinallyCure() {
     var sum = BaseCureSum * (1 +  CureAdditionSum) * (1 + HolyAtkSum) * (1 + CureBoostSum) * (1 + CureSkillEffectUp);
     
     document.getElementById("FinallyCure").innerHTML = numberFormat(sum, "", 1);
-    console.log(sum);
 }
 
 readBaseValue();
