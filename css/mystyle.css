@@ -80,7 +80,6 @@ div[class ~= head] ~ div[class ~= label] {
 
 div[class ~= input-group] > div[class ~= label] {
     padding: 1px;
-    width: 120px;
     font-size: 14px;
 }
 
