@@ -19,7 +19,6 @@
         gtag('config', 'UA-119541090-1');
     </script>
 
-
     <link rel="icon" type="image/png" href="./img/logo.png">
 
     <!-- Font CSS -->
@@ -43,20 +42,19 @@
     <div class="container d-flex flex-wrap">
         <img src="./img/logo.png" alt="ROM Auxiliary Tools" style="width: 50px; height: 50px;">
         <div class="align-self-end head">計算機</div>
-        <div class="align-self-end label-tag">治癒術</div>
-        <div class="align-self-end label-tag bg-deep-purple lighten-4">EP 3.5</div>
-        <div class="align-self-end label-tag bg-deep-orange lighten-3">非官方提供</div>
+        <div class="align-self-end label">治癒術</div>
+        <div class="align-self-end label bg-deep-purple lighten-4">EP 3.5</div>
+        <div class="align-self-end label bg-deep-orange lighten-3">非官方提供</div>
     </div>
     <div class="container align-middle">
         <!-- 基本素質 -->
         <form class="row block" onclick="readBaseValue()" onmouseup="readBaseValue()" onmouseout="readBaseValue()" ontouchend="readBaseValue()" ontouchcancel="readBaseValue()">
-            <div class="col-12 type-title">基本素質</div>
-            <div class="col-lg-4 col-md-6 col-12 type-element">
+            <div class="col-12 title">基本素質</div>
+            <div class="col-lg-4 col-md-6 col-12 element">
                 <div class="input-group">
-                    <var></var>
-                    <div class="type-label">Base 等級</div>
-                    <div class="btn btn-xs border-rounded-left w-25px bg-brown lighten-2" onclick="btnLimit('BaseLevel', 1, 99)"><i class="fa fa-step-backward"></i></div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="label">Base 等級</div>
+                    <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('BaseLevel', 1, 99)"><i class="fa fa-step-backward"></i></div>
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('BaseLevel', 'less', 1, 99, 1)"
                         ontouchstart="btnRangeDown('BaseLevel', 'less', 1, 99, 1)"
                         onmouseup="btnRangeUp()"
@@ -65,7 +63,7 @@
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-minus"></i></div>
                     <div class="number" id="BaseLevel">90</div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold" 
+                    <div class="btn btn-xs border-square bg-brown lighten-3" 
                         onmousedown="btnRangeDown('BaseLevel', 'plus', 1, 99, 1)"
                         ontouchstart="btnRangeDown('BaseLevel', 'plus', 1, 99, 1)"
                         onmouseup="btnRangeUp()"
@@ -73,18 +71,18 @@
                         ontouchend="btnRangeUp()"
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-plus"></i></div>
-                    <div class="btn btn-xs border-rounded-right w-25px bg-brown lighten-2" onclick="btnLimit('BaseLevel', 99, 99)"><i class="fa fa-step-forward"></i></div>
+                    <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('BaseLevel', 99, 99)"><i class="fa fa-step-forward"></i></div>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="BaseLevelBar" role="progressbar" style="width: 91%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="99"></div>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 col-12 type-element">
+            <div class="col-lg-4 col-md-6 col-12 element">
                 <div class="input-group">
-                    <div class="type-label">Int 合計</div>
-                    <div class="btn btn-xs border-rounded-left w-25px bg-brown lighten-2" onclick="btnLimit('IntSum', 0, 300)"><i class="fa fa-step-backward"></i></div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold" 
+                    <div class="label">Int 合計</div>
+                    <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('IntSum', 0, 300)"><i class="fa fa-step-backward"></i></div>
+                    <div class="btn btn-xs border-square bg-brown lighten-3" 
                         onmousedown="btnRangeDown('IntSum', 'less', 0, 300, 1)"
                         ontouchstart="btnRangeDown('IntSum', 'less', 0, 300, 1)"
                         onmouseup="btnRangeUp()"
@@ -93,7 +91,7 @@
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-minus"></i></div>
                     <div class="number" id="IntSum">200</div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('IntSum', 'plus', 0, 300, 1)"
                         ontouchstart="btnRangeDown('IntSum', 'plus', 0, 300, 1)"
                         onmouseup="btnRangeUp()"
@@ -101,9 +99,9 @@
                         ontouchend="btnRangeUp()"
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-plus"></i></div>
-                    <div class="btn btn-xs border-rounded-right w-25px bg-brown lighten-2" onclick="btnLimit('IntSum', 300, 300)"><i class="fa fa-step-forward"></i></div>
+                    <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('IntSum', 300, 300)"><i class="fa fa-step-forward"></i></div>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="IntSumBar" role="progressbar" style="width: 67%;" aria-valuenow="200" aria-valuemin="0" aria-valuemax="300"></div>
                 </div>
             </div>
@@ -111,12 +109,12 @@
 
         <!-- 技能 -->
         <form class="row block" onclick="readSkill()" onmouseup="readSkill()" onmouseout="readSkill()" ontouchend="readSkill()" ontouchcancel="readSkill()">
-            <div class="col-12 type-title">技能</div>
-            <div class="col-lg-4 col-md-6 col-12 type-element">
+            <div class="col-12 title">技能</div>
+            <div class="col-lg-4 col-md-6 col-12 element">
                 <div class="input-group">
-                    <div class="type-label">治癒術</div>
-                    <div class="btn btn-xs border-rounded-left w-25px bg-brown lighten-2" onclick="btnLimit('CureLevel', 1, 20)"><i class="fa fa-step-backward"></i></div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="label">治癒術</div>
+                    <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('CureLevel', 1, 20)"><i class="fa fa-step-backward"></i></div>
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('CureLevel', 'less', 1, 20, 1)"
                         ontouchstart="btnRangeDown('CureLevel', 'less', 1, 20, 1)"
                         onmouseup="btnRangeUp()"
@@ -125,7 +123,7 @@
                         ontouchcancel="btnRangeUp()"                         
                         ontouchmove="CancelEvent(event)"><i class="fa fa-minus"></i></div>
                     <div class="number" id="CureLevel">10</div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('CureLevel', 'plus', 1, 20, 1)"
                         ontouchstart="btnRangeDown('CureLevel', 'plus', 1, 20, 1)"
                         onmouseup="btnRangeUp()"
@@ -133,18 +131,18 @@
                         ontouchend="btnRangeUp()"                         
                         ontouchcancel="btnRangeUp()"                         
                         ontouchmove="CancelEvent(event)"><i class="fa fa-plus"></i></div>
-                    <div class="btn btn-xs border-rounded-right w-25px bg-brown lighten-2" onclick="btnLimit('CureLevel', 20, 20)"><i class="fa fa-step-forward"></i></div>
+                    <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('CureLevel', 20, 20)"><i class="fa fa-step-forward"></i></div>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="CureLevelBar" role="progressbar" style="width: 50%;" aria-valuenow="10" aria-valuemin="1" aria-valuemax="20"></div>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 col-12 type-element">
+            <div class="col-lg-4 col-md-6 col-12 element">
                 <div class="input-group">
-                    <div class="type-label">冥想</div>
-                    <div class="btn btn-xs border-rounded-left w-25px bg-brown lighten-2" onclick="btnLimit('Meditation', 0, 10)"><i class="fa fa-step-backward"></i></div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="label">冥想</div>
+                    <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('Meditation', 0, 10)"><i class="fa fa-step-backward"></i></div>
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('Meditation', 'less', 0, 10, 1)"
                         ontouchstart="btnRangeDown('Meditation', 'less', 0, 10, 1)"                         
                         onmouseup="btnRangeUp()"                         
@@ -153,7 +151,7 @@
                         ontouchcancel="btnRangeUp()"                         
                         ontouchmove="CancelEvent(event)"><i class="fa fa-minus"></i></div>
                     <div class="number" id="Meditation">10</div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('Meditation', 'plus', 0, 10, 1)"
                         ontouchstart="btnRangeDown('Meditation', 'plus', 0, 10, 1)"
                         onmouseup="btnRangeUp()"
@@ -161,19 +159,19 @@
                         ontouchend="btnRangeUp()"
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-plus"></i></div>
-                    <div class="btn btn-xs border-rounded-right w-25px bg-brown lighten-2" onclick="btnLimit('Meditation', 10, 10)"><i class="fa fa-step-forward"></i></div>
+                    <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('Meditation', 10, 10)"><i class="fa fa-step-forward"></i></div>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="MeditationBar" role="progressbar" style="width: 100%;" aria-valuenow="10" aria-valuemin="0"
                         aria-valuemax="10"></div>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 col-12 type-element">
+            <div class="col-lg-4 col-md-6 col-12 element">
                 <div class="input-group">
-                    <div class="type-label">冒險-緊急治療</div>
-                    <div class="btn btn-xs border-rounded-left w-25px bg-brown lighten-2" onclick="btnLimit('EmergencyCure', 0, 3)"><i class="fa fa-step-backward"></i></div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="label">冒險-緊急治療</div>
+                    <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('EmergencyCure', 0, 3)"><i class="fa fa-step-backward"></i></div>
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('EmergencyCure', 'less', 0, 3, 1)"
                         ontouchstart="btnRangeDown('EmergencyCure', 'less', 0, 3, 1)"
                         onmouseup="btnRangeUp()"
@@ -182,7 +180,7 @@
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-minus"></i></div>
                     <div class="number" id="EmergencyCure">1</div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('EmergencyCure', 'plus', 0, 3, 1)"
                         ontouchstart="btnRangeDown('EmergencyCure', 'plus', 0, 3, 1)"
                         onmouseup="btnRangeUp()"
@@ -190,21 +188,21 @@
                         ontouchend="btnRangeUp()"
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-plus"></i></div>
-                    <div class="btn btn-xs border-rounded-right w-25px bg-brown lighten-2" onclick="btnLimit('EmergencyCure', 3, 3)"><i class="fa fa-step-forward"></i></div>
+                    <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('EmergencyCure', 3, 3)"><i class="fa fa-step-forward"></i></div>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="EmergencyCureBar" role="progressbar" style="width: 33%;" aria-valuenow="1" aria-valuemin="0" aria-valuemax="3"></div>
                 </div>
             </div>
         </form>
         <!-- 星盤 -->
         <form class="row block " onclick="readAstrolabe()" onmouseup="readAstrolabe()" onmouseout="readAstrolabe()" ontouchend="readAstrolabe()" ontouchcancel="readAstrolabe()">
-            <div class="col-12 type-title">阿薩神碑（星盤）</div>
-            <div class="col-lg-4 col-md-6 col-12 type-element">
+            <div class="col-12 title">阿薩神碑（星盤）</div>
+            <div class="col-lg-4 col-md-6 col-12 element">
                 <div class="input-group">
-                    <div class="type-label">治癒術-強效</div>
-                    <div class="btn btn-xs border-rounded-left w-25px bg-brown lighten-2" onclick="btnLimit('CureBoost', 0, 5)"><i class="fa fa-step-backward"></i></div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="label">治癒術-強效</div>
+                    <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('CureBoost', 0, 5)"><i class="fa fa-step-backward"></i></div>
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('CureBoost', 'less', 0, 5, 1)"
                         ontouchstart="btnRangeDown('CureBoost', 'less', 0, 5, 1)"
                         onmouseup="btnRangeUp()"
@@ -213,7 +211,7 @@
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-minus"></i></div>
                     <div class="number" id="CureBoost">5</div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('CureBoost', 'plus', 0, 5, 1)"
                         ontouchstart="btnRangeDown('CureBoost', 'plus', 0, 5, 1)"
                         onmouseup="btnRangeUp()"
@@ -221,18 +219,18 @@
                         ontouchend="btnRangeUp()"
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-plus"></i></div>
-                    <div class="btn btn-xs border-rounded-right w-25px bg-brown lighten-2" onclick="btnLimit('CureBoost', 5, 5)"><i class="fa fa-step-forward"></i></div>
+                    <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('CureBoost', 5, 5)"><i class="fa fa-step-forward"></i></div>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="CureBoostBar" role="progressbar" style="width: 100%;" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5"></div>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 col-12 type-element">
+            <div class="col-lg-4 col-md-6 col-12 element">
                 <div class="input-group">
-                    <div class="type-label">聖屬性攻擊+1%</div>
-                    <div class="btn btn-xs border-rounded-left w-25px bg-brown lighten-2" onclick="btnLimit('HolyAtkOne', 0, 3)"><i class="fa fa-step-backward"></i></div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="label">聖屬性攻擊+1%</div>
+                    <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('HolyAtkOne', 0, 3)"><i class="fa fa-step-backward"></i></div>
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('HolyAtkOne', 'less', 0, 3, 1)"
                         ontouchstart="btnRangeDown('HolyAtkOne', 'less', 0, 3, 1)"
                         onmouseup="btnRangeUp()"
@@ -241,7 +239,7 @@
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-minus"></i></div>
                     <div class="number" id="HolyAtkOne">3</div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('HolyAtkOne', 'plus', 0, 3, 1)"
                         ontouchstart="btnRangeDown('HolyAtkOne', 'plus', 0, 3, 1)"
                         onmouseup="btnRangeUp()"
@@ -249,18 +247,18 @@
                         ontouchend="btnRangeUp()"
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-plus"></i></div>
-                    <div class="btn btn-xs border-rounded-right w-25px bg-brown lighten-2" onclick="btnLimit('HolyAtkOne', 3, 3)"><i class="fa fa-step-forward"></i></div>
+                    <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('HolyAtkOne', 3, 3)"><i class="fa fa-step-forward"></i></div>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="HolyAtkOneBar" role="progressbar" style="width: 100%;" aria-valuenow="3" aria-valuemin="0" aria-valuemax="3"></div>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 col-12 type-element">
+            <div class="col-lg-4 col-md-6 col-12 element">
                 <div class="input-group">
-                    <div class="type-label">聖屬性攻擊+2%</div>
-                    <div class="btn btn-xs border-rounded-left w-25px bg-brown lighten-2" onclick="btnLimit('HolyAtkTwo', 0, 2)"><i class="fa fa-step-backward"></i></div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="label">聖屬性攻擊+2%</div>
+                    <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('HolyAtkTwo', 0, 2)"><i class="fa fa-step-backward"></i></div>
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('HolyAtkTwo', 'less', 0, 2, 1)"
                         ontouchstart="btnRangeDown('HolyAtkTwo', 'less', 0, 2, 1)"
                         onmouseup="btnRangeUp()"
@@ -269,7 +267,7 @@
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-minus"></i></div>
                     <div class="number" id="HolyAtkTwo">1</div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('HolyAtkTwo', 'plus', 0, 2, 1)"
                         ontouchstart="btnRangeDown('HolyAtkTwo', 'plus', 0, 2, 1)"
                         onmouseup="btnRangeUp()"
@@ -277,9 +275,9 @@
                         ontouchend="btnRangeUp()"
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-plus"></i></div>
-                    <div class="btn btn-xs border-rounded-right w-25px bg-brown lighten-2" onclick="btnLimit('HolyAtkTwo', 2, 2)"><i class="fa fa-step-forward"></i></div>
+                    <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('HolyAtkTwo', 2, 2)"><i class="fa fa-step-forward"></i></div>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="HolyAtkTwoBar" role="progressbar" style="width: 50%;" aria-valuenow="1" aria-valuemin="0" aria-valuemax="2"></div>
                 </div>
             </div>
@@ -287,12 +285,12 @@
 
         <!-- 公會 -->
         <form class="row block" onclick="readGroupGoddes()" onmouseup="readGroupGoddes()" onmouseout="readGroupGoddes()" ontouchend="readGroupGoddes()" ontouchcancel="readGroupGoddes()">
-            <div class="col-12 type-title">公會（女神祝福）</div>
-            <div class="col-lg-4 col-md-6 col-12 type-element">
+            <div class="col-12 title">公會（女神祝福）</div>
+            <div class="col-lg-4 col-md-6 col-12 element">
                 <div class="input-group">
-                    <div class="type-label">聖屬性攻擊</div>
-                    <div class="btn btn-xs border-rounded-left w-25px bg-brown lighten-2" onclick="btnLimit('HolyAtkGoddes', 0, 20)"><i class="fa fa-step-backward"></i></div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="label">聖屬性攻擊</div>
+                    <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('HolyAtkGoddes', 0, 20)"><i class="fa fa-step-backward"></i></div>
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('HolyAtkGoddes', 'less', 0, 20, 1)"
                         ontouchstart="btnRangeDown('HolyAtkGoddes', 'less', 0, 20, 1)"
                         onmouseup="btnRangeUp()"
@@ -301,7 +299,7 @@
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-minus"></i></div>
                     <div class="number" id="HolyAtkGoddes">10</div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('HolyAtkGoddes', 'plus', 0, 20, 1)"
                         ontouchstart="btnRangeDown('HolyAtkGoddes', 'plus', 0, 20, 1)"
                         onmouseup="btnRangeUp()"
@@ -309,21 +307,21 @@
                         ontouchend="btnRangeUp()"
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-plus"></i></div>
-                    <div class="btn btn-xs border-rounded-right w-25px bg-brown lighten-2" onclick="btnLimit('HolyAtkGoddes', 20, 20)"><i class="fa fa-step-forward"></i></div>
+                    <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('HolyAtkGoddes', 20, 20)"><i class="fa fa-step-forward"></i></div>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="HolyAtkGoddesBar" role="progressbar" style="width: 50%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="20"></div>
                 </div>
             </div>
         </form>
         <!-- 裝備 -->
         <form class="row block" onclick="readEquipment()" onmouseup="readEquipment()" onmouseout="readEquipment()" ontouchend="readEquipment()" ontouchcancel="readEquipment()" onchange="readEquipment()">
-            <div class="col-12 type-title">裝備</div>
-            <div class="col-lg-4 col-md-6 col-12 type-element">
+            <div class="col-12 title">裝備</div>
+            <div class="col-lg-4 col-md-6 col-12 element">
                 <div class="input-group">
-                    <div class="type-label">紅十字之杖-精鍊</div>
-                    <div class="btn btn-xs border-rounded-left w-25px bg-brown lighten-2" onclick="btnLimit('Arms', 0, 15)"><i class="fa fa-step-backward"></i></div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="label">紅十字之杖-精鍊</div>
+                    <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('Arms', 0, 15)"><i class="fa fa-step-backward"></i></div>
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('Arms', 'less', 0, 15, 1)"
                         ontouchstart="btnRangeDown('Arms', 'less', 1, 15, 1)"
                         onmouseup="btnRangeUp()"
@@ -332,7 +330,7 @@
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-minus"></i></div>
                     <div class="number" id="Arms">10</div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('Arms', 'plus', 0, 15, 1)"
                         ontouchstart="btnRangeDown('Arms', 'plus', 0, 15, 1)"
                         onmouseup="btnRangeUp()"
@@ -340,17 +338,17 @@
                         ontouchend="btnRangeUp()"
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-plus"></i></div>
-                    <div class="btn btn-xs border-rounded-right w-25px bg-brown lighten-2" onclick="btnLimit('Arms', 15, 15)"><i class="fa fa-step-forward"></i></div>
+                    <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('Arms', 15, 15)"><i class="fa fa-step-forward"></i></div>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="ArmsBar" role="progressbar" style="width: 67%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="15"></div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-12 type-element">
+            <div class="col-lg-4 col-md-6 col-12 element">
                 <div class="input-group">
-                    <div class="type-label">紅十字之杖-進化</div>
-                    <div class="btn btn-xs border-rounded-left w-25px bg-brown lighten-2" onclick="btnLimit('ArmsBoost', 0, 4)"><i class="fa fa-step-backward"></i></div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="label">紅十字之杖-進化</div>
+                    <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('ArmsBoost', 0, 4)"><i class="fa fa-step-backward"></i></div>
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('ArmsBoost', 'less', 0, 4, 1)"
                         ontouchstart="btnRangeDown('ArmsBoost', 'less', 0, 4, 1)"
                         onmouseup="btnRangeUp()"
@@ -359,7 +357,7 @@
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-minus"></i></div>
                     <div class="number" id="ArmsBoost">0</div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('ArmsBoost', 'plus', 0, 4, 1)"
                         ontouchstart="btnRangeDown('ArmsBoost', 'plus', 0, 4, 1)"
                         onmouseup="btnRangeUp()"
@@ -367,17 +365,17 @@
                         ontouchend="btnRangeUp()"
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-plus"></i></div>
-                    <div class="btn btn-xs border-rounded-right w-25px bg-brown lighten-2" onclick="btnLimit('ArmsBoost', 4, 4)"><i class="fa fa-step-forward"></i></div>
+                    <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('ArmsBoost', 4, 4)"><i class="fa fa-step-forward"></i></div>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="ArmsBoostBar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="4"></div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-12 type-element">
+            <div class="col-lg-4 col-md-6 col-12 element">
                 <div class="input-group">
-                    <div class="type-label">天衣舞月-精鍊</div>
-                    <div class="btn btn-xs border-rounded-left w-25px bg-brown lighten-2" onclick="btnLimit('Clothes', 0, 15)"><i class="fa fa-step-backward"></i></div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="label">天衣舞月-精鍊</div>
+                    <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('Clothes', 0, 15)"><i class="fa fa-step-backward"></i></div>
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('Clothes', 'less', 0, 15, 1)"
                         ontouchstart="btnRangeDown('Clothes', 'less', 0, 15, 1)"
                         onmouseup="btnRangeUp()"
@@ -386,7 +384,7 @@
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-minus"></i></div>
                     <div class="number" id="Clothes">10</div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('Clothes', 'plus', 0, 15, 1)"
                         ontouchstart="btnRangeDown('Clothes', 'plus', 0, 15, 1)"
                         onmouseup="btnRangeUp()"
@@ -394,17 +392,17 @@
                         ontouchend="btnRangeUp()"
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-plus"></i></div>
-                    <div class="btn btn-xs border-rounded-right w-25px bg-brown lighten-2" onclick="btnLimit('Clothes', 15, 15)"><i class="fa fa-step-forward"></i></div>
+                    <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('Clothes', 15, 15)"><i class="fa fa-step-forward"></i></div>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="ClothesBar" role="progressbar" style="width: 67%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="15"></div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-12 type-element">
+            <div class="col-lg-4 col-md-6 col-12 element">
                 <div class="input-group">
-                    <div class="type-label">天衣舞月-進化</div>
-                    <div class="btn btn-xs border-rounded-left w-25px bg-brown lighten-2" onclick="btnLimit('ClothesBoost', 0, 4)"><i class="fa fa-step-backward"></i></div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="label">天衣舞月-進化</div>
+                    <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('ClothesBoost', 0, 4)"><i class="fa fa-step-backward"></i></div>
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('ClothesBoost', 'less', 0, 4, 1)"
                         ontouchstart="btnRangeDown('ClothesBoost', 'less', 0, 4, 1)"
                         onmouseup="btnRangeUp()"
@@ -413,7 +411,7 @@
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-minus"></i></div>
                     <div class="number" id="ClothesBoost">0</div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('ClothesBoost', 'plus', 0, 4, 1)"
                         ontouchstart="btnRangeDown('ClothesBoost', 'plus', 0, 4, 1)"
                         onmouseup="btnRangeUp()"
@@ -421,33 +419,33 @@
                         ontouchend="btnRangeUp()"
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-plus"></i></div>
-                    <div class="btn btn-xs border-rounded-right w-25px bg-brown lighten-2" onclick="btnLimit('ClothesBoost', 4, 4)"><i class="fa fa-step-forward"></i></div>
+                    <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('ClothesBoost', 4, 4)"><i class="fa fa-step-forward"></i></div>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="ClothesBoostBar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="4"></div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-12 type-element">
+            <div class="col-lg-4 col-md-6 col-12 element">
                 <div class="input-group">
-                    <div class="type-label">背飾</div>
-                    <select class="border-rounded" id="Back" style="width: 140px; padding-left:5px;" onchange="selectBar('Back',3)">
+                    <div class="label">背飾</div>
+                    <select class="border-rounded" id="Back" onchange="selectBar('Back',3)">
                         <option value="0">無</option>
                         <option value="1">寶貝・別哭</option>
                         <option value="2">賢者之書</option>
                         <option value="3">金色聖誕鈴鐺</option>
                     </select>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="BackBar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="3"></div>
                 </div>
 
             </div>
 
-            <div class="col-lg-4 col-md-6 col-12 type-element">
+            <div class="col-lg-4 col-md-6 col-12 element">
                 <div class="input-group">
-                    <div class="type-label">寵物-畢帝特地龍</div>
-                    <div class="btn btn-xs border-rounded-left w-25px bg-brown lighten-2" onclick="btnLimit('PetSkill', 0, 10)"><i class="fa fa-step-backward"></i></div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="label">寵物-畢帝特地龍</div>
+                    <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('PetSkill', 0, 10)"><i class="fa fa-step-backward"></i></div>
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('PetSkill', 'less', 0, 10, 1)"
                         ontouchstart="btnRangeDown('PetSkill', 'less', 0, 10, 1)"
                         onmouseup="btnRangeUp()"
@@ -456,7 +454,7 @@
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-minus"></i></div>
                     <div class="number" id="PetSkill">10</div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('PetSkill', 'plus', 0, 10, 1)"
                         ontouchstart="btnRangeDown('PetSkill', 'plus', 0, 10, 1)"
                         onmouseup="btnRangeUp()"
@@ -464,21 +462,21 @@
                         ontouchend="btnRangeUp()"
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-plus"></i></div>
-                    <div class="btn btn-xs border-rounded-right w-25px bg-brown lighten-2" onclick="btnLimit('PetSkill', 10, 10)"><i class="fa fa-step-forward"></i></div>
+                    <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('PetSkill', 10, 10)"><i class="fa fa-step-forward"></i></div>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="PetSkillBar" role="progressbar" style="width: 100%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10"></div>
                 </div>
             </div>
         </form>
         <!-- 附魔 -->
         <form class="row block" onclick="readEnchanting()" onmouseup="readEnchanting()" onmouseout="readEnchanting()" ontouchend="readEnchanting()" ontouchcancel="readEnchanting()">
-            <div class="col-12 type-title">附魔（治癒加成）</div>
-            <div class="col-lg-4 col-md-6 col-12 type-element">
+            <div class="col-12 title">附魔（治癒加成）</div>
+            <div class="col-lg-4 col-md-6 col-12 element">
                 <div class="input-group">
-                    <div class="type-label">武器</div>
-                    <div class="btn btn-xs border-rounded-left w-25px bg-brown lighten-2" onclick="btnLimit('ArmsEnchanting', 0, 0.05)"><i class="fa fa-step-backward"></i></div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="label">武器</div>
+                    <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('ArmsEnchanting', 0, 0.05)"><i class="fa fa-step-backward"></i></div>
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('ArmsEnchanting', 'less', 0, 0.05, 0.001)"
                         ontouchstart="btnRangeDown('ArmsEnchanting', 'less', 0, 0.05, 0.001)"
                         onmouseup="btnRangeUp()"
@@ -487,7 +485,7 @@
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-minus"></i></div>
                     <div class="number" id="ArmsEnchanting">4.0%</div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('ArmsEnchanting', 'plus', 0, 0.05, 0.001)"
                         ontouchstart="btnRangeDown('ArmsEnchanting', 'plus', 0, 0.05, 0.001)"
                         onmouseup="btnRangeUp()"
@@ -495,17 +493,17 @@
                         ontouchend="btnRangeUp()"
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-plus"></i></div>
-                    <div class="btn btn-xs border-rounded-right w-25px bg-brown lighten-2" onclick="btnLimit('ArmsEnchanting', 0.05, 0.05)"><i class="fa fa-step-forward"></i></div>
+                    <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('ArmsEnchanting', 0.05, 0.05)"><i class="fa fa-step-forward"></i></div>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="ArmsEnchantingBar" role="progressbar" style="width: 80%;" aria-valuenow="4" aria-valuemin="0" aria-valuemax="5"></div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-12 type-element">
+            <div class="col-lg-4 col-md-6 col-12 element">
                 <div class="input-group">
-                    <div class="type-label">披風</div>
-                    <div class="btn btn-xs border-rounded-left w-25px bg-brown lighten-2" onclick="btnLimit('CloakEnchanting', 0, 0.05)"><i class="fa fa-step-backward"></i></div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="label">披風</div>
+                    <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('CloakEnchanting', 0, 0.05)"><i class="fa fa-step-backward"></i></div>
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('CloakEnchanting', 'less', 0, 0.05, 0.001)"
                         ontouchstart="btnRangeDown('CloakEnchanting', 'less', 0, 0.05, 0.001)"
                         onmouseup="btnRangeUp()"
@@ -514,7 +512,7 @@
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-minus"></i></div>
                     <div class="number" id="CloakEnchanting">4.0%</div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('CloakEnchanting', 'plus', 0, 0.05, 0.001)"
                         ontouchstart="btnRangeDown('CloakEnchanting', 'plus', 0, 0.05, 0.001)"
                         onmouseup="btnRangeUp()"
@@ -522,17 +520,17 @@
                         ontouchend="btnRangeUp()"
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-plus"></i></div>
-                    <div class="btn btn-xs border-rounded-right w-25px bg-brown lighten-2" onclick="btnLimit('CloakEnchanting', 0.05, 0.05)"><i class="fa fa-step-forward"></i></div>
+                    <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('CloakEnchanting', 0.05, 0.05)"><i class="fa fa-step-forward"></i></div>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="CloakEnchantingBar" role="progressbar" style="width: 80%;" aria-valuenow="0.04" aria-valuemin="0" aria-valuemax="0.05"></div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-12 type-element">
+            <div class="col-lg-4 col-md-6 col-12 element">
                 <div class="input-group">
-                    <div class="type-label">鞋子</div>
-                    <div class="btn btn-xs border-rounded-left w-25px bg-brown lighten-2" onclick="btnLimit('ShoesEnchanting', 0, 0.05)"><i class="fa fa-step-backward"></i></div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="label">鞋子</div>
+                    <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('ShoesEnchanting', 0, 0.05)"><i class="fa fa-step-backward"></i></div>
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('ShoesEnchanting', 'less', 0, 0.05, 0.001)"
                         ontouchstart="btnRangeDown('ShoesEnchanting', 'less', 0, 0.05, 0.001)"
                         onmouseup="btnRangeUp()"
@@ -541,7 +539,7 @@
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-minus"></i></div>
                     <div class="number" id="ShoesEnchanting">4.0%</div>
-                    <div class="btn btn-xs border-square w-25px bg-brown lighten-3 bold"
+                    <div class="btn btn-xs border-square bg-brown lighten-3"
                         onmousedown="btnRangeDown('ShoesEnchanting', 'plus', 0, 0.05, 0.001)"
                         ontouchstart="btnRangeDown('ShoesEnchanting', 'plus', 0, 0.05, 0.001)"
                         onmouseup="btnRangeUp()"
@@ -549,41 +547,41 @@
                         ontouchend="btnRangeUp()"
                         ontouchcancel="btnRangeUp()"
                         ontouchmove="CancelEvent(event)"><i class="fa fa-plus"></i></div>
-                    <div class="btn btn-xs border-rounded-right w-25px bg-brown lighten-2" onclick="btnLimit('ShoesEnchanting', 0.05, 0.05)"><i class="fa fa-step-forward"></i></div>
+                    <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('ShoesEnchanting', 0.05, 0.05)"><i class="fa fa-step-forward"></i></div>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="ShoesEnchantingBar" role="progressbar" style="width: 80%;" aria-valuenow="4" aria-valuemin="0" aria-valuemax="5"></div>
                 </div>
             </div>
         </form>
         <!-- 卡片 -->
         <form class="row block" onchange="readCard()">
-            <div class="col-12 type-title">卡片</div>
+            <div class="col-12 title">卡片</div>
 
-            <div class="col-lg-3 col-md-4 col-12 type-element">
+            <div class="col-lg-3 col-md-4 col-12 element">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="CardSealOfBaiSuzhen" onchange="checkLimitBar('CardSealOfBaiSuzhen')">
                     <label class="form-check-label" for="CardSealOfBaiSuzhen">頭飾「封印的白素貞卡片」</label>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="CardSealOfBaiSuzhenBar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1"></div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-12 type-element">
+            <div class="col-lg-3 col-md-4 col-12 element">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="CardWitch" onchange="checkLimitBar('CardWitch')">
                     <label class="form-check-label" for="CardWitch">存入「巫婆卡片」</label>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="CardWitchBar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1"></div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-12 type-element">
+            <div class="col-lg-3 col-md-4 col-12 element">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="CardAngelPoly" onchange="checkLimitBar('CardAngelPoly')">
                     <label class="form-check-label" for="CardAngelPoly">存入「天使波利卡片」</label>
                 </div>
-                <div class="progress h-3px">
+                <div class="progress">
                     <div class="progress-bar" id="CardAngelPolyBar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1"></div>
                 </div>
             </div>
@@ -592,11 +590,11 @@
         <!-- 結果 -->
         <form class="row block">
             <div class="col-lg-6 col-md-6 col-12" style="padding:0;">
-                <div class="type-title" style="text-align: center; background: #03A9F4; ">最終治癒量</div>
+                <div class="title" style="text-align: center; background: #03A9F4; ">最終治癒量</div>
                 <div class="" id="FinallyCure" style="text-align: center; font-size: 85px; color: green">0.0</div>
             </div>
             <div class="col-lg-6 col-md-6 col-12" style="padding: 0;">
-                <div class="type-title" style="text-align: center; background: #29B6F6">詳情</div>
+                <div class="title" style="text-align: center; background: #29B6F6">詳情</div>
                 <ul>
                     <li>基礎治癒量：<a id="BaseCureSum">0</a></li>
                     <li>治癒量提升：<a id="CureAdditionSum">0</a></li>

@@ -1,3 +1,7 @@
+* {
+    font-family: Microsoft JhengHei;
+}
+
 .btn-xs, .btn-group-xs > .btn {
     padding: 0.125rem 0.25rem;
     font-size: 0.6rem;
@@ -17,7 +21,7 @@
     border-bottom-left-radius: 20px !important;
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
-    padding-left: 7px;
+    padding-left: 3px !important;
 }
 
 .border-rounded-right {
@@ -25,36 +29,25 @@
     border-bottom-left-radius: 0 !important;
     border-top-right-radius: 20px !important;
     border-bottom-right-radius: 20px !important;
-    padding-right: 7px;
+    padding-right: 3px !important;
 }
 
-.w-25px {
-    width: 25px;
+.block {
+    background-color: #BBDEFB;
+    border-radius: 8px;
+    margin-bottom: 2px;
+    padding-bottom: 3px;
+    min-height: 80px;
 }
 
-.w-30px {
-    width: 30px;
+.head {
+    font-size: 36px;
+    font-weight: bold;
+    padding-right: 5px;
+    margin-bottom: 0px;
 }
 
-.h-3px {
-    height: 2px;   
-}
-
-div{
-    font-family: Microsoft JhengHei;
-}
-
-.number {
-    width: 40px;
-    font-weight:bold;
-    font-size: 10px;
-    text-align: center;
-    vertical-align: center;
-    background-color: wheat;
-    padding-top:4px;
-}
-
-.type-title {
+form[class ~= block] > div[class ~= title] {
     background-color: #64B5F6;
     padding-top: 3px;
     padding-left: 15px;
@@ -66,28 +59,14 @@ div{
     height: 37px;
 }
 
-.type-label {
-    padding: 1px;
-    width: 120px;
-    font-size: 14px;
-}
-
-.type-element {
+div[class ~= title] ~ div[class ~= element] {
     padding-top: 2px;
     font-size: 14px;
     margin-top: 2px;
     margin-bottom: 2px;
 }
 
-.block {
-    background-color: #BBDEFB;
-    border-radius: 8px;
-    margin-bottom: 2px;
-    padding-bottom: 3px;
-    min-height: 80px;
-}
-
-.label-tag {
+div[class ~= head] ~ div[class ~= label] {
     background-color: #b9f6ca;
     border-radius: 20px;
     padding-left: 7px;
@@ -99,10 +78,36 @@ div{
     margin-right: 1px;
 }
 
-.head {
-    font-size: 36px;
-    font-weight: bold;
-    padding-right: 5px;
-    margin-bottom: 0px;
+div[class ~= input-group] > div[class ~= label] {
+    padding: 1px;
+    width: 120px;
+    font-size: 14px;
 }
 
+div[class ~= input-group] > div[class ~= label] ~ div[class ~= btn-xs] {
+    padding : 0;
+    width: 25px;
+    text-align: center;
+    height: 24px;
+    line-height: 23px;
+}
+
+div[class ~= input-group] > div[class ~= label] ~ div[class ~= number] {
+    width: 40px;
+    font-weight:bold;
+    font-size: 10px;
+    text-align: center;
+    background-color: wheat;
+    height: 24px;
+    line-height: 24px;
+}
+
+div[class ~= input-group] ~ div[class ~= progress], 
+div[class ~= form-check] ~ div[class ~= progress] {
+    height: 2px;
+}
+
+div[class ~= input-group] > select {
+    width: 140px;
+    padding-left: 5px;
+}
