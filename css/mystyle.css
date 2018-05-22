@@ -47,7 +47,8 @@
     margin-bottom: 0px;
 }
 
-form[class ~= block] > div[class ~= title] {
+form[class ~= block] > div[class ~= title],
+form[class ~= block] > * > div[class ~= title] {
     background-color: #64B5F6;
     padding-top: 3px;
     padding-left: 15px;
@@ -73,6 +74,7 @@ div[class ~= head] ~ div[class ~= label] {
     padding-right: 7px;
     font-size: 14px;
     font-weight: bold;
+    margin-top: 5px;
     margin-bottom: 5px;
     margin-left: 1px;
     margin-right: 1px;
@@ -109,4 +111,10 @@ div[class ~= form-check] ~ div[class ~= progress] {
 div[class ~= input-group] > select {
     width: 140px;
     padding-left: 5px;
+}
+
+nav[class ~= navbar] {
+    background-color: #1976d2 !important;
+    color: white !important;
+    font-size: 20px;
 }
