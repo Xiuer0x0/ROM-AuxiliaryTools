@@ -1,3 +1,7 @@
+function navbarMenu(x) {
+    x.classList.toggle("change");
+}
+
 function CancelEvent(e) { e.preventDefault(); }
 
 function numberFormat(value, type, float) {
@@ -68,6 +72,7 @@ function btnRangeUp() {
 var value_BaseSum = 0;
 function readBaseValue() {
     value_BaseSum = Number(document.getElementById("BaseLevel").innerHTML) + Number(document.getElementById("IntSum").innerHTML);
+    document.getElementById("SumBase").innerHTML = value_BaseSum;
     CalculationBaseCure();
 }
 
@@ -129,11 +134,19 @@ function readEquipment() {
 }
 
 //讀取「附魔」
-var value_ArmsEnchanting = 0, value_CloakEnchanting = 0, value_ShoesEnchanting = 0;
+var value_SumEnchanting = 0;
 function readEnchanting() {
-    value_ArmsEnchanting = Number(numberFormat(document.getElementById("ArmsEnchanting").innerHTML, "", 3));
-    value_CloakEnchanting = Number(numberFormat(document.getElementById("CloakEnchanting").innerHTML, "", 3));
-    value_ShoesEnchanting = Number(numberFormat(document.getElementById("ShoesEnchanting").innerHTML, "", 3));
+    value_SumEnchanting = (Number(numberFormat(document.getElementById("ArmsEnchanting").innerHTML, "", 3)) * 1000
+                        + Number(numberFormat(document.getElementById("CloakEnchanting").innerHTML, "", 3)) * 1000
+                        + Number(numberFormat(document.getElementById("ShoesEnchanting").innerHTML, "", 3)) * 1000
+                        + Number(numberFormat(document.getElementById("HeadwearEnchanting").innerHTML, "", 3)) * 1000
+                        + Number(numberFormat(document.getElementById("FaceDecorationEnchanting").innerHTML, "", 3)) * 1000
+                        + Number(numberFormat(document.getElementById("MouthDecorationEnchanting").innerHTML, "", 3)) * 1000
+                        + Number(numberFormat(document.getElementById("BackDecorationEnchanting").innerHTML, "", 3)) * 1000
+                        + Number(numberFormat(document.getElementById("TailDecorationEnchanting").innerHTML, "", 3)) * 1000 
+                        ) / 1000;
+    
+    document.getElementById("SumEnchanting").innerHTML = numberFormat(value_SumEnchanting, "%", 1)
     CalculationCureAddition();
 }
 
@@ -167,7 +180,7 @@ function CalculationBaseCure() {
     CalculationFinallyCure();
 }
 
-//治癒量提升
+//治癒加成
 function CalculationCureAddition() {
     var wearing = 0;
     if(value_ArmsBoost >= 4 && value_ClothesBoost >= 4) {
@@ -180,9 +193,8 @@ function CalculationCureAddition() {
         + value_Arms * 0.04 * 1000
         + value_BackCureAddition * 1000
         + value_PetSkill * 0.005 * 1000
-        + value_ArmsEnchanting * 1000
-        + value_CloakEnchanting * 1000
-        + value_ShoesEnchanting * 1000 ) / 1000 ;
+        + value_SumEnchanting * 1000) / 1000 ;
+    
     document.getElementById("CureAdditionSum").innerHTML = numberFormat(sum, "%", 1);
     CalculationFinallyCure();
 }
