@@ -1,0 +1,53 @@
+/*BlockTitle*/
+div[class ~= title] > div[class ~= float-right] {
+    color: #FFD3B3;
+}
+
+/*ButtonGroup*/
+div[class ~= input-group] > div[class ~= label] {
+    padding: 1px;
+    font-size: 14px;
+}
+
+div[class ~= input-group] > div[class ~= label] ~ div[class ~= btn-xs] {
+    padding : 0;
+    width: 25px;
+    text-align: center;
+    height: 24px;
+    line-height: 23px;
+}
+
+div[class ~= input-group] > div[class ~= label] ~ div[class ~= number] {
+    width: 40px;
+    font-weight:bold;
+    font-size: 10px;
+    text-align: center;
+    background-color: wheat;
+    height: 24px;
+    line-height: 24px;
+}
+
+/*Select*/
+div[class ~= input-group] > select {
+    width: 140px;
+    padding-left: 5px;
+    outline: none;
+}
+
+/*ProgressBar*/
+div[class ~= input-group] ~ div[class ~= progress], 
+div[class ~= form-check] ~ div[class ~= progress] {
+    height: 2px;
+}
+
+/*Output*/
+footer[class ~= block] div[class ~= title] {
+    text-align: center;
+    background: #03A9F4;
+}
+
+footer[class ~= block] div[class ~= title] ~ ul {
+    font-size: 16px;
+    margin: 0;
+    padding-top: 5px;
+}

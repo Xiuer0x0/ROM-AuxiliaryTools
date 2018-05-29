@@ -1,12 +1,10 @@
+/*通則*/
 * {
     font-family: Microsoft JhengHei;
 }
 
-.btn-xs, .btn-group-xs > .btn {
-    padding: 0.125rem 0.25rem;
-    font-size: 0.6rem;
-    line-height: 1.5;
-    border-radius: 0.1rem;
+body {
+    min-width: 280px;;
 }
 
 .border-square {
@@ -32,118 +30,17 @@
     padding-right: 3px !important;
 }
 
-.block {
-    background-color: #BBDEFB;
-    border-radius: 8px;
-    margin-bottom: 2px;
-    padding-bottom: 3px;
-    min-height: 80px;
+/*bootstrap 3.7*/
+.btn-xs, .btn-group-xs > .btn {
+    padding: 0.125rem 0.25rem;
+    font-size: 0.6rem;
+    line-height: 1.5;
+    border-radius: 0.1rem;
 }
 
-.head {
-    font-size: 36px;
-    font-weight: bold;
-    padding-right: 5px;
-    margin-bottom: 0px;
-}
-
-/*區塊*/
-header[class ~= d-flex] > div[class ~= title] {
-    font-size: 34px;
-    font-weight:  bold;
-    margin: 0px;
-}
-
-header[class ~= d-flex] > div[class ~= title] > img {
-    margin-bottom: 5px;
-}
-
-header[class ~= d-flex] > div[class ~= label] {
-    background-color: #b9f6ca;
-    border-radius: 20px;
-    padding-left: 7px;
-    padding-right: 7px;
-    font-size: 14px;
-    font-weight: bold;
-
-    margin-bottom: 7px;
-    margin-left: 1px;
-    margin-right: 1px;
-}
-
-div[class ~= input-group] > div[class ~= label] {
-    padding: 1px;
-    font-size: 14px;
-}
-
-div[class ~= input-group] > div[class ~= label] ~ div[class ~= btn-xs] {
-    padding : 0;
-    width: 25px;
-    text-align: center;
-    height: 24px;
-    line-height: 23px;
-}
-
-div[class ~= input-group] > div[class ~= label] ~ div[class ~= number] {
-    width: 40px;
-    font-weight:bold;
-    font-size: 10px;
-    text-align: center;
-    background-color: wheat;
-    height: 24px;
-    line-height: 24px;
-}
-
-div[class ~= input-group] ~ div[class ~= progress], 
-div[class ~= form-check] ~ div[class ~= progress] {
-    height: 2px;
-}
-
-div[class ~= input-group] > select {
-    width: 140px;
-    padding-left: 5px;
-}
-
-div[class ~= title] ~ div[class ~= element] {
-    padding-top: 2px;
-    font-size: 14px;
-    margin-top: 2px;
-    margin-bottom: 2px;
-}
-
-div[class ~= title] > ul > li {
-    font-size: 14px;
-}
-
-div[class ~= title] > div[class ~= float-right] {
-    color: #FFD3B3;
-}
-
-form[class ~= block] > div[class ~= title],
-footer[class ~= block] > * > div[class ~= title] {
-    background-color: #64B5F6;
-    padding-top: 3px;
-    padding-left: 15px;
-    padding-bottom: 3px;
-    font-weight: bold;
-    font-size: 20px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    height: 37px;
-}
-
-footer[class ~= block] > * div[class ~= title] {
-    text-align: center;
-}
-
-footer > div > p {
-    font-size: 8px;
-    padding: 10px;
-}
-
-/*nav*/
+/*navbar*/
 header > nav[class ~= navbar] {
-    background-color: #5692D8 !important;
+    background-color: #5692D8;
     font-weight: bold;
     font-size: 22px;
     padding: 0;
@@ -173,7 +70,7 @@ a[class ~= logo] > div[class ~= d-flex] > div[class ~= label] {
     margin-left: 3px;
 }
 
-div[class ~= navbar-nav]  a[class ~= nav-item] {
+div[class ~= navbar-nav] a[class ~= nav-item] {
     border: solid 1px lightblue;
     border-radius: 10px;
     margin: 5px;
@@ -199,3 +96,105 @@ div[class ~= navbar-nav]  a[class ~= nav-item] {
     -webkit-transform: rotate(45deg) translate(-8px, -8px);
     transform: rotate(45deg) translate(-8px, -8px);
 }*/
+
+/*body-header*/
+header[class ~= d-flex] > div[class ~= title] {
+    font-size: 34px;
+    font-weight:  bold;
+    margin: 0px;
+}
+
+header[class ~= d-flex] > div[class ~= title] > img {
+    margin-bottom: 5px;
+}
+
+header[class ~= d-flex] > div[class ~= label] {
+    background-color: #b9f6ca;
+    border-radius: 20px;
+    padding-left: 7px;
+    padding-right: 7px;
+    font-size: 14px;
+    font-weight: bold;
+
+    margin-bottom: 7px;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+div[class ~= release] > button {
+    font-weight: bold;
+    border-bottom-left-radius : 12px;
+    border-bottom-right-radius: 12px;
+    padding-bottom: 4px;
+    outline: none;
+}
+
+div[class ~= release] div > div[class ~= modal-content] {
+    background-color: #eeeeee;
+    min-width: 265px;
+}
+
+div[class ~= release] div div[class ~= modal-header] {
+    background-color: #d7ccc8;
+    font-size: 20px;
+    font-weight: bold; 
+}
+
+div[class ~= release] div button {
+    outline: none;
+}
+
+div[class ~= release] div div[class ~= modal-body] > div[class ~= version] {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+div[class ~= release] div div[class ~= modal-body] > div[class ~= version] ~ ul {
+    font-size: 14px;
+    margin: 0;
+}
+
+div[class ~= release] div div[class ~= modal-body] > div[class ~= version] ~ div[class ~= date] {
+    color: gray;
+    text-align: right;
+}
+
+div[class ~= release] div div[class ~= modal-footer] {
+    background-color: #e0e0e0;
+} 
+
+/*block*/
+body .block {
+    background-color: #BBDEFB;
+    border-radius: 8px;
+    margin-bottom: 2px;
+    padding-bottom: 3px;
+    min-height: 80px;
+}
+
+div[class ~= title] ~ div[class ~= element] {
+    padding-top: 2px;
+    font-size: 14px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+form[class ~= block] > div[class ~= title],
+footer[class ~= block] div[class ~= title] {
+    background-color: #64B5F6;
+    padding-top: 3px;
+    padding-left: 15px;
+    padding-bottom: 3px;
+    font-weight: bold;
+    font-size: 20px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    height: 37px;
+}
+
+/*footer*/
+footer > div > p {
+    font-size: 8px;
+    padding: 10px;
+}
+
