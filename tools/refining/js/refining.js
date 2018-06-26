@@ -303,37 +303,44 @@ function View_AutoTable_thColspan() {
 function View_ProgressBar(itemId, max, num) {
     var bar = $("#" + itemId + "Bar");
     var now = bar.progressbar("value");
-    var endVal = Number(num) / Number(max) * 100;
-
-    var plus = true;
-    if (now > endVal) { plus = false; }
-    else { plus = true; }
-    
-    var timer = setInterval(fn, 10);
-    function fn() {
-        if (plus == true) {
-            if (now > endVal) {
-                now = endVal;
-                bar.progressbar("value", now);
-                clearInterval(timer);
-            }
-            else {
-                bar.progressbar("value", now);
-                now += 2;
-            };
-        }
-        else {
-            if (now < endVal) {
-                now = endVal;
-                bar.progressbar("value", now);
-                clearInterval(timer);
-            }
-            else {
-                bar.progressbar("value", now);
-                now -= 2;
-            };
-        }
+    var endVal;
+    if (num == 0 && max == 0) {
+        bar.progressbar("value", 100);
     }
+    else {
+        endVal = Number(num) / Number(max) * 100;
+        var plus = true;
+        if (now > endVal) { plus = false; }
+        else { plus = true; }
+
+        var timer = setInterval(fn, 10);
+        function fn() {
+            if (plus == true) {
+                if (now > endVal) {
+                    now = endVal;
+                    bar.progressbar("value", now);
+                    clearInterval(timer);
+                }
+                else {
+                    bar.progressbar("value", now);
+                    now += 3;
+                };
+            }
+            else {
+                if (now < endVal) {
+                    now = endVal;
+                    bar.progressbar("value", now);
+                    clearInterval(timer);
+                }
+                else {
+                    bar.progressbar("value", now);
+                    now -= 3;
+                };
+            }
+        }
+    };
+
+    
 }
 
 //顯示「詳情」
