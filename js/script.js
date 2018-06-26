@@ -1,7 +1,7 @@
 //讀取頁首頁尾
 $(document).ready(function(){
-    $("#header").load("/./header.html #header");
-    $("#footer").load("/./footer.html #footer");
+    $("#header").load("/ROM-AuxiliaryTools/header.html #header");
+    $("#footer").load("/ROM-AuxiliaryTools/footer.html #footer");
 });
 
 function navbarMenu(x) {
