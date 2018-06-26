@@ -23,22 +23,8 @@ div[class ~= element] > div[class ~= input-group] {
     padding-left: 0;
 }
 
-/*-----------------Price Block-----------------*/
-form[class ~= price] > div[class ~= element] > div[class ~= input-group] > input {
-    width: 100px;
-    text-align: right;
-    padding-right: 5px;
-    border-radius: 3px;
-}
-
-/*-----------------HaveNeed Block-----------------*/
-form[class ~= need] > div[class ~= element] > div[class ~= input-group] input {
-    border-radius: 0px;
-}
-
-form[class ~= need] > div[class ~= element] > div[id *= Bar],
-form[class ~= need] > div[class ~= element] > div[class ~= progress] {
-    height: 4px;
+input {
+    -webkit-appearance: none;
 }
 
 /*range slider*/
@@ -67,6 +53,41 @@ div[class ~= range-slider] > div[class ~= ui-slider-handle]:active {
     background: rgb(243, 180, 122);
 }
 
+/*-----------------Price Block-----------------*/
+form[class ~= price] > div[class ~= element] > div[class ~= input-group] > input {
+    width: 100px;
+    text-align: right;
+    padding-right: 5px;
+    border-radius: 3px;
+}
+
+/*-----------------HaveNeed Block-----------------*/
+form[class ~= need] > div[class ~= element] > div[class ~= input-group] input {
+    border-radius: 0px;
+}
+
+form[class ~= need] > div[class ~= element] > div[class ~= input-group] input[type = number],
+form[class ~= need] > div[class ~= element] > div[class ~= input-group] div[class ~= total] {
+    width: 50px;
+    border:1px solid #ced4da;
+}
+
+form[class ~= need] > div[class ~= element] > div[class ~= input-group] > input[type = number] {
+    text-align: right;
+    border-right: 0px;
+}
+
+form[class ~= need] > div[class ~= element] > div[class ~= input-group] div[class ~= total] {
+    border-left: 0px;
+    background-color: #fff;
+}
+
+form[class ~= need] > div[class ~= element] > div[class ~= input-group] div[class ~= total] > label > span {
+    margin-left: 5px;
+    
+    text-align: center;
+}
+
 /*btn total group*/
 div[class ~= input-group] div[class ~= btn] {
     border: 1px solid #ced4da;
@@ -92,27 +113,11 @@ div[class ~= input-group] div[class ~= clear] {
     padding-left: 7px;
 }
 
-div[class ~= element] > div[class ~= input-group] > input[type = number] {
-    text-align: right;
-    width: 60px;
-    border:1px solid #ced4da;
-    border-right: 0px;
+/*prrgressbar*/
+form[class ~= need] > div[class ~= element] > div[id *= Bar],
+form[class ~= need] > div[class ~= element] > div[class ~= progress] {
+    height: 4px;
 }
-
-div[class ~= input-group] div[class ~= total] {
-    width: 60px;
-    border: 1px solid #ced4da;
-    border-left: 0px;
-    background-color: #fff;
-}
-
-
-div[class ~= total] > label > span {
-    margin-left: 10px;
-    margin-right: 10px;
-    text-align: center;
-}
-
 
 /*-----------------Output-----------------*/
 
