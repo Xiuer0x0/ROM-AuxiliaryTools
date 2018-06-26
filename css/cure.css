@@ -1,15 +1,10 @@
-/*BlockTitle*/
-div[class ~= title] > div[class ~= float-right] {
-    color: #FFD3B3;
-}
-
-/*ButtonGroup*/
+/*InputGroup*/
 div[class ~= input-group] > div[class ~= label] {
     padding: 1px;
     font-size: 14px;
 }
 
-div[class ~= input-group] > div[class ~= label] ~ div[class ~= btn-xs] {
+div[class ~= input-group] div[class ~= btn-xs] {
     padding : 0;
     width: 25px;
     text-align: center;
@@ -17,7 +12,7 @@ div[class ~= input-group] > div[class ~= label] ~ div[class ~= btn-xs] {
     line-height: 23px;
 }
 
-div[class ~= input-group] > div[class ~= label] ~ div[class ~= number] {
+div[class ~= input-group] div[class ~= number] {
     width: 40px;
     font-weight:bold;
     font-size: 10px;
@@ -41,13 +36,29 @@ div[class ~= form-check] ~ div[class ~= progress] {
 }
 
 /*Output*/
-footer[class ~= block] div[class ~= title] {
+footer[class ~= row],
+footer[class ~= row] > div {
+    padding: 0;
+}
+
+footer[class ~= row] div[class ~= block] {
+    border: 1px solid white;
+}
+
+footer[class ~= row] div[class ~= finallycure] {
+    text-align: center; 
+    font-size: 85px; 
+    color: green;
+}
+
+footer[class ~= row] div[class ~= title] {
     text-align: center;
     background: #03A9F4;
 }
 
-footer[class ~= block] div[class ~= title] ~ ul {
+footer[class ~= row] div[class ~= details] ul {
     font-size: 16px;
     margin: 0;
     padding-top: 5px;
+    padding-bottom: 5px;
 }

@@ -1,10 +1,20 @@
 /*通則*/
-* {
+body {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
     font-family: Microsoft JhengHei;
 }
 
-body {
-    min-width: 280px;;
+header[id = header] {
+    min-height: 68px;
 }
 
 .border-square {
@@ -28,6 +38,19 @@ body {
     border-top-right-radius: 20px !important;
     border-bottom-right-radius: 20px !important;
     padding-right: 3px !important;
+}
+
+.fa-info {
+    height: 15px;
+    width: 15px;
+    border-radius: 20px;
+    background-color: rgb(66, 198, 241);
+    color: white;
+}
+
+.fa-info:hover {
+    background-color: blue;
+    border: 1px solid black;
 }
 
 /*bootstrap 3.7*/
@@ -57,6 +80,8 @@ a[class ~= logo] > img {
     overflow: auto;
     float: left;
     margin-top: 4px;
+    width: 55px;
+    height: 55px;
 }
 
 a[class ~= logo] > div[class ~= d-flex] > div[class ~= label] {
@@ -106,6 +131,8 @@ header[class ~= d-flex] > div[class ~= title] {
 
 header[class ~= d-flex] > div[class ~= title] > img {
     margin-bottom: 5px;
+    width: 40px;
+    height: 40px;
 }
 
 header[class ~= d-flex] > div[class ~= label] {
@@ -121,7 +148,7 @@ header[class ~= d-flex] > div[class ~= label] {
     margin-right: 1px;
 }
 
-div[class ~= release] > button {
+div[class ~= flag-Modal] > button {
     font-weight: bold;
     border-bottom-left-radius : 12px;
     border-bottom-right-radius: 12px;
@@ -129,58 +156,54 @@ div[class ~= release] > button {
     outline: none;
 }
 
-div[class ~= release] div > div[class ~= modal-content] {
+div[class ~= flag-Modal] div > div[class ~= modal-content] {
     background-color: #eeeeee;
     min-width: 265px;
 }
 
-div[class ~= release] div div[class ~= modal-header] {
+div[class ~= flag-Modal] div[class ~= modal-header] {
     background-color: #d7ccc8;
     font-size: 20px;
     font-weight: bold; 
 }
 
-div[class ~= release] div button {
+div[class ~= flag-Modal] button {
     outline: none;
 }
 
-div[class ~= release] div div[class ~= modal-body] > div[class ~= version] {
+div[class ~= flag-Modal] div[class ~= modal-body] div[class ~= version] {
     font-weight: bold;
     font-size: 18px;
 }
 
-div[class ~= release] div div[class ~= modal-body] > div[class ~= version] ~ ul {
+div[class ~= flag-Modal] div[class ~= modal-body] ul {
     font-size: 14px;
     margin: 0;
 }
 
-div[class ~= release] div div[class ~= modal-body] > div[class ~= version] ~ div[class ~= date] {
+div[class ~= flag-Modal] div[class ~= modal-body] div[class ~= date] {
     color: gray;
     text-align: right;
 }
 
-div[class ~= release] div div[class ~= modal-footer] {
+div[class ~= flag-Modal] div[class ~= modal-footer] {
+    border-bottom-left-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
     background-color: #e0e0e0;
+    
 } 
 
 /*block*/
 body .block {
     background-color: #BBDEFB;
     border-radius: 8px;
+    margin-top: 2px;
     margin-bottom: 2px;
-    padding-bottom: 3px;
+    padding-bottom: 5px;
     min-height: 80px;
 }
 
-div[class ~= title] ~ div[class ~= element] {
-    padding-top: 2px;
-    font-size: 14px;
-    margin-top: 2px;
-    margin-bottom: 2px;
-}
-
-form[class ~= block] > div[class ~= title],
-footer[class ~= block] div[class ~= title] {
+.block > div[class ~= title] {
     background-color: #64B5F6;
     padding-top: 3px;
     padding-left: 15px;
@@ -192,9 +215,32 @@ footer[class ~= block] div[class ~= title] {
     height: 37px;
 }
 
+div[class ~= title] ~ div[class ~= element] {
+    padding-top: 2px;
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+div[class ~= title] > span {
+    float: right;
+    color: #FFD3B3;
+}
+
+.filler {
+    flex: 1;
+    height: 0;
+}
+
 /*footer*/
-footer > div > p {
+footer[class ~= footer] {
+    width: 100%;
+    margin-top: 15px;
+}
+
+footer[class ~= footer] > div > p {
     font-size: 8px;
-    padding: 10px;
+    padding: 15px;
+    margin: 0;
 }
 

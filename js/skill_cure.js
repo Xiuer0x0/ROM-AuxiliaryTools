@@ -1,10 +1,10 @@
-//輸入功能區塊
+//輸入區塊功能
 function btnLimit(id, value, max) {
     var item = document.getElementById(id);
     var num = item.innerHTML;
-    if (num.charAt(num.length - 1) == "%") { item.innerHTML = numberFormat(value, "%", 1); }
+    if (num.charAt(num.length - 1) == "%") { item.innerHTML = NumberFormat(value, "%", 1); }
     else { item.innerHTML = value; }
-    document.getElementById(id + "Bar").style.width = numberFormat(value / max, "%", 0);
+    document.getElementById(id + "Bar").style.width = NumberFormat(value / max, "%", 0);
 }
 
 function checkLimitBar(id) {
@@ -15,7 +15,7 @@ function checkLimitBar(id) {
 
 function selectBar(id, max) {
     var num = document.getElementById(id).value;
-    document.getElementById(id + "Bar").style.width = numberFormat(num / max, "%", 0);
+    document.getElementById(id + "Bar").style.width = NumberFormat(num / max, "%", 0);
 }
 
 var timer = 0;
@@ -43,9 +43,9 @@ function btnRangeDown(id, type, min, max, step) {
         }
         if (num > max) { num = max; }
         if (num < min) { num = min; }
-        if (percentage == true) { item.innerHTML = numberFormat(num, "%", 1); }
+        if (percentage == true) { item.innerHTML = NumberFormat(num, "%", 1); }
         else { item.innerHTML = num; }
-        document.getElementById(id + "Bar").style.width = numberFormat(num / max, "%", 0);
+        document.getElementById(id + "Bar").style.width = NumberFormat(num / max, "%", 0);
     }
 }
 
@@ -64,8 +64,8 @@ function readBaseValue() {
 //讀取「技能」
 var value_CureLevel = 1, value_Meditation = 0, value_EmergencyCure = 0;
 function readSkill() {
-    value_CureLevel = Number(document.getElementById("CureLevel").innerHTML);
-    value_Meditation = Number(document.getElementById("Meditation").innerHTML);
+    value_CureLevel     = Number(document.getElementById("CureLevel").innerHTML);
+    value_Meditation    = Number(document.getElementById("Meditation").innerHTML);
     value_EmergencyCure = Number(document.getElementById("EmergencyCure").innerHTML);
     CalculationBaseCure();
     CalculationCureAddition();
@@ -74,7 +74,7 @@ function readSkill() {
 //讀取「星盤」
 var value_CureBoost = 0, value_HolyAtkOne = 0, value_HolyAtkTwo = 0;
 function readAstrolabe() {
-    value_CureBoost = Number(document.getElementById("CureBoost").innerHTML);
+    value_CureBoost  = Number(document.getElementById("CureBoost").innerHTML);
     value_HolyAtkOne = Number(document.getElementById("HolyAtkOne").innerHTML);
     value_HolyAtkTwo = Number(document.getElementById("HolyAtkTwo").innerHTML);
     CalculationHolyAtk();
@@ -121,17 +121,17 @@ function readEquipment() {
 //讀取「附魔」
 var value_SumEnchanting = 0;
 function readEnchanting() {
-    value_SumEnchanting = (Number(numberFormat(document.getElementById("ArmsEnchanting").innerHTML, "", 3)) * 1000
-                        + Number(numberFormat(document.getElementById("CloakEnchanting").innerHTML, "", 3)) * 1000
-                        + Number(numberFormat(document.getElementById("ShoesEnchanting").innerHTML, "", 3)) * 1000
-                        + Number(numberFormat(document.getElementById("HeadwearEnchanting").innerHTML, "", 3)) * 1000
-                        + Number(numberFormat(document.getElementById("FaceDecorationEnchanting").innerHTML, "", 3)) * 1000
-                        + Number(numberFormat(document.getElementById("MouthDecorationEnchanting").innerHTML, "", 3)) * 1000
-                        + Number(numberFormat(document.getElementById("BackDecorationEnchanting").innerHTML, "", 3)) * 1000
-                        + Number(numberFormat(document.getElementById("TailDecorationEnchanting").innerHTML, "", 3)) * 1000 
+    value_SumEnchanting = (Number(NumberFormat(document.getElementById("ArmsEnchanting").innerHTML, "", 3)) * 1000
+                        + Number(NumberFormat(document.getElementById("CloakEnchanting").innerHTML, "", 3)) * 1000
+                        + Number(NumberFormat(document.getElementById("ShoesEnchanting").innerHTML, "", 3)) * 1000
+                        + Number(NumberFormat(document.getElementById("HeadwearEnchanting").innerHTML, "", 3)) * 1000
+                        + Number(NumberFormat(document.getElementById("FaceDecorationEnchanting").innerHTML, "", 3)) * 1000
+                        + Number(NumberFormat(document.getElementById("MouthDecorationEnchanting").innerHTML, "", 3)) * 1000
+                        + Number(NumberFormat(document.getElementById("BackDecorationEnchanting").innerHTML, "", 3)) * 1000
+                        + Number(NumberFormat(document.getElementById("TailDecorationEnchanting").innerHTML, "", 3)) * 1000 
                         ) / 1000;
     
-    document.getElementById("SumEnchanting").innerHTML = numberFormat(value_SumEnchanting, "%", 1)
+    document.getElementById("SumEnchanting").innerHTML = NumberFormat(value_SumEnchanting, "%", 1)
     CalculationCureAddition();
 }
 
@@ -153,7 +153,7 @@ function readCard() {
     CalculationHolyAtk();
 }
 
-//基礎治癒量
+//計算「基礎治癒量」
 function CalculationBaseCure() {
     var emergencyCureValue;
     if( value_EmergencyCure > 1) { emergencyCureValue = (value_EmergencyCure - 1) * 50; }
@@ -165,7 +165,7 @@ function CalculationBaseCure() {
     CalculationFinallyCure();
 }
 
-//治癒加成
+//計算「治癒加成」
 function CalculationCureAddition() {
     var wearing = 0;
     if(value_ArmsBoost >= 4 && value_ClothesBoost >= 4) {
@@ -181,11 +181,11 @@ function CalculationCureAddition() {
         + value_SumEnchanting * 1000
     ) / 1000 ;
     
-    document.getElementById("CureAdditionSum").innerHTML = numberFormat(sum, "%", 1);
+    document.getElementById("CureAdditionSum").innerHTML = NumberFormat(sum, "%", 1);
     CalculationFinallyCure();
 }
 
-//聖屬性攻擊
+//計算「聖屬性攻擊」
 function CalculationHolyAtk() {
     var sum = ( value_CardWitch * 1000
         + value_CardAngelPoly * 1000
@@ -194,34 +194,35 @@ function CalculationHolyAtk() {
         + value_HolyAtkTwo * 0.02 * 1000 
         + value_BackHolyAtk * 1000
     ) / 1000;
-    document.getElementById("HolyAtkSum").innerHTML = numberFormat(sum, "%", 1);
+    document.getElementById("HolyAtkSum").innerHTML = NumberFormat(sum, "%", 1);
     CalculationFinallyCure();
 }
 
-//治癒術-強效
+//計算「治癒術-強效」
 function CalculationCureBoost() {
-    document.getElementById("CureBoostSum").innerHTML = numberFormat(value_CureBoost * 0.02, "%", 0);
+    document.getElementById("CureBoostSum").innerHTML = NumberFormat(value_CureBoost * 0.02, "%", 0);
     CalculationFinallyCure();
 }
 
-//封印的白素貞卡片
+//計算「封印的白素貞卡片」
 function CalculationCureSkillEffectUp() {
-    document.getElementById("CureSkillEffectUp").innerHTML = numberFormat(value_CardSealOfBaiSuzhen, "%",0);
+    document.getElementById("CureSkillEffectUp").innerHTML = NumberFormat(value_CardSealOfBaiSuzhen, "%",0);
     CalculationFinallyCure();
 }
 
-//最終治癒量
+//計算「最終治癒量」
 function CalculationFinallyCure() {
     var BaseCureSum = Number(document.getElementById("BaseCureSum").innerHTML),
-        CureAdditionSum = Number(numberFormat(document.getElementById("CureAdditionSum").innerHTML, "", 3)),
-        HolyAtkSum = Number(numberFormat(document.getElementById("HolyAtkSum").innerHTML, "", 3)),
-        CureBoostSum = Number(numberFormat(document.getElementById("CureBoostSum").innerHTML, "", 3)),
-        CureSkillEffectUp = Number(numberFormat(document.getElementById("CureSkillEffectUp").innerHTML, "", 3));
+        CureAdditionSum = Number(NumberFormat(document.getElementById("CureAdditionSum").innerHTML, "", 3)),
+        HolyAtkSum = Number(NumberFormat(document.getElementById("HolyAtkSum").innerHTML, "", 3)),
+        CureBoostSum = Number(NumberFormat(document.getElementById("CureBoostSum").innerHTML, "", 3)),
+        CureSkillEffectUp = Number(NumberFormat(document.getElementById("CureSkillEffectUp").innerHTML, "", 3));
 
     var sum = Math.ceil(BaseCureSum * (1 +  CureAdditionSum) * (1 + HolyAtkSum) * (1 + CureBoostSum) * (1 + CureSkillEffectUp));
-    document.getElementById("FinallyCure").innerHTML = numberFormat(sum, "", 0);
+    document.getElementById("FinallyCure").innerHTML = NumberFormat(sum, "", 0);
 }
 
+//頁面載入後首次讀取預設值
 readBaseValue();
 readSkill();
 readAstrolabe();

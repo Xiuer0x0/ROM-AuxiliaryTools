@@ -8,7 +8,7 @@
 
     <title>ROM Auxiliary Tools</title>
     <meta name="description" content="ROM Auxiliary Tools">
-    <meta name="keywords" content="RO, 手遊, 守護永恆的愛, 計算, 補量, 奶量">
+    <meta name="keywords" content="RO, 手遊, 守護永恆的愛, 計算機, 補量, 奶量">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119541090-1"></script>
@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Other CSS -->
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- My CSS -->
     <link rel="stylesheet" href="css/mystyle-color.css">
@@ -36,42 +36,14 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-light ">
-            <div class="container" style="padding: 0">
-                <a class="navbar-brand logo" href="/">
-                    <img src="./img/logo.png" width="55" height="55" alt="">RO守遊計算機
-                    <div class="d-flex ">
-                        <div class="label align-items-start">非官方提供</div>
-                        <div class="label align-items-start bg-warning">台港澳</div>
-                    </div>
-                </a>
-                
-            <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-                    aria-expanded="false" aria-label="Toggle navigation" onclick="navbarMenu(this)">
-                    <div>
-                        <div class="bar1"></div>
-                        <div class="bar2"></div>
-                        <div class="bar3"></div>
-                    </div>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-item nav-link active" href="/">治癒術
-                            <span class="sr-only">(current)</span>
-                        </a>
-                        <a class="nav-item nav-link disabled" href="#">精鍊</a>
-                    </div>
-                </div>-->
-            </div>
-        </nav>
-    </header>
+    <!-- Use JQuery Load -->
+    <header id="header"></header>
 
     <section>
         <header class="container d-flex flex-wrap" style="padding: 0">
-            <div class="title"><img src="./img/skill/acolyte_cure.png" alt="" width="40" height="40">治癒術</div>
+            <div class="title"><img src="./img/skill/acolyte_cure.png" alt="">治癒術</div>
             <div class="label align-self-end bg-deep-purple lighten-4">EP 3.5</div>
-            <div class="release ml-auto">
+            <div class="flag-Modal ml-auto">
                 <!-- Button trigger modal (for Bootstrap)-->
                 <button type="button" class="btn-xs btn-secondary" data-toggle="modal" data-target="#ReleaseNotesModal">
                     V1
@@ -82,7 +54,7 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <div class="modal-title" id="ReleaseNotesModal">Release Notes</div>
+                                <div class="modal-title">Release Notes</div>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -118,7 +90,7 @@
                 <form class="row block" onclick="readBaseValue()" onmouseup="readBaseValue()" onmouseout="readBaseValue()" ontouchend="readBaseValue()"
                     ontouchcancel="readBaseValue()">
                     <div class="col-12 title">基本素質
-                        <div class="float-right" id="SumBase">0</div>
+                        <span id="SumBase">0</span>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12 element">
                         <div class="input-group">
@@ -378,7 +350,7 @@
                     <div class="col-12 title">裝備</div>
                     <div class="col-lg-4 col-md-6 col-12 element">
                         <div class="input-group">
-                            <div class="label mr-auto">紅十字之杖-精鍊</div>
+                            <div class="label mr-auto">紅十字之杖-精煉</div>
                             <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('Arms', 0, 15)">
                                 <i class="fa fa-step-backward"></i>
                             </div>
@@ -428,7 +400,7 @@
                     </div>
                     <div class="col-lg-4 col-md-6 col-12 element">
                         <div class="input-group">
-                            <div class="label mr-auto">天衣舞月-精鍊</div>
+                            <div class="label mr-auto">天衣舞月-精煉</div>
                             <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('Clothes', 0, 15)">
                                 <i class="fa fa-step-backward"></i>
                             </div>
@@ -523,7 +495,7 @@
                 <form class="row block" onclick="readEnchanting()" onmouseup="readEnchanting()" onmouseout="readEnchanting()" ontouchend="readEnchanting()"
                     ontouchcancel="readEnchanting()">
                     <div class="col-12 title">附魔（治癒加成）
-                        <div class="float-right" id="SumEnchanting">0%</div>
+                        <span id="SumEnchanting">0%</span>
                     </div>
 
                     <div class="col-lg-4 col-md-6 col-12 element">
@@ -780,12 +752,12 @@
             </article>
 
             <!-- 結果 -->
-            <footer class="row block">
-                <div class="col-lg-6 col-md-6 col-12" style="padding:0;">
+            <footer class="row">
+                <div class="block col-lg-6 col-md-6 col-12">
                     <div class="title">最終治癒量</div>
-                    <div class="" id="FinallyCure" style="text-align: center; font-size: 85px; color: green">0.0</div>
+                    <div class="finallycure" id="FinallyCure">0.0</div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-12" style="padding: 0;">
+                <div class="block details col-lg-6 col-md-6 col-12">
                     <div class="title" style="background: #29B6F6">詳情</div>
                     <ul>
                         <li>基礎治癒量：<a id="BaseCureSum">0</a></li>
@@ -798,31 +770,23 @@
             </footer>
         </div>
     </section>
-    
+
+    <section class="filler"></section>
+
+    <!-- Use JQuery Load -->
+    <footer id="footer"></footer>
 
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="js/bootstrap.js" crossorigin="anonymous"></script>
+    <!-- jQuery first-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <!-- then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+    <!-- My js -->
     <script src="js/script.js"></script>
     <script src="js/skill_cure.js"></script>
 </body>
-
-<footer>
-    <div class="bg-grey lighten-3">
-        <p>圖像版權歸
-            <a href="http://www.gravity.co.kr/tc/" target="_blank">Gravity</a>、
-            <a href="https://www.xd.com/" target="_blank">心動網路</a>、
-            <a href="https://www.gnjoy.com.tw/" target="_blank">GNJOY</a>所有。
-            
-            <br> 如有遇到問題請至
-            <a href="https://forum.gamer.com.tw/C.php?bsn=28924&snA=27852&tnum=1" target="_blank">這邊</a> 留言。
-        </p>
-    </div>
-</footer>
 
 </html>
