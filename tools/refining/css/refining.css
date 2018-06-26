@@ -4,20 +4,6 @@ div[class ~= element] {
     margin-bottom: 5px;
 }
 
-/*-----------------Price Block-----------------*/
-form[class ~= price] > div[class ~= element] > div[class ~= input-group] > input {
-    width: 100px;
-    text-align: right;
-    padding-right: 5px;
-}
-
-/*-----------------HaveNeed Block-----------------*/
-div[class ~= element] > div[class ~= input-group] {
-    height: 25px;
-    width: 100%;
-    padding-left: 0;
-}
-
 div[class ~= element] > div[class ~= input-group] img {
     width: 25px;
     height: 25px;
@@ -31,18 +17,27 @@ div[class ~= element] > div[class ~= input-group] > label[class ~= left] {
     text-align: left;
 }
 
-div[class ~= element] > div[class ~= input-group] > label[class ~= sum] {
+div[class ~= element] > div[class ~= input-group] {
+    height: 25px;
     width: 100%;
-    margin-bottom: 0px;
-    border-bottom: 1px solid black;
+    padding-left: 0;
 }
 
-div[class ~= element] > div[class ~= input-group] span {
-    float: right;
+/*-----------------Price Block-----------------*/
+form[class ~= price] > div[class ~= element] > div[class ~= input-group] > input {
+    width: 100px;
+    text-align: right;
+    padding-right: 5px;
+    border-radius: 3px;
 }
 
-div[class ~= element] > div[id *= Bar],
-div[class ~= element] > div[class ~= progress] {
+/*-----------------HaveNeed Block-----------------*/
+form[class ~= need] > div[class ~= element] > div[class ~= input-group] input {
+    border-radius: 0px;
+}
+
+form[class ~= need] > div[class ~= element] > div[id *= Bar],
+form[class ~= need] > div[class ~= element] > div[class ~= progress] {
     height: 4px;
 }
 

@@ -134,8 +134,9 @@ $(document).ready(
         })
         .focusout(function () {
             var item = $(this);
-            if (item.val() == "") { item.val(0); }
-            else { item.val(ThousandthComma(item.val())); };
+            var val = Number(item.val());
+            if (val == "" || isNaN(val)) { item.val(0); }
+            else { item.val(ThousandthComma(val)); };
         })
         .keydown(function(e){
             if(e.which == 13) {$(this).blur();}; //按下Enter，失焦
@@ -188,9 +189,15 @@ var pricesMarketPlus = [10000, 55000, 110000, 175000, 221800, 405200, 875800, 19
 //讀取「物價」
 var pricesConsumables, pricesEquipment;
 
-function Read_ItemPrices(){
-    pricesEquipment = Number(RemoveComma($("#PricesEquipment").val()));
-    pricesConsumables = Number(RemoveComma($("#PricesConsumables").val()));
+function Read_ItemPrices() {
+    function read(id) {
+        var val = Number(RemoveComma($("#" + id).val()));
+        if (isNaN(val)) { val = 0; }
+        return val;
+    }
+
+    pricesEquipment = read("PricesEquipment");
+    pricesConsumables = read("PricesConsumables");
     //console.log("equipment:" + pricesEquipment + "\n" + "consumables:" + pricesConsumables);
 }
 
