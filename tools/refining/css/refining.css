@@ -1,4 +1,9 @@
 /*-----------------通則-----------------*/
+body {
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
+
 div[class ~= element] {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -126,7 +131,6 @@ footer form[class *= col] {
     padding-right: 0;
     margin-top: 1px;
     margin-bottom: 1px;
-    border: 1px solid white;
 }
 
 div[class ~= element] > ul {
@@ -139,10 +143,6 @@ div[class ~= element] > ul > li {
     padding-top: 2px;
     margin-left: 0px;
     font-size: 14px;
-}
-
-div[class ~= element] > ul > li:hover {
-    border-bottom: 1px solid gray;
 }
 
 div[class ~= element] > ul > li > span {
@@ -168,9 +168,14 @@ table tr[class ~= title] {
     text-align: center;
 }
 
-table tr[class ~= title],
-table tr:hover {
+table tr[class ~= title] {
     border-bottom: 1px solid gray;
+    font-weight: bold;
+}
+
+table tbody tr:hover {
+    background-color: whitesmoke;
+    color: orange;
     font-weight: bold;
 }
 

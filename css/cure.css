@@ -41,19 +41,10 @@ footer[class ~= row] > div {
     padding: 0;
 }
 
-footer[class ~= row] div[class ~= block] {
-    border: 1px solid white;
-}
-
 footer[class ~= row] div[class ~= finallycure] {
     text-align: center; 
     font-size: 85px; 
     color: green;
-}
-
-footer[class ~= row] div[class ~= title] {
-    text-align: center;
-    background: #03A9F4;
 }
 
 footer[class ~= row] div[class ~= details] ul {

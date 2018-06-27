@@ -52,7 +52,7 @@ $(document).ready(
                 fontFamily: "Microsoft JhengHei",
                 fontSize: 28,
                 fontWeight: "bold",
-                fontColor: "orange",
+                fontColor: "#ff2600",
                 padding: { top: 70 },
             }],
             toolTip: {
@@ -72,9 +72,10 @@ $(document).ready(
                 },
                 mouseout: function () {
                     $("#OutputCharts").CanvasJSChart().title.set("text", "總費用");
-                    $("#OutputCharts").CanvasJSChart().subtitles[0].set("text", Totalcost());
+                    $("#OutputCharts").CanvasJSChart().subtitles[0].set("text", Calculation_Totalcost());
                 },
                 type: "doughnut",
+                startAngle: 90,
                 explodeOnClick: false,
                 showInLegend: true,
                 indexLabelPlacement: "inside",
@@ -106,6 +107,7 @@ $(document).ready(
 //Loading
 $(document).ready(
     $(function () {
+        View_BackgroundIamge();
         $("#PricesEquipment").val(ThousandthComma($("#PricesEquipment").val()));
         $("#PricesConsumables").val(ThousandthComma($("#PricesConsumables").val()));
         
@@ -125,6 +127,7 @@ $(document).ready(
     $(window)
         .resize(function () {
             View_AutoTable_thColspan();
+            View_BackgroundIamge();
         }),
     $("input")
         .focus(function () {
@@ -294,6 +297,11 @@ function Calculation_CostRefiningRange() {
     sumCostRefining = SumCost(costRefining);
 }
 
+function Calculation_Totalcost() {
+    var sum = sumCostEquipment + sumCostConsumables + sumCostRefining;
+    if (sum == 0) { return "(´⊙ω⊙`)"}
+    else { return CanvasJS.formatNumber(sum, "#,##0")};
+}
 
 /*---------------------------------------- View ----------------------------------------*/
 
@@ -352,7 +360,7 @@ function View_ProgressBar(itemId, max, num) {
 
 //顯示「詳情」
 function View_CostDetails() {
-    var table = "#CostDetails";
+    var table = "#CostDetails tbody";
     var colCSStag = ["", "needEquipment", "costEquipment", "needConsumables", "costConsumables", "costRefining", "costSum", "market"];
     
     function row(x) {
@@ -389,7 +397,7 @@ function View_CostDetails() {
 //顯示「甜甜圈數值」
 function View_Charts() {
     var chart = $("#OutputCharts").CanvasJSChart();
-    var costTotal = RemoveComma(Totalcost());
+    var costTotal = RemoveComma(Calculation_Totalcost());
 
     if (isNaN(costTotal)) {
         chart.title.set("text", "請選擇範圍");
@@ -463,9 +471,9 @@ function View_Charts() {
         fixPercentage();
 
         var dataPoints = [
-            { y: sumCostEquipment, color: "green", indexLabel: sumCostEquPercentage, name: "+0裝備" },
-            { y: sumCostConsumables, color: "darkblue", indexLabel: sumCostConPercentage, name: "精煉耗材" },
-            { y: sumCostRefining, color: "gray", indexLabel: sumCostRefPercentage, name: "精煉費" }
+            { y: sumCostEquipment, color: "#61c26c", indexLabel: sumCostEquPercentage, name: "裝備" },
+            { y: sumCostConsumables, color: "#7e50a1", indexLabel: sumCostConPercentage, name: "精煉耗材" },
+            { y: sumCostRefining, color: "#f0a078", indexLabel: sumCostRefPercentage, name: "精煉費" }
         ];
     }
     
@@ -474,10 +482,20 @@ function View_Charts() {
     chart.subtitles[0].set("maxWidth", 300);
 }
 
-function Totalcost() {
-    var sum = sumCostEquipment + sumCostConsumables + sumCostRefining;
-    if (sum == 0) { return "(´⊙ω⊙`)"}
-    else { return CanvasJS.formatNumber(sum, "#,##0")};
+function View_BackgroundIamge() {
+    var width = $(window).width();
+    var item = $("body");
+
+    if (width < 1600) {
+        item.css("background-image", "");
+    }
+    else {
+        item.css({
+            "background-image": "url('/ROM-AuxiliaryTools/img/background/refining.png')",
+            "background-position": "right -" + 300 * (width / 1920) + "px bottom -" + (100 - (1 - (width / 1920)) * 220) + "px",
+            "background-size": 53 + (1 - (width / 1920)) / 3 * 100 + "%"
+        })
+    }
 }
 
 /*---------------------------------------- Btn ----------------------------------------*/
