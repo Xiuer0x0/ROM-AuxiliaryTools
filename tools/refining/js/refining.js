@@ -436,7 +436,7 @@ function View_BackgroundIamge() {
     }
     else {
         item.css({
-            "background-image": "url('img/background/refining.png')",
+            "background-image": "url('/img/background/refining.png')",
             "background-position": "right -" + 300 * (width / 1920) + "px bottom -" + (100 - (1 - (width / 1920)) * 220) + "px",
             "background-size": 53 + (1 - (width / 1920)) / 3 * 100 + "%"
         })
