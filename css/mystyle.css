@@ -294,6 +294,10 @@ footer[class ~= footer] > div > p {
     /* nav */
     nav div[class ~= navbar-collapse] {
         background-color: #7ac6f5;
+/* prrgressbar */
+div.progress {
+    height: 4px;
+}
     }
 
     nav div[class ~= navbar-nav] a[class ~= nav-item] {
