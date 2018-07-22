@@ -294,9 +294,6 @@ footer[class ~= footer] > div > p {
     /* nav */
     nav div[class ~= navbar-collapse] {
         background-color: #7ac6f5;
-/* prrgressbar */
-div.progress {
-    height: 4px;
 }
     }
 
@@ -309,4 +306,7 @@ div.progress {
     section footer [class ~= details] {
         border-left: 0px;
     }
+/* prrgressbar */
+div.progress {
+    height: 4px;
 }
