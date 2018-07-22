@@ -6,9 +6,9 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
-    <title>ROM Auxiliary Tools - 精鍊費用</title>
-    <meta name="description" content="ROM Auxiliary Tools">
-    <meta name="keywords" content="RO, 手遊, 守護永恆的愛, 計算機, 試算, 精鍊, 精煉, 安全精煉">
+    <title>精煉計算機 - ROM Auxiliary Tools</title>
+    <meta name="description" content="ROMobile輔助工具 - 精煉費用估算">
+    <meta name="keywords" content="RO,手遊,守護永恆的愛,計算機,試算,精鍊,精煉,安全精煉">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119541090-1"></script>
@@ -20,7 +20,7 @@
         gtag('config', 'UA-119541090-1');
     </script>
     
-    <link rel="icon" type="image/png" href="/ROM-AuxiliaryTools/img/logo.png">
+    <link rel="icon" type="image/png" href="img/logo.png">
 
     <!-- Font CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -29,13 +29,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
 
-
     <!-- JQuery UI CSS -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
     <!-- My CSS -->
-    <link rel="stylesheet" href="/ROM-AuxiliaryTools/css/mystyle-color.css">
-    <link rel="stylesheet" href="/ROM-AuxiliaryTools/css/mystyle.css">
+    <link rel="stylesheet" href="css/mystyle-color.css">
+    <link rel="stylesheet" href="css/mystyle.css">
     <link rel="stylesheet" href="css/refining.css">
 
 </head>
@@ -47,8 +46,8 @@
     <section>
         <header class="container d-flex flex-wrap" style="padding: 0">
             <div class="title">
-                <img src="/ROM-AuxiliaryTools/img/store/refining.png" alt="">安全精煉</div>
-            <div class="label align-self-end bg-deep-purple lighten-4">EP 3.5</div>
+                <img src="img/store/refining.png" alt="">安全精煉</div>
+            <div class="label align-self-end version">EP 3.5</div>
             <div class="flag-Modal ml-auto">
                 <!-- Button trigger modal (for Bootstrap) -->
                 <button type="button" class="btn-xs btn-secondary" data-toggle="modal" data-target="#ReleaseNotesModal">V0</button>
@@ -127,7 +126,7 @@
                             <label class="left" for="PricesEquipment">+0裝備</label>
                             <input type="text" id="PricesEquipment" min="0" value="375000" maxlength="9">
                             <label class="right" for="PricesEquipment">
-                                <img src="/ROM-AuxiliaryTools/img/currency/zeny.png" alt="Zeny">
+                                <img src="img/currency/zeny.png" alt="Zeny">
                             </label>
                         </div>
                     </div>
@@ -135,12 +134,12 @@
                     <div class="element col-lg-4 col-md-6 col-12">
                         <div class="input-group">
                             <label class="left" for="PricesConsumables">
-                                <img src="/ROM-AuxiliaryTools/img/item/metal_of_god.png" alt="神之金屬">
-                                <img src="/ROM-AuxiliaryTools/img/item/aluminum.png" alt="鋁">
+                                <img src="img/item/metal_of_god.png" alt="神之金屬">
+                                <img src="img/item/aluminum.png" alt="鋁">
                             </label>
                             <input type="text" id="PricesConsumables" min="0" value="25000" maxlength="9">
                             <label class="right" for="PricesConsumables">
-                                <img src="/ROM-AuxiliaryTools/img/currency/zeny.png" alt="Zeny">
+                                <img src="img/currency/zeny.png" alt="Zeny">
                             </label>
                         </div>
                     </div>
@@ -156,7 +155,7 @@
                                 <i class="fa fa-step-backward"></i>
                             </div>
                             
-                            <input type="number" id="EquipmentQuantity" value="0" min="0" max="0" maxlength="4">
+                            <input class="number" type="number" id="EquipmentQuantity" value="0" min="0" max="0" maxlength="4">
                             <div class="total">
                                 <label for="EquipmentQuantity">/
                                     <span id="EquipmentQuantityTotal">total</span>
@@ -173,20 +172,20 @@
                     <div class="element col-lg-4 col-md-6 col-12">
                         <div class="input-group">
                             <label class="left" for="ConsumablesQuantity">
-                                <img src="/ROM-AuxiliaryTools/img/item/metal_of_god.png" alt="神之金屬">
-                                <img src="/ROM-AuxiliaryTools/img/item/aluminum.png" alt="鋁">
+                                <img src="img/item/metal_of_god.png" alt="神之金屬">
+                                <img src="img/item/aluminum.png" alt="鋁">
                             </label>
                             <div class="btn btn-xs clear" id="ConsumablesQuantityClearbtn">
                                 <i class="fa fa-step-backward"></i>
                             </div>
                             
-                            <input type="number" id="ConsumablesQuantity" value="0" min="0" max="0" maxlength="4">
+                            <input class="number" type="number" id="ConsumablesQuantity" value="0" min="0" max="0" maxlength="4">
                             <div class="total">
                                 <label for="ConsumablesQuantity">/
                                     <span id="ConsumablesQuantityTotal">total</span>
                                 </label>
                             </div>
-                            <div class="btn btn-xs limit border-rounded-right" id="ConsumablesQuantityMaxbtn">
+                            <div class="btn btn-xs limit" id="ConsumablesQuantityMaxbtn">
                                 <i class="fa fa-step-forward"></i>
                             </div>
                         </div>
@@ -200,7 +199,7 @@
             <footer class="row d-flex flex-wrap">
                 <form class="result block col-12 col-lg-4">
                     <div class="title col-12">精煉費用</div>
-                    <div id="OutputCharts" style="height: 390px; width: 100%;"></div>
+                    <div id="OutputCharts"></div>
                 </form>
                 
                 <form class="details block col-12 col-lg-8" >
@@ -208,14 +207,14 @@
                     <div class="element col-12">
                         <table id="CostDetails" style="width: 100%; height: 390px;">
                             <thead>
-                                <tr class="title">
+                                <tr>
                                     <th id="col1">#</th>
                                     <th id="col2" colspan="2">
-                                        <img src="/ROM-AuxiliaryTools/img/ui/equipment.png" alt="裝備">
+                                        <img src="img/ui/equipment.png" alt="裝備">
                                     </th>
                                     <th id="col3" colspan="2">
-                                        <img src="/ROM-AuxiliaryTools/img/item/metal_of_god.png" alt="神之金屬">
-                                        <img src="/ROM-AuxiliaryTools/img/item/aluminum.png" alt="鋁">
+                                        <img src="img/item/metal_of_god.png" alt="神之金屬">
+                                        <img src="img/item/aluminum.png" alt="鋁">
                                     </th>
                                     <th id="col4">精煉費</th>
                                     <th id="col5" class="costSum">小計</th>
@@ -254,10 +253,10 @@
         crossorigin="anonymous"></script>
 
     <!-- Canvasjs.js -->
-    <script src="/ROM-AuxiliaryTools/js/jquery.canvasjs.min.js"></script>
+    <script src="js/jquery.canvasjs.min.js"></script>
 
     <!-- My js -->
-    <script src="/ROM-AuxiliaryTools/js/script.js"></script>
+    <script src="js/script.js"></script>
     <script src="js/refining.js"></script>
 
 </body>

@@ -30,7 +30,7 @@ $(document).ready(
             .tooltip({
                 effect: "slideDown",
                 delay: 250
-            });
+            })
         }),
     //輸出圖表
     $("#OutputCharts")
@@ -85,24 +85,12 @@ $(document).ready(
                 dataPoints: []
             }]
         }),
-    $(".progress")
-        .progressbar({
-            value: 0,
-            max: 100
-        })
-        .ready(function(){
-            $(this).find(".ui-progressbar-value").css({
-                "background": "#007bff",
-                "border":0,
-                "margin":0,
-            });
-        }),
     $(".fa-info")
         .tooltip({
             effect: "slideDown",
             delay: 250
         })
-);
+)
 
 //Loading
 $(document).ready(
@@ -120,7 +108,7 @@ $(document).ready(
         Calculation_CostRefiningRange();
         View_Charts();
     })
-);
+)
 
 //Event
 $(document).ready(
@@ -139,7 +127,7 @@ $(document).ready(
             var item = $(this);
             var val = Number(item.val());
             if (val == "" || isNaN(val)) { item.val(0); }
-            else { item.val(ThousandthComma(val)); };
+            else { item.val(ThousandthComma(val)); }
         })
         .keydown(function(e){
             if(e.which == 13) {$(this).blur();}; //按下Enter，失焦
@@ -221,7 +209,7 @@ function Read_HaveNeed(itemId) {
     var item = $("#" + itemId);
     var max = Number($("#" + itemId + "Total").text());
     
-    if (item.val() > max) { item.val(max); };
+    if (item.val() > max) { item.val(max); }
     
     View_ProgressBar(itemId, max, item.val());
 
@@ -230,7 +218,7 @@ function Read_HaveNeed(itemId) {
     }
     else if (itemId == "ConsumablesQuantity") { 
         costHaveNeedConsumables = pricesConsumables * item.val();
-    };
+    }
 }
 
 
@@ -300,7 +288,7 @@ function Calculation_CostRefiningRange() {
 function Calculation_Totalcost() {
     var sum = sumCostEquipment + sumCostConsumables + sumCostRefining;
     if (sum == 0) { return "(´⊙ω⊙`)"}
-    else { return CanvasJS.formatNumber(sum, "#,##0")};
+    else { return CanvasJS.formatNumber(sum, "#,##0")}
 }
 
 /*---------------------------------------- View ----------------------------------------*/
@@ -313,49 +301,6 @@ function View_AutoTable_thColspan() {
     else {
         $("#CostDetails tr:first th[colspan=1]").attr("colspan", "2");
     }
-}
-
-function View_ProgressBar(itemId, max, num) {
-    var bar = $("#" + itemId + "Bar");
-    var now = bar.progressbar("value");
-    var endVal;
-    if (num == 0 && max == 0) {
-        bar.progressbar("value", 100);
-    }
-    else {
-        endVal = Number(num) / Number(max) * 100;
-        var plus = true;
-        if (now > endVal) { plus = false; }
-        else { plus = true; }
-
-        var timer = setInterval(fn, 10);
-        function fn() {
-            if (plus == true) {
-                if (now > endVal) {
-                    now = endVal;
-                    bar.progressbar("value", now);
-                    clearInterval(timer);
-                }
-                else {
-                    bar.progressbar("value", now);
-                    now += 3;
-                };
-            }
-            else {
-                if (now < endVal) {
-                    now = endVal;
-                    bar.progressbar("value", now);
-                    clearInterval(timer);
-                }
-                else {
-                    bar.progressbar("value", now);
-                    now -= 3;
-                };
-            }
-        }
-    };
-
-    
 }
 
 //顯示「詳情」
@@ -386,7 +331,7 @@ function View_CostDetails() {
                 newRow += "<td class=\"" + colCSStag[j] + "\">" + ThousandthComma(cells[j]) + "</td>";
             }
         }
-        if($(table + " tr").length > 15){
+        if ($(table + " tr").length > 15) {
             $(table + " tr:eq(1)").remove();
         }
         newRow += "</tr>";
@@ -419,8 +364,8 @@ function View_Charts() {
 
             for (var i = 0; i < num.length; i++) {
                 if (num[i] > num[index.max]) { index.max = i; }
-                else if (num[i] < num[index.min]) { index.min = i; };
-            };
+                else if (num[i] < num[index.min]) { index.min = i; }
+            }
 
             //尋找相同值
             function sameValue(array, comparativeNum) {
@@ -440,9 +385,9 @@ function View_Charts() {
 
                 t_array.splice(removeNum, 1);
 
-                for (var i = 0; i < t_array.length; i++) { temp += t_array[i]; };
+                for (var i = 0; i < t_array.length; i++) { temp += t_array[i]; }
                 return temp;
-            };
+            }
 
             //顯示比重調整（解決：因進位取捨，造成顯示時總合不為100％
             var sum = num[0] + num[1] + num[2];
@@ -451,14 +396,14 @@ function View_Charts() {
                 if (sameValue(num, index.min)) {
                     num[index.max] = (1 - sumArrayOther(num, index.max));
                 }
-                else { num[index.min] = (1 - sumArrayOther(num, index.min)); };
+                else { num[index.min] = (1 - sumArrayOther(num, index.min)); }
             }
             else if (sum < 1) {
                 if (sameValue(num, index.max)) {
                     num[index.min] = (1 - sumArrayOther(num, index.min));
                 }
                 else { num[index.max] = (1 - sumArrayOther(num, index.max)); }
-            };
+            }
 
             function view_Set(value) {
                 if (value == 0) { return "" }
@@ -491,7 +436,7 @@ function View_BackgroundIamge() {
     }
     else {
         item.css({
-            "background-image": "url('/ROM-AuxiliaryTools/img/background/refining.png')",
+            "background-image": "url('img/background/refining.png')",
             "background-position": "right -" + 300 * (width / 1920) + "px bottom -" + (100 - (1 - (width / 1920)) * 220) + "px",
             "background-size": 53 + (1 - (width / 1920)) / 3 * 100 + "%"
         })
@@ -505,7 +450,7 @@ function Btn(classTag, _even) {
     var itemTotal = $("#" + itemId + "Total").text();
 
     if( _even == "Clear" ) { item.val(0); }
-    else if ( _even == "Max" ) { item.val(itemTotal); };
+    else if ( _even == "Max" ) { item.val(itemTotal); }
     
 
     View_ProgressBar(itemId, itemTotal, item.val());
@@ -514,7 +459,3 @@ function Btn(classTag, _even) {
     Calculation_CostRefiningRange()
     View_Charts();
 }
-
-
-    
-

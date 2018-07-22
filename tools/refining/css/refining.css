@@ -1,20 +1,27 @@
-/*-----------------通則-----------------*/
+/*#region ---------------- base ---------------- */
 body {
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
-div[class ~= element] {
+div.element {
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
-div[class ~= element] > div[class ~= input-group] img {
+div.title ~ div.element {
+    padding-top: 2px;
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+div.element > div.input-group img {
     width: 25px;
     height: 25px;
 }
 
-div[class ~= element] > div[class ~= input-group] > label[class ~= left] {
+div.element > div.input-group > label.left {
     margin-right: auto;
     min-width: 85px;
     padding: 1px;
@@ -22,7 +29,7 @@ div[class ~= element] > div[class ~= input-group] > label[class ~= left] {
     text-align: left;
 }
 
-div[class ~= element] > div[class ~= input-group] {
+div.element > div.input-group {
     height: 25px;
     width: 100%;
     padding-left: 0;
@@ -30,22 +37,26 @@ div[class ~= element] > div[class ~= input-group] {
 
 input {
     -webkit-appearance: none;
+    border: 1px;
 }
 
+/*#endregion base */
+
+/*#region ---------------- input block ---------------- */
+/*#region - refining range*/
 /*range slider*/
-div[class ~= element] > div[class ~= input-group] div[class ~= range-slider] {
-    /*width: calc(100% - 85px);*/ /*label width = 85px*/
+div.element > div.input-group div.range-slider {
     width: 100%;
     margin-top: 6px;
     margin-left: 0px;
     margin-right: 5px;
 }
 
-.ui-slider-range { 
+div.element > div.input-group div.range-slider .ui-slider-range { 
     background: rgb(235, 147, 75);
 }
 
-div[class ~= range-slider] > div[class ~= ui-slider-handle] {
+div.element > div.input-group div.range-slider > div.ui-slider-handle {
     width: 25px;
     height: 25px;
     text-align: center;
@@ -54,78 +65,97 @@ div[class ~= range-slider] > div[class ~= ui-slider-handle] {
     line-height: 0px;
 }
 
-div[class ~= range-slider] > div[class ~= ui-slider-handle]:active {
+div.element > div.input-group div.range-slider > div.ui-slider-handle:active {
     background: rgb(243, 180, 122);
 }
-
-/*-----------------Price Block-----------------*/
-form[class ~= price] > div[class ~= element] > div[class ~= input-group] > input {
+/*#endregion refining range*/
+/*#region - price */
+form.price > div.element > div.input-group > input {
+    height: 25px;
     width: 100px;
     text-align: right;
     padding-right: 5px;
     border-radius: 3px;
 }
-
-/*-----------------HaveNeed Block-----------------*/
-form[class ~= need] > div[class ~= element] > div[class ~= input-group] input {
+/*#endregion price*/
+/*#region - have need */
+/*#region -- input */
+form.need > div.element > div.input-group input {
+    height: 25px;
     border-radius: 0px;
 }
 
-form[class ~= need] > div[class ~= element] > div[class ~= input-group] input[type = number],
-form[class ~= need] > div[class ~= element] > div[class ~= input-group] div[class ~= total] {
+form.need > div.element > div.input-group > input.number {
     width: 50px;
     border:1px solid #ced4da;
-}
-
-form[class ~= need] > div[class ~= element] > div[class ~= input-group] > input[type = number] {
-    text-align: right;
     border-right: 0px;
+    padding-right: 10px;
+    text-align: right;
 }
 
-form[class ~= need] > div[class ~= element] > div[class ~= input-group] div[class ~= total] {
-    border-left: 0px;
+/*hide number step*/
+form.need > div.element > div.input-group > input.number {
+    -moz-appearance: textfield;
+}
+form.need > div.element > div.input-group > input.number::-webkit-inner-spin-button,
+form.need > div.element > div.input-group > input.number::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+/*#endregion input */
+/*#region -- total */
+form.need > div.element > div.input-group div.total {
+    height: 25px;
+    width: 50px;
     background-color: #fff;
+    border:1px solid #ced4da;
+    border-left: 0px;
 }
 
-form[class ~= need] > div[class ~= element] > div[class ~= input-group] div[class ~= total] > label > span {
+form.need > div.element > div.input-group div.total > label > span {
     margin-left: 5px;
-    
     text-align: center;
 }
-
-/*btn total group*/
-div[class ~= input-group] div[class ~= btn] {
-    border: 1px solid #ced4da;
+/*#endregion total*/
+/*#region -- btn */
+div.input-group div.btn {
     background-color: #e0e2e6; 
+    border: 1px solid #ced4da;
     outline: none;
 } 
 
-div[class ~= input-group] div[class ~= btn]:hover {
+div.input-group div.btn:hover {
     background-color: #aeb1b3ec;
 }
 
-div[class ~= input-group] div[class ~= btn-xs] {
-    padding : 0;
+div.input-group div.btn-xs {
     width: 25px;
-    text-align: center;
-    height: 24px;
+    height: 25px;
+    padding : 0;
     line-height: 23px;
+    text-align: center;
 }
 
-div[class ~= input-group] div[class ~= clear] {
+div.input-group div.clear {
     border-bottom-left-radius: 15px;
     border-top-left-radius: 15px;
-    padding-left: 7px;
+    padding-left: 3px;
 }
 
-/*prrgressbar*/
-form[class ~= need] > div[class ~= element] > div[id *= Bar],
-form[class ~= need] > div[class ~= element] > div[class ~= progress] {
-    height: 4px;
+div.input-group div.limit {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding-right: 3px;
 }
+/*#endregion btn*/
 
-/*-----------------Output-----------------*/
+/*#endregion have need */
 
+/*#endregion input block */
+
+/*#region ---------------- result ---------------- */
 footer form[class *= col] {
     padding-left: 0;
     padding-right: 0;
@@ -133,42 +163,31 @@ footer form[class *= col] {
     margin-bottom: 1px;
 }
 
-div[class ~= element] > ul {
-    margin-bottom: 0px;
-    padding-left: 20px;
+/*#region - charts*/
+#OutputCharts {
+    width: 100%;
+    height: 390px;
 }
-
-div[class ~= element] > ul > li {
-    height: 30px;
-    padding-top: 2px;
-    margin-left: 0px;
-    font-size: 14px;
-}
-
-div[class ~= element] > ul > li > span {
-    float: right;
-}
-
-/*table*/
+/*#endregion charts*/
+/*#region - details table*/
 table {
     text-align: right;
-
 }
 
 table img {
     width: 25px;
     height: 25px;
 }
-
+/*#region -- 水平 */
 table tr {
     border-bottom: 1px solid rgba(0, 0, 0, 0);
 }
 
-table tr[class ~= title] {
+table thead tr {
     text-align: center;
 }
 
-table tr[class ~= title] {
+table thead tr {
     border-bottom: 1px solid gray;
     font-weight: bold;
 }
@@ -179,6 +198,8 @@ table tbody tr:hover {
     font-weight: bold;
 }
 
+/*#endregion 水平*/
+/*#region -- 垂直 */
 table td[class = ""],
 table td[class *= need] {
     text-align: center;
@@ -191,7 +212,7 @@ table td {
 }
 
 table [class *= need],
-table [class = market] {
+table .market {
     border-right: 1px solid rgba(0, 0, 0, 0);
 }
 
@@ -199,38 +220,34 @@ table [class *= cost] {
     padding-right: 5px;
 }
 
-table th[id = col1] {
+table th#col1 {
     width: 4%;
 }
 
-table th[id = col2],
-table th[id = col3] {
+table th#col2,
+table th#col3 {
     width: 21%;
 }
 
-table th[id = col4] {
+table th#col4 {
     width: 16%;
 }
 
-table th[id = col5],
-table th[id = col6] {
+table th#col5,
+table th#col6 {
     width: 19%;
 }
 
+/*#endregion 垂直 */
 
+/*#endregion details table*/
+
+/*#endregion result */
 
 @media screen and (max-width: 767px) {
     /*range slider*/
-    div[class ~= element] > div[class ~= input-group] div[class ~= range-slider] {
-        /*width: calc(100% - 85px - 0px);*/ /*label width = 85px, rangeslider margin-right width = 50px*/
-        /*margin-right: 0px;*/
+    div.element > div.input-group div.range-slider {
         margin-left: 5px;
-
-    }
-
-    /*btn total group*/
-    div[class ~= element] > div[class ~= input-group] > input[type = number] {
-        padding-right: 10px;
     }
 
     /*Output table*/
@@ -244,8 +261,8 @@ table th[id = col6] {
         border: 0px;
     }
 
-    table th[id = col2],
-    table th[id = col3] {
+    table th#col2,
+    table th#col3 {
         width: 7%;
     }
 }
