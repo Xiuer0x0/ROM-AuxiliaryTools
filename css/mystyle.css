@@ -131,9 +131,7 @@ div[class ~= navbar-nav] a[class ~= nav-item]:hover {
     -webkit-transform: rotate(-45deg) translate(-9px, 6px);
     transform: rotate(-45deg) translate(-9px, 6px);
 }
-
 .change .bar2 {opacity: 0;}
-
 .change .bar3 {
     -webkit-transform: rotate(45deg) translate(-8px, -8px);
     transform: rotate(45deg) translate(-8px, -8px);
@@ -277,6 +275,7 @@ section footer [class ~= details] div[class ~= title] {
 footer[class ~= footer] {
     width: 100%;
     margin-top: 15px;
+    background-color: #e0e0e0;
 }
 
 footer[class ~= footer] > div > p {

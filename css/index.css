@@ -1,0 +1,66 @@
+section .main.container {
+    padding: 5px;
+}
+
+section .main.container h3 {
+    font-weight: bold;
+}
+
+section .main.container h3 ~ .introduction > p {
+    text-indent: 2rem;
+}
+
+section .main.container h3 ~ .tools {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap !important;
+    flex-wrap: wrap !important;
+}
+
+h3 ~ .tools .card {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 3px;
+    max-width: 22rem;
+}
+
+.card img {
+    height: 210px;
+    padding: 3px;
+}
+
+.card .card-body {
+    padding-top: 15px;
+}
+
+.card .card-body .card-title {
+    margin: 0;
+    font-weight: bold;
+}
+
+.card .card-body .card-subtitle {
+    margin: 0;
+    color: gray;
+    font-size: 14px;
+}
+
+.card .card-body > p.card-text {
+    margin-bottom: 2px;
+    text-indent: 2rem;
+}
+
+.card .card-body > a {
+    float: right;
+}
+
+.card .card-footer {
+    margin: 0;
+    width: 100%;
+    line-height: 1;
+    padding: 5px 10px 5px 10px;
+    text-align: right;
+    color: gray;
+    font-size: 12px;
+}
