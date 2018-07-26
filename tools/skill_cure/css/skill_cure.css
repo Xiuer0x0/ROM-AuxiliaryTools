@@ -57,6 +57,7 @@ div.item-block div.input-group input {
     width: 40px;
     height: 25px;
     border:1px solid #ced4da;
+    border-radius: 0;
     text-align: center;
 }
 
