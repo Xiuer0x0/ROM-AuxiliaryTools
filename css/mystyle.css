@@ -22,7 +22,8 @@ select::-ms-expand {
     display: none; 
 }
 
-input {
+input.number,
+input.float {
     -webkit-appearance: none;
     border: 1px;
 }
