@@ -35,11 +35,6 @@ div.element > div.input-group {
     padding-left: 0;
 }
 
-input {
-    -webkit-appearance: none;
-    border: 1px;
-}
-
 /*#endregion base */
 
 /*#region ---------------- input block ---------------- */

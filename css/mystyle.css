@@ -22,6 +22,11 @@ select::-ms-expand {
     display: none; 
 }
 
+input {
+    -webkit-appearance: none;
+    border: 1px;
+}
+
 /*#endregion 清除瀏覽器預設值 */
 
 body {
