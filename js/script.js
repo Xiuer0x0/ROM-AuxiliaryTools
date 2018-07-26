@@ -1,11 +1,8 @@
-//讀取頁首頁尾
 $(document).ready(function () {
-    $("#header").load("/header.html #header");
-    $("#footer").load("/footer.html #footer");
-})
-
-//UI set
-$(document).ready(
+    //讀取頁首頁尾
+    $("#header").load("/header.html #header"),
+    $("#footer").load("/footer.html #footer"),
+    //UI set
     $(".progress")
         .progressbar({
             value: 0,
@@ -30,8 +27,22 @@ $(document).ready(
     $("input.float")
         .keydown(function(e) {
             return CheckKeydown("float", e, this)
+        }),
+    //UI even
+    $(window)
+        .scroll(function(){
+            if($(this).scrollTop() > 75){
+                $('#scroll').fadeIn();
+            }else{
+                $('#scroll').fadeOut();
+            }
+        }),
+    $('#scroll')
+        .click(function(){
+            $("html, body").animate({ scrollTop: 0 }, 400);
+            return false;
         })
-)
+})
 
 function CheckKeydown(type, e, item) {
     var code = parseInt(e.keyCode);

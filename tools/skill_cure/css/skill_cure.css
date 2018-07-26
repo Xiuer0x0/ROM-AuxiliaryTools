@@ -1,55 +1,420 @@
-/*InputGroup*/
-div[class ~= input-group] > div[class ~= label] {
+/*#region item-block */
+/*#region - base */
+div.item-block {
+    border-radius: 5px;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+div.item-block > div.title,
+div.item-block div.input-group,
+div.item-block.other div.element {
+    height: 25px;
+}
+
+div.item-block div.input-group > label.title {
+    margin-left: 5px;
+    margin-right: auto;
+    padding-top: 2px;
+    font-weight: bold;
+}
+/*#endregion - base */
+/*#region - btn */
+div.item-block div.input-group .btn {
+    border: 1px solid #ced4da;
+    background-color: #e0e2e6; 
+    outline: none;
+}
+
+div.item-block div.input-group .btn:hover {
+    background-color: #aeb1b3ec;
+}
+
+div.item-block div.input-group div.btn.left {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding-left: 3px;
+}
+
+div.item-block div.input-group div.btn.right {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+div.item-block div.input-group div.btn.square {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+/*#endregion - btn */
+/*#region - input[number, text] & select:focus */
+div.item-block div.input-group input {
+    width: 40px;
+    height: 25px;
+    border:1px solid #ced4da;
+    text-align: center;
+}
+
+div.item-block div.input-group input.number:focus,
+div.item-block div.input-group input.float:focus {
+    width: 140px;
+    border-radius: 15px;
+    border: 1.5px solid rgb(77, 144, 254);
+    outline: none;
+}
+
+/*hide number step*/
+div.item-block div.input-group input.number {
+    -moz-appearance: textfield;
+}
+div.item-block div.input-group input.number::-webkit-inner-spin-button,
+div.item-block div.input-group input.number::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/*#endregion - input[number, text] */
+/*#region - selectgroup */
+div.item-block.select-group div.title > label.left {
+    margin-left: 5px;    
+    font-weight: bold;
+}
+
+div.item-block.select-group > div.title > select {
+    float: right;
+    outline: none;
+    height: 23px;
+    width: 140px;
+    border-radius: 15px;
+    
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+div.item-block select:focus {
+    border: 1.5px solid rgb(77, 144, 254);
+
+}
+
+div.item-block.select-group > div.title ~ hr {
+    margin: -3.5px 10px 0px 0px;
+}
+
+div.item-block.select-group > div.title ~ div.input-group {
+    margin: 5px 0 0 0;
+}
+
+div.item-block > div.title ~ div.input-group > label {
+    margin: 0px auto 0px 20px;
+}
+
+div.item-block.select-group > div.title ~ div.progress {
+    margin-left: 20px;
+}
+/*#endregion selectgroup */
+/*#region - input-group range*/
+div.input-group > div.label {
     padding: 1px;
     font-size: 14px;
 }
 
-div[class ~= input-group] div[class ~= btn-xs] {
+div.input-group div.btn-xs {
     padding : 0;
     width: 25px;
     text-align: center;
-    height: 24px;
+    height: 25px;
     line-height: 23px;
 }
 
-div[class ~= input-group] div[class ~= number] {
+div.input-group div.number {
     width: 40px;
     font-weight:bold;
     font-size: 10px;
     text-align: center;
     background-color: wheat;
-    height: 24px;
+    height: 25px;
     line-height: 24px;
 }
-
-/*Select*/
-div[class ~= input-group] > select {
-    width: 140px;
-    padding-left: 5px;
-    outline: none;
+/*#region -- Disabled */
+div.input-group div.filter {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
 
-/*ProgressBar*/
-div[class ~= input-group] ~ div[class ~= progress], 
-div[class ~= form-check] ~ div[class ~= progress] {
-    height: 2px;
+div.input-group.disabled div.filter {
+    z-index: 10;
 }
 
-/*Output*/
-footer[class ~= row],
-footer[class ~= row] > div {
+div.input-group.disabled {
+    opacity: 0.4;
+    color: rgba(0, 0, 0, 0.6);
+}
+/*#endregion Disabled*/
+/*#endregion input-group range */
+/*#region - input-group check */
+div.item-block > div.input-group > input.checkbox {
+    margin: 3px;
+    width: 20px;
+    height: 20px;
+}
+
+div.item-block div.input-group > input.checkbox ~ label {
+    margin-top: 2px;
+    width: calc(100% - 26px);
+    font-weight: bold;
+}
+/*#endregion input-group check */
+/*#region - !!Exception!! */
+div.item-block.other div.element {
+    margin-bottom: 5px;
+    padding: 0px;
+}
+
+div.item-block.other div.element div.item-block {
+    margin-top: 0px;
+}
+
+div.item-block.other div.element div.item-block div.progress {
+    margin-left: 0px;
+}
+
+@media screen and (min-width: 992px) {
+    div.item-block.other {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+    }
+
+    div.item-block.other div.element {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    div.item-block div.input-group input {
+        text-align: center;
+    }
+
+    div.item-block {
+        margin-bottom: 5px;
+    }
+
+    div.item-block.other .element {
+        margin-bottom: 15px;
+    }
+
+    div.item-block.other .element:last-child {
+        margin-bottom: 5px;
+    }
+}
+/*#endregion !!Exception!! */
+/*#endregion item-block */
+
+/*#region - Result*/
+/*#region base*/
+footer.row,
+footer.row > div {
     padding: 0;
 }
 
-footer[class ~= row] div[class ~= finallycure] {
-    text-align: center; 
-    font-size: 85px; 
+footer.row div.result > .value,
+footer.row div.details ul li > .value {
+    width: 15%;
+    min-width: 50px;
+    text-align: right;
+}
+
+footer.row i.fa-long-arrow-up {
+    margin: 4px 3px 0 0;
     color: green;
 }
 
-footer[class ~= row] div[class ~= details] ul {
-    font-size: 16px;
-    margin: 0;
-    padding-top: 5px;
-    padding-bottom: 5px;
+footer.row i.fa-long-arrow-up ~ div.value {
+    color: green;
 }
+
+footer.row i.fa-long-arrow-down {
+    margin: 5px 3px 0 0;
+    color: red;
+}
+
+footer.row i.fa-long-arrow-down ~ div.value {
+    color: red;
+}
+/*#endregion base*/
+/*#region Finally Cure */
+footer.row div.result.block div.result {
+    margin: 0;
+    line-height: 1;
+    text-align: center; 
+    font-size: 96px; 
+    color: orange;
+}
+
+footer.row div.result.block div.status {
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+footer.row div.result.block div.status i,
+footer.row div.result.block div.status div.value {
+    display: block;
+    width: auto;
+    align-content: center;
+    font-size: 30px;
+}
+
+footer.row div.result.block div.status i.fa-long-arrow-up {
+    margin-top: 6px;
+}
+
+footer.row div.result.block div.status i.fa-long-arrow-down {
+    margin-top: 10px;
+}
+
+
+/*#endregion Finally Cure */
+/*#region Details */
+footer.row div.details ul {
+    margin: 0 25%;
+    padding: 5px 0 5px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 1199px) {
+    footer.row div.details ul {
+        margin: 0 15%;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    footer.row div.details ul {
+        margin: 0 10%;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    footer.row div.details ul {
+        margin: 0 5%;
+    }
+}
+
+footer.row div.details ul li {
+    display: flex;
+    width: 90%;
+}
+
+footer.row div.details ul li > i.fa-info {
+    min-width: 15px;
+    margin: 6.5px 2px 0 0;
+}
+
+footer.row div.details ul li > .label {
+    width: 40%;
+    min-width: 140px;
+}
+
+footer.row div.details ul li > .status {
+    display: flex;
+    width: 15%;
+    min-width: 50px;
+    margin-left: 10%;
+}
+
+/*#endregion Details */
+/*#endregion - Result*/
+
+/*#region DetailsCard*/
+form.row.block .details {
+    border-bottom: 1px solid black;
+    padding: 0 3px 3px 3px;
+    background-color: #a7d7ff;
+    font-size: 14px;
+}
+
+form.row.block .details > .d-flex.flex-wrap > div {
+    margin: 0;
+    padding: 0px;
+}
+
+form.row.block .details > .d-flex.flex-wrap > .title {
+    width: 100%;
+    margin: 3px 3px 3px 2px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 5px 0 0 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+form.row.block .details > .d-flex.flex-wrap > .title:first-child {
+    border: none;
+}
+
+form.row.block .details .card {
+    height: 100%;
+    margin: 1px;
+    padding: 0;
+    background-color: #d4d0f7de;
+}
+
+form.row.block .details .card .title {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 3px;
+    font-weight: bold;
+}
+
+form.row.block .details .card .title .status {
+    display: block;
+}
+
+form.row.block .details .card .title label {
+    margin: 0;
+    padding-bottom: 1px;
+    white-space:break-word; 
+}
+
+form.row.block .details .card .title .tag {
+    float: right;
+    margin: 1px 3px 0 3px;
+    border-radius: 10px;
+    padding: 0 5px 0 5px;
+    background-color: lightsalmon;
+}
+
+form.row.block .details .card p {
+    margin: 5px;
+    padding-left: 20px; 
+}
+
+.fa-check {
+    margin: 3.5px 0 1px 5px;
+    width: 14px;
+    color:green;
+}
+
+.fa-close {
+    margin: 3.45px 0 1px 5px;
+    width: 14px;
+    color: red;
+    opacity: 0.5;
+}
+
+.card.disabled {
+    opacity: .7;
+    color: gray;
+}
+
+/*#endregion DetailsCard*/

@@ -27,6 +27,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <!-- JQuery UI CSS -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
     <!-- My CSS -->
     <link rel="stylesheet" href="/css/mystyle-color.css">
     <link rel="stylesheet" href="/css/mystyle.css">
@@ -50,11 +53,17 @@
     <section>
         <header class="container d-flex flex-wrap" style="padding: 0">
             <div class="title"><img src="/img/skill/acolyte_cure.png" alt="">治癒術</div>
-            <div class="label align-self-end version">EP 3.5</div>
+            <div class="label align-self-end version">EP 4.0</div>
+            <div class="label align-self-end tool-group">
+                <div class="btn btn-xs tools" id="tools-save" title="儲存於本地"><i class="fa fa-save"></i></div>
+                <div class="btn btn-xs tools" id="tools-load" title="讀取本地記錄"><i class="fa fa-folder-open-o"></i></div>
+                <!--<div class="btn btn-xs tools" id="tools-copy" title="複製本地紀錄"><i class="fa fa-copy"></i></div> -->
+                <div class="btn btn-xs tools" id="tools-default" title="恢復本站預設值"><i class="fa fa-refresh"></i></div>
+            </div>
             <div class="flag-Modal ml-auto">
                 <!-- Button trigger modal (for Bootstrap)-->
                 <button type="button" class="btn-xs btn-secondary" data-toggle="modal" data-target="#ReleaseNotesModal">
-                    V1
+                    V2
                 </button>
             
                 <!-- Modal -->
@@ -68,6 +77,22 @@
                                 </button>
                             </div>
                             <div class="modal-body">
+                                <div class="version">V2</div>
+                                <ul>
+                                    <li>新增 - 比較功能、道具重點效果說明。</li>
+                                    <li>更新 - 官方EP4.0：
+                                        <ol>
+                                            <li>調整「等級、素質、星盤」上限。</li>
+                                            <li>加入新裝備、卡片。</li>
+                                            <li>加入「紅十字之杖」+13精煉效果。</li>
+                                        </ol>
+                                    </li>
+                                    <li>更新 - 重新建構操作功能。</li>
+                                    <li>更新 - 修正部分詞彙，使其與遊戲中相同。</li>
+                                </ul>
+                                <div class="date">2018/07/20</div>
+                                <hr>
+
                                 <div class="version">V1</div>
                                 <ul>
                                     <li>新增 - 「頭飾附魔」計算功能。</li>
@@ -95,666 +120,936 @@
             <!--輸入選項-->
             <article>
                 <!-- 基本素質 -->
-                <form class="row block" onclick="readBaseValue()" onmouseup="readBaseValue()" onmouseout="readBaseValue()" ontouchend="readBaseValue()"
-                    ontouchcancel="readBaseValue()">
+                <form class="row block">
                     <div class="col-12 title">基本素質
                         <span id="SumBase">0</span>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">Base 等級</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('BaseLevel', 1, 99)">
+
+                    <div class="item-block col-lg-4 col-md-6 col-12">
+                        <div class="input-group" id="BaseLevelGroup">
+                            <label class="title">Base 等級</label>
+                            <div class="btn btn-xs left" id="BaseLevelBtn_StepBackward">
                                 <i class="fa fa-step-backward"></i>
                             </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('BaseLevel', 'less', 1, 99, 1)" ontouchstart="btnRangeDown('BaseLevel', 'less', 1, 99, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <div class="btn btn-xs square" id="BaseLevelBtn_Minus">
                                 <i class="fa fa-minus"></i>
                             </div>
-                            <div class="number" id="BaseLevel">90</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('BaseLevel', 'plus', 1, 99, 1)" ontouchstart="btnRangeDown('BaseLevel', 'plus', 1, 99, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <input type="number" class="number" id="BaseLevelInput" value="0" min="0" max="0">
+                            <div class="btn btn-xs square" id="BaseLevelBtn_Plus">
                                 <i class="fa fa-plus"></i>
                             </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('BaseLevel', 99, 99)">
+                            <div class="btn btn-xs right" id="BaseLevelBtn_StepForward">
                                 <i class="fa fa-step-forward"></i>
                             </div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="BaseLevelBar" role="progressbar" style="width: 91%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="99"></div>
-                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="BaseLevelBar"></div>
                     </div>
-            
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">Int 合計</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('IntSum', 0, 300)">
+
+                    <div class="item-block col-lg-4 col-md-6 col-12">
+                        <div class="input-group" id="BaseIntGroup">
+                            <label class="title">Int 合計</label>
+                            <div class="btn btn-xs left" id="BaseIntBtn_StepBackward">
                                 <i class="fa fa-step-backward"></i>
                             </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('IntSum', 'less', 0, 300, 1)" ontouchstart="btnRangeDown('IntSum', 'less', 0, 300, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <div class="btn btn-xs square" id="BaseIntBtn_Minus">
                                 <i class="fa fa-minus"></i>
                             </div>
-                            <div class="number" id="IntSum">200</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('IntSum', 'plus', 0, 300, 1)" ontouchstart="btnRangeDown('IntSum', 'plus', 0, 300, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <input type="number" class="number" id="BaseIntInput" value="0" min="0" max="0">
+                            <div class="btn btn-xs square" id="BaseIntBtn_Plus">
                                 <i class="fa fa-plus"></i>
                             </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('IntSum', 300, 300)">
+                            <div class="btn btn-xs right" id="BaseIntBtn_StepForward">
                                 <i class="fa fa-step-forward"></i>
                             </div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="IntSumBar" role="progressbar" style="width: 67%;" aria-valuenow="200" aria-valuemin="0" aria-valuemax="300"></div>
-                        </div>
-                    </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="BaseIntBar"></div>
+                    </div>        
                 </form>
             
                 <!-- 技能 -->
-                <form class="row block" onclick="readSkill()" onmouseup="readSkill()" onmouseout="readSkill()" ontouchend="readSkill()" ontouchcancel="readSkill()">
+                <form class="row block">
                     <div class="col-12 title">技能</div>
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">治癒術</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('CureLevel', 1, 20)">
+
+                    <div class="item-block col-lg-4 col-md-6 col-12">
+                        <div class="input-group" id="SkillCureGroup">
+                            <label class="title">治癒術</label>
+                            <div class="btn btn-xs left" id="SkillCureBtn_StepBackward">
                                 <i class="fa fa-step-backward"></i>
                             </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('CureLevel', 'less', 1, 20, 1)" ontouchstart="btnRangeDown('CureLevel', 'less', 1, 20, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <div class="btn btn-xs square" id="SkillCureBtn_Minus">
                                 <i class="fa fa-minus"></i>
                             </div>
-                            <div class="number" id="CureLevel">10</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('CureLevel', 'plus', 1, 20, 1)" ontouchstart="btnRangeDown('CureLevel', 'plus', 1, 20, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <input type="number" class="number" id="SkillCureInput" value="0" min="0" max="0">
+                            <div class="btn btn-xs square" id="SkillCureBtn_Plus">
                                 <i class="fa fa-plus"></i>
                             </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('CureLevel', 20, 20)">
+                            <div class="btn btn-xs right" id="SkillCureBtn_StepForward">
                                 <i class="fa fa-step-forward"></i>
                             </div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="CureLevelBar" role="progressbar" style="width: 50%;" aria-valuenow="10" aria-valuemin="1" aria-valuemax="20"></div>
-                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="SkillCureBar"></div>
                     </div>
-            
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">冥想</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('Meditation', 0, 10)">
+                    
+                    <div class="item-block col-lg-4 col-md-6 col-12">
+                        <div class="input-group" id="SkillMeditationGroup">
+                            <label class="title">冥想</label>
+                            <div class="btn btn-xs left" id="SkillMeditationBtn_StepBackward">
                                 <i class="fa fa-step-backward"></i>
                             </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('Meditation', 'less', 0, 10, 1)" ontouchstart="btnRangeDown('Meditation', 'less', 0, 10, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <div class="btn btn-xs square" id="SkillMeditationBtn_Minus">
                                 <i class="fa fa-minus"></i>
                             </div>
-                            <div class="number" id="Meditation">10</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('Meditation', 'plus', 0, 10, 1)" ontouchstart="btnRangeDown('Meditation', 'plus', 0, 10, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <input type="number" class="number" id="SkillMeditationInput" value="0" min="0" max="0">
+                            <div class="btn btn-xs square" id="SkillMeditationBtn_Plus">
                                 <i class="fa fa-plus"></i>
                             </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('Meditation', 10, 10)">
+                            <div class="btn btn-xs right" id="SkillMeditationBtn_StepForward">
                                 <i class="fa fa-step-forward"></i>
                             </div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="MeditationBar" role="progressbar" style="width: 100%;" aria-valuenow="10" aria-valuemin="0"
-                                aria-valuemax="10"></div>
-                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="SkillMeditationBar"></div>
                     </div>
-            
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">冒險-緊急治療</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('EmergencyCure', 0, 3)">
+                    
+                    <div class="item-block col-lg-4 col-md-6 col-12">
+                        <div class="input-group" id="SkillEmergencyCureGroup">
+                            <label class="title">冒險-緊急治療</label>
+                            <div class="btn btn-xs left" id="SkillEmergencyCureBtn_StepBackward">
                                 <i class="fa fa-step-backward"></i>
                             </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('EmergencyCure', 'less', 0, 3, 1)" ontouchstart="btnRangeDown('EmergencyCure', 'less', 0, 3, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <div class="btn btn-xs square" id="SkillEmergencyCureBtn_Minus">
                                 <i class="fa fa-minus"></i>
                             </div>
-                            <div class="number" id="EmergencyCure">1</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('EmergencyCure', 'plus', 0, 3, 1)" ontouchstart="btnRangeDown('EmergencyCure', 'plus', 0, 3, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <input type="number" class="number" id="SkillEmergencyCureInput" value="0" min="0" max="0">
+                            <div class="btn btn-xs square" id="SkillEmergencyCureBtn_Plus">
                                 <i class="fa fa-plus"></i>
                             </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('EmergencyCure', 3, 3)">
+                            <div class="btn btn-xs right" id="SkillEmergencyCureBtn_StepForward">
                                 <i class="fa fa-step-forward"></i>
                             </div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="EmergencyCureBar" role="progressbar" style="width: 33%;" aria-valuenow="1" aria-valuemin="0"
-                                aria-valuemax="3"></div>
-                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="SkillEmergencyCureBar"></div>
                     </div>
                 </form>
+
                 <!-- 星盤 -->
-                <form class="row block " onclick="readAstrolabe()" onmouseup="readAstrolabe()" onmouseout="readAstrolabe()" ontouchend="readAstrolabe()"
-                    ontouchcancel="readAstrolabe()">
+                <form class="row block">
                     <div class="col-12 title">阿薩神碑（星盤）</div>
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">治癒術-強效</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('CureBoost', 0, 5)">
+
+                    <div class="item-block col-lg-4 col-md-6 col-12">
+                        <div class="input-group" id="AstrolabeCureAdditionGroup">
+                            <label class="title">治癒術-強效</label>
+                            <div class="btn btn-xs left" id="AstrolabeCureAdditionBtn_StepBackward">
                                 <i class="fa fa-step-backward"></i>
                             </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('CureBoost', 'less', 0, 5, 1)" ontouchstart="btnRangeDown('CureBoost', 'less', 0, 5, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <div class="btn btn-xs square" id="AstrolabeCureAdditionBtn_Minus">
                                 <i class="fa fa-minus"></i>
                             </div>
-                            <div class="number" id="CureBoost">5</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('CureBoost', 'plus', 0, 5, 1)" ontouchstart="btnRangeDown('CureBoost', 'plus', 0, 5, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <input type="number" class="number" id="AstrolabeCureAdditionInput" value="0" min="0" max="0">
+                            <div class="btn btn-xs square" id="AstrolabeCureAdditionBtn_Plus">
                                 <i class="fa fa-plus"></i>
                             </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('CureBoost', 5, 5)">
+                            <div class="btn btn-xs right" id="AstrolabeCureAdditionBtn_StepForward">
                                 <i class="fa fa-step-forward"></i>
                             </div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="CureBoostBar" role="progressbar" style="width: 100%;" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5"></div>
-                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="AstrolabeCureAdditionBar"></div>
                     </div>
-            
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">聖屬性攻擊+1%</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('HolyAtkOne', 0, 3)">
+
+                    <div class="item-block col-lg-4 col-md-6 col-12">
+                        <div class="input-group" id="AstrolabeHolyAtkOneGroup">
+                            <label class="title">聖屬性攻擊+1%</label>
+                            <div class="btn btn-xs left" id="AstrolabeHolyAtkOneBtn_StepBackward">
                                 <i class="fa fa-step-backward"></i>
                             </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('HolyAtkOne', 'less', 0, 3, 1)" ontouchstart="btnRangeDown('HolyAtkOne', 'less', 0, 3, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <div class="btn btn-xs square" id="AstrolabeHolyAtkOneBtn_Minus">
                                 <i class="fa fa-minus"></i>
                             </div>
-                            <div class="number" id="HolyAtkOne">3</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('HolyAtkOne', 'plus', 0, 3, 1)" ontouchstart="btnRangeDown('HolyAtkOne', 'plus', 0, 3, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <input type="number" class="number" id="AstrolabeHolyAtkOneInput" value="0" min="0" max="0">
+                            <div class="btn btn-xs square" id="AstrolabeHolyAtkOneBtn_Plus">
                                 <i class="fa fa-plus"></i>
                             </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('HolyAtkOne', 3, 3)">
+                            <div class="btn btn-xs right" id="AstrolabeHolyAtkOneBtn_StepForward">
                                 <i class="fa fa-step-forward"></i>
                             </div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="HolyAtkOneBar" role="progressbar" style="width: 100%;" aria-valuenow="3" aria-valuemin="0"
-                                aria-valuemax="3"></div>
-                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="AstrolabeHolyAtkOneBar"></div>
                     </div>
-            
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">聖屬性攻擊+2%</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('HolyAtkTwo', 0, 2)">
+
+                    <div class="item-block col-lg-4 col-md-6 col-12">
+                        <div class="input-group" id="AstrolabeHolyAtkTwoGroup">
+                            <label class="title">聖屬性攻擊+2%</label>
+                            <div class="btn btn-xs left" id="AstrolabeHolyAtkTwoBtn_StepBackward">
                                 <i class="fa fa-step-backward"></i>
                             </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('HolyAtkTwo', 'less', 0, 2, 1)" ontouchstart="btnRangeDown('HolyAtkTwo', 'less', 0, 2, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <div class="btn btn-xs square" id="AstrolabeHolyAtkTwoBtn_Minus">
                                 <i class="fa fa-minus"></i>
                             </div>
-                            <div class="number" id="HolyAtkTwo">1</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('HolyAtkTwo', 'plus', 0, 2, 1)" ontouchstart="btnRangeDown('HolyAtkTwo', 'plus', 0, 2, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <input type="number" class="number" id="AstrolabeHolyAtkTwoInput" value="0" min="0" max="0">
+                            <div class="btn btn-xs square" id="AstrolabeHolyAtkTwoBtn_Plus">
                                 <i class="fa fa-plus"></i>
                             </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('HolyAtkTwo', 2, 2)">
+                            <div class="btn btn-xs right" id="AstrolabeHolyAtkTwoBtn_StepForward">
                                 <i class="fa fa-step-forward"></i>
                             </div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="HolyAtkTwoBar" role="progressbar" style="width: 50%;" aria-valuenow="1" aria-valuemin="0" aria-valuemax="2"></div>
-                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="AstrolabeHolyAtkTwoBar"></div>
                     </div>
                 </form>
             
                 <!-- 公會 -->
-                <form class="row block" onclick="readGroupGoddes()" onmouseup="readGroupGoddes()" onmouseout="readGroupGoddes()" ontouchend="readGroupGoddes()"
-                    ontouchcancel="readGroupGoddes()">
+                <form class="row block">
                     <div class="col-12 title">公會（女神祝福）</div>
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">聖屬性攻擊</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('HolyAtkGoddes', 0, 20)">
+
+                    <div class="item-block col-lg-4 col-md-6 col-12">
+                        <div class="input-group" id="GroupGoddesHolyAtkGroup">
+                            <label class="title">聖屬性攻擊</label>
+                            <div class="btn btn-xs left" id="GroupGoddesHolyAtkBtn_StepBackward">
                                 <i class="fa fa-step-backward"></i>
                             </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('HolyAtkGoddes', 'less', 0, 20, 1)" ontouchstart="btnRangeDown('HolyAtkGoddes', 'less', 0, 20, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <div class="btn btn-xs square" id="GroupGoddesHolyAtkBtn_Minus">
                                 <i class="fa fa-minus"></i>
                             </div>
-                            <div class="number" id="HolyAtkGoddes">10</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('HolyAtkGoddes', 'plus', 0, 20, 1)" ontouchstart="btnRangeDown('HolyAtkGoddes', 'plus', 0, 20, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <input type="number" class="number" id="GroupGoddesHolyAtkInput" value="0" min="0" max="0">
+                            <div class="btn btn-xs square" id="GroupGoddesHolyAtkBtn_Plus">
                                 <i class="fa fa-plus"></i>
                             </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('HolyAtkGoddes', 20, 20)">
+                            <div class="btn btn-xs right" id="GroupGoddesHolyAtkBtn_StepForward">
                                 <i class="fa fa-step-forward"></i>
                             </div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="HolyAtkGoddesBar" role="progressbar" style="width: 50%;" aria-valuenow="10" aria-valuemin="0"
-                                aria-valuemax="20"></div>
-                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="GroupGoddesHolyAtkBar"></div>
                     </div>
                 </form>
 
                 <!-- 裝備 -->
-                <form class="row block" onclick="readEquipment()" onmouseup="readEquipment()" onmouseout="readEquipment()" ontouchend="readEquipment()"
-                    ontouchcancel="readEquipment()" onchange="readEquipment()">
-                    <div class="col-12 title">裝備</div>
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">紅十字杖-精煉</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('Arms', 0, 15)">
-                                <i class="fa fa-step-backward"></i>
+                <form class="row block">
+                    <div class="col-12 title">
+                        <i class="fa fa-plus"></i> 裝備</div>
+                    <div class="details col-12 hide">
+                        <div class="d-flex flex-wrap">
+                            <div class="title">武器</div>
+                            <div class="col-lg-4 col-md-5 col-12">
+                                <div class="card disabled" id="CardEquipmentArms1">
+                                    <div class="title">
+                                        <i class="status fa fa-close"></i>
+                                        <label>【恢復之杖】</label>
+                                        <div class="tag hide">武器</div>
+                                    </div>
+                                    <p>精煉每+1，則【治癒術】【光耀之堂】恢復效果提升3%。</p>
+                                </div>
                             </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('Arms', 'less', 0, 15, 1)" ontouchstart="btnRangeDown('Arms', 'less', 1, 15, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
-                                <i class="fa fa-minus"></i>
+                            <div class="col-lg-4 col-md-5 col-12">
+                                <div class="card disabled" id="CardEquipmentArms2">
+                                    <div class="title">
+                                        <i class="status fa fa-close"></i>
+                                        <label>【紅十字杖】</label>
+                                        <div class="tag hide">武器</div>
+                                    </div>
+                                    <p>精煉每+1，則【治癒術】【光耀之堂】恢復效果提升4%。</p>
+                                </div>
                             </div>
-                            <div class="number" id="Arms">10</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('Arms', 'plus', 0, 15, 1)" ontouchstart="btnRangeDown('Arms', 'plus', 0, 15, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
-                                <i class="fa fa-plus"></i>
+                            <div class="col-lg-4 col-md-5 col-12">
+                                <div class="card disabled" id="CardEquipmentArms3">
+                                    <div class="title">
+                                        <i class="status fa fa-close"></i>
+                                        <label>【紅十字杖Ⅷ↑+13↑】</label>
+                                        <div class="tag hide">武器</div>
+                                    </div>
+                                    <p>魔法攻擊+5%，
+                                        <b>治療加成+10%</b>。</p>
+                                </div>
                             </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('Arms', 15, 15)">
-                                <i class="fa fa-step-forward"></i>
+
+                            <div class="title">衣服</div>
+                            <div class="col-lg-4 col-md-5 col-12">
+                                <div class="card disabled" id="CardEquipmentClothes1">
+                                    <div class="title">
+                                        <i class="status fa fa-close"></i>
+                                        <label>【天衣月舞Ⅷ↑+10↑】</label>
+                                        <div class="tag hide">衣服</div>
+                                    </div>
+                                    <p>
+                                        <b>治療加成+5%。</b>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="ArmsBar" role="progressbar" style="width: 67%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="15"></div>
+                    
+                            <div class="title">頭飾</div>
+                            <div class="col-lg-4 col-md-5 col-12">
+                                <div class="card disabled" id="CardEquipmentHead1">
+                                    <div class="title">
+                                        <i class="status fa fa-close"></i>
+                                        <label>【懶懶波利】</label>
+                                        <div class="tag hide">頭飾</div>
+                                    </div>
+                                    <p>
+                                        <b>聖屬性攻擊+3%，每精煉+1，治療加成+1%</b>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="title">背飾</div>
+                            <div class="col-lg-4 col-md-5 col-12">
+                                <div class="card disabled" id="CardEquipmentBack1">
+                                    <div class="title">
+                                        <i class="status fa fa-close"></i>
+                                        <label>【寶貝・別哭】</label>
+                                        <div class="tag hide">背飾</div>
+                                    </div>
+                                    <p>
+                                        <b>治療加成+3%、聖屬性攻擊+3%。</b>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-12">
+                                <div class="card disabled" id="CardEquipmentBack2">
+                                    <div class="title">
+                                        <i class="status fa fa-close"></i>
+                                        <label>【賢者之書】</label>
+                                        <div class="tag hide">背飾</div>
+                                    </div>
+                                    <p>風、地、水、火、
+                                        <b>聖屬性攻擊＋5%</b>。</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-12">
+                                <div class="card disabled" id="CardEquipmentBack3">
+                                    <div class="title">
+                                        <i class="status fa fa-close"></i>
+                                        <label>【金色聖誕鈴鐺】</label>
+                                        <div class="tag hide">背飾</div>
+                                    </div>
+                                    <p>
+                                        <b>聖屬性攻擊+8%。</b>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="title">寵物</div>
+                            <div class="col-lg-4 col-md-5 col-12">
+                                <div class="card disabled" id="CardEquipmentPet1">
+                                    <div class="title">
+                                        <i class="status fa fa-close"></i>
+                                        <label>【畢帝特地龍】技能-治療效果UP</label>
+                                        <div class="tag hide">寵物</div>
+                                    </div>
+                                    <p>每提升一級，
+                                        <b>增加寵物和主人0.5%治療加成</b>。
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="title">神器</div>
+                            <div class="col-lg-4 col-md-5 col-12">
+                                <div class="card disabled" id="CardEquipmentArtifact">
+                                    <div class="title">
+                                        <i class="status fa fa-close"></i>
+                                        <label>【金枝】</label>
+                                        <div class="tag hide">神器</div>
+                                    </div>
+                                    <p>
+                                        <b>治療加成+15%。</b>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="title">套裝效果</div>
+                            <div class="col-lg-4 col-md-5 col-12">
+                                <div class="card disabled" id="CardEquipmentWearing1">
+                                    <div class="title">
+                                        <i class="status fa fa-close"></i>
+                                        <label>【紅十字杖Ⅳ↑】+【天衣月舞Ⅳ↑】</label>
+                                        <div class="tag hide">套裝</div>
+                                    </div>
+                                    <p>
+                                        <b>治療加成+5%。</b>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-12">
+                                <div class="card disabled" id="CardEquipmentWearing2">
+                                    <div class="title">
+                                        <i class="status fa fa-close"></i>
+                                        <label>【紅十字杖Ⅳ↑】+【天衣月舞Ⅳ↑+10↑】</label>
+                                        <div class="tag hide">套裝</div>
+                                    </div>
+                                    <p>
+                                        <b>治療加成+5%。</b>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">紅十字杖-進化</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('ArmsBoost', 0, 4)">
-                                <i class="fa fa-step-backward"></i>
-                            </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('ArmsBoost', 'less', 0, 4, 1)" ontouchstart="btnRangeDown('ArmsBoost', 'less', 0, 4, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
-                                <i class="fa fa-minus"></i>
-                            </div>
-                            <div class="number" id="ArmsBoost">0</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('ArmsBoost', 'plus', 0, 4, 1)" ontouchstart="btnRangeDown('ArmsBoost', 'plus', 0, 4, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
-                                <i class="fa fa-plus"></i>
-                            </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('ArmsBoost', 4, 4)">
-                                <i class="fa fa-step-forward"></i>
-                            </div>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="ArmsBoostBar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="4"></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">天衣月舞-精煉</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('Clothes', 0, 15)">
-                                <i class="fa fa-step-backward"></i>
-                            </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('Clothes', 'less', 0, 15, 1)" ontouchstart="btnRangeDown('Clothes', 'less', 0, 15, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
-                                <i class="fa fa-minus"></i>
-                            </div>
-                            <div class="number" id="Clothes">10</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('Clothes', 'plus', 0, 15, 1)" ontouchstart="btnRangeDown('Clothes', 'plus', 0, 15, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
-                                <i class="fa fa-plus"></i>
-                            </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('Clothes', 15, 15)">
-                                <i class="fa fa-step-forward"></i>
-                            </div>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="ClothesBar" role="progressbar" style="width: 67%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="15"></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">天衣月舞-進化</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('ClothesBoost', 0, 4)">
-                                <i class="fa fa-step-backward"></i>
-                            </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('ClothesBoost', 'less', 0, 4, 1)" ontouchstart="btnRangeDown('ClothesBoost', 'less', 0, 4, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
-                                <i class="fa fa-minus"></i>
-                            </div>
-                            <div class="number" id="ClothesBoost">0</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('ClothesBoost', 'plus', 0, 4, 1)" ontouchstart="btnRangeDown('ClothesBoost', 'plus', 0, 4, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
-                                <i class="fa fa-plus"></i>
-                            </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('ClothesBoost', 4, 4)">
-                                <i class="fa fa-step-forward"></i>
-                            </div>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="ClothesBoostBar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
-                                aria-valuemax="4"></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">背飾</div>
-                            <select class="border-rounded" id="Back" onchange="selectBar('Back',3)">
+                    <!-- 武器 -->
+                    <div class="item-block select-group col-lg-4 col-md-6 col-12">
+                        <div class="title">
+                            <label class="left" for="EquipmentArms">武器</label>
+                            <select class="select" name="" id="EquipmentArms">
                                 <option value="0">無</option>
-                                <option value="1">寶貝・別哭</option>
-                                <option value="2">賢者之書</option>
-                                <option value="3">金色聖誕鈴鐺</option>
+                                <option value="1">恢復之杖</option>
+                                <option value="2">紅十字杖</option>
                             </select>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="BackBar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="3"></div>
-                        </div>
-            
-                    </div>
-            
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">寵物-畢帝特地龍</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('PetSkill', 0, 10)">
+                        <hr>
+                        <div class="input-group" id="EquipmentArmsRefiningGroup">
+                            <div class="filter"></div>
+                            <label class="left" for="">精煉</label>
+                            <div class="btn btn-xs left" id="EquipmentArmsRefiningBtn_StepBackward">
                                 <i class="fa fa-step-backward"></i>
                             </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('PetSkill', 'less', 0, 10, 1)" ontouchstart="btnRangeDown('PetSkill', 'less', 0, 10, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <div class="btn btn-xs square" id="EquipmentArmsRefiningBtn_Minus">
                                 <i class="fa fa-minus"></i>
                             </div>
-                            <div class="number" id="PetSkill">10</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('PetSkill', 'plus', 0, 10, 1)" ontouchstart="btnRangeDown('PetSkill', 'plus', 0, 10, 1)"
-                                onmouseup="btnRangeUp()" onmouseout="btnRangeUp()" ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()"
-                                ontouchmove="CancelEvent(event)">
+                            <input type="number" class="number" id="EquipmentArmsRefiningInput" value="0" min="0" max="15">
+                            <div class="btn btn-xs square" id="EquipmentArmsRefiningBtn_Plus">
                                 <i class="fa fa-plus"></i>
                             </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('PetSkill', 10, 10)">
+                            <div class="btn btn-xs right" id="EquipmentArmsRefiningBtn_StepForward">
                                 <i class="fa fa-step-forward"></i>
                             </div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="PetSkillBar" role="progressbar" style="width: 100%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10"></div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="EquipmentArmsRefiningBar"></div>
+
+                        <div class="input-group" id="EquipmentArmsBoostGroup">
+                            <div class="filter"></div>
+                            <label class="left" for="">進化</label>
+                            <div class="btn btn-xs left" id="EquipmentArmsBoostBtn_StepBackward">
+                                <i class="fa fa-step-backward"></i>
+                            </div>
+                            <div class="btn btn-xs square" id="EquipmentArmsBoostBtn_Minus">
+                                <i class="fa fa-minus"></i>
+                            </div>
+                            <input type="number" class="number" id="EquipmentArmsBoostInput" value="0" min="0" max="8">
+                            <div class="btn btn-xs square" id="EquipmentArmsBoostBtn_Plus">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <div class="btn btn-xs right" id="EquipmentArmsBoostBtn_StepForward">
+                                <i class="fa fa-step-forward"></i>
+                            </div>        
+                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="EquipmentArmsBoostBar"></div>
+                    </div>
+                    <!-- 衣服 -->
+                    <div class="item-block select-group col-lg-4 col-md-6 col-12">
+                        <div class="title">
+                            <label class="left" for="EquipmentClothes">衣服</label>
+                            <select class="select" name="" id="EquipmentClothes">
+                                <option value="0">無</option>
+                                <option value="1" selected>天衣月舞</option>
+                            </select>
+                        </div>
+                        <hr>
+                        <div class="input-group" id="EquipmentClothesRefiningGroup">
+                            <div class="filter"></div>
+                            <label class="left" for="">精煉</label>
+                            <div class="btn btn-xs left" id="EquipmentClothesRefiningBtn_StepBackward">
+                                <i class="fa fa-step-backward"></i>
+                            </div>
+                            <div class="btn btn-xs square" id="EquipmentClothesRefiningBtn_Minus">
+                                <i class="fa fa-minus"></i>
+                            </div>
+                            <input type="number" class="number" id="EquipmentClothesRefiningInput" value="0" min="0" max="15">
+                            <div class="btn btn-xs square" id="EquipmentClothesRefiningBtn_Plus">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <div class="btn btn-xs right" id="EquipmentClothesRefiningBtn_StepForward">
+                                <i class="fa fa-step-forward"></i>
+                            </div>
+                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="EquipmentClothesRefiningBar"></div>
+
+                        <div class="input-group" id="EquipmentClothesBoostGroup">
+                            <div class="filter"></div>
+                            <label class="left" for="">進化</label>
+                            <div class="btn btn-xs left" id="EquipmentClothesBoostBtn_StepBackward">
+                                <i class="fa fa-step-backward"></i>
+                            </div>
+                            <div class="btn btn-xs square" id="EquipmentClothesBoostBtn_Minus">
+                                <i class="fa fa-minus"></i>
+                            </div>
+                            <input type="number" class="number" id="EquipmentClothesBoostInput" value="0" min="0" max="8">
+                            <div class="btn btn-xs square" id="EquipmentClothesBoostBtn_Plus">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <div class="btn btn-xs right" id="EquipmentClothesBoostBtn_StepForward">
+                                <i class="fa fa-step-forward"></i>
+                            </div>
+                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="EquipmentClothesBoostBar"></div>
+                    </div>
+                    <!-- 頭飾 -->
+                    <div class="item-block select-group col-lg-4 col-md-6 col-12">
+                        <div class="title">
+                            <label class="left" for="EquipmentHead">頭飾</label>
+                            <select class="select" name="" id="EquipmentHead">
+                                <option value="0">無</option>
+                                <option value="1">懶懶波利</option>
+                            </select>
+                        </div>
+                        <hr>
+                        <div class="input-group" id="EquipmentHeadRefiningGroup">
+                            <div class="filter"></div>
+                            <label class="left" for="">精煉</label>
+                            <div class="btn btn-xs left" id="EquipmentHeadRefiningBtn_StepBackward">
+                                <i class="fa fa-step-backward"></i>
+                            </div>
+                            <div class="btn btn-xs square" id="EquipmentHeadRefiningBtn_Minus">
+                                <i class="fa fa-minus"></i>
+                            </div>
+                            <input type="number" class="number" id="EquipmentHeadRefiningInput" value="0" min="0" max="15">
+                            <div class="btn btn-xs square" id="EquipmentHeadRefiningBtn_Plus">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <div class="btn btn-xs right" id="EquipmentHeadRefiningBtn_StepForward">
+                                <i class="fa fa-step-forward"></i>
+                            </div>
+                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="EquipmentHeadRefiningBar"></div>
+
+                        <div class="input-group" id="EquipmentHeadBoostGroup">
+                            <div class="filter"></div>
+                            <label class="left" for="">進化</label>
+                            <div class="btn btn-xs left" id="EquipmentHeadBoostBtn_StepBackward">
+                                <i class="fa fa-step-backward"></i>
+                            </div>
+                            <div class="btn btn-xs square" id="EquipmentHeadBoostBtn_Minus">
+                                <i class="fa fa-minus"></i>
+                            </div>
+                            <input type="number" class="number" id="EquipmentHeadBoostInput" value="0" min="0" max="8">
+                            <div class="btn btn-xs square" id="EquipmentHeadBoostBtn_Plus">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <div class="btn btn-xs right" id="EquipmentHeadBoostBtn_StepForward">
+                                <i class="fa fa-step-forward"></i>
+                            </div>
+                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="EquipmentHeadBoostBar"></div>
+                    </div>
+                    <!-- 其它 -->
+                    <div class="item-block other col-lg-12 col-md-6 col-12">
+                        <!-- 背飾 -->
+                        <div class="element col-lg-4 col-12">
+                            <div class="item-block select-group">
+                                <div class="title">
+                                    <label class="left" for="EquipmentBack">背飾</label>
+                                    <select class="select" name="" id="EquipmentBack">
+                                        <option value="0">無</option>
+                                        <option value="1">寶貝・別哭</option>
+                                        <option value="2">賢者之書</option>
+                                        <option value="3">金色聖誕鈴鐺</option>
+                                    </select>
+                                </div>
+                                <!-- #region 未使用 起-->
+                                <hr class="hide">
+                                <div class="input-group hide" id="EquipmentBackRefiningGroup">
+                                    <div class="filter"></div>
+                                    <label class="left" for="">精煉</label>
+                                    <div class="btn btn-xs left" id="EquipmentBackRefiningBtn_StepBackward">
+                                        <i class="fa fa-step-backward"></i>
+                                    </div>
+                                    <div class="btn btn-xs square" id="EquipmentBackRefiningBtn_Minus">
+                                        <i class="fa fa-minus"></i>
+                                    </div>
+                                    <input type="number" class="number" id="EquipmentBackRefiningInput" value="0" min="0" max="15">
+                                    <div class="btn btn-xs square" id="EquipmentBackRefiningBtn_Plus">
+                                        <i class="fa fa-plus"></i>
+                                    </div>
+                                    <div class="btn btn-xs right" id="EquipmentBackRefiningBtn_StepForward">
+                                        <i class="fa fa-step-forward"></i>
+                                    </div>
+                                </div>
+                                <!-- Use JQuerry for ProgressBar -->
+                                <div class="progress hide" id="EquipmentBackRefiningBar"></div>
+                        
+                                <div class="input-group hide" id="EquipmentBackBoostGroup">
+                                    <div class="filter"></div>
+                                    <label class="left" for="">進化</label>
+                                    <div class="btn btn-xs left" id="EquipmentBackBoostBtn_StepBackward">
+                                        <i class="fa fa-step-backward"></i>
+                                    </div>
+                                    <div class="btn btn-xs square" id="EquipmentBackBoostBtn_Minus">
+                                        <i class="fa fa-minus"></i>
+                                    </div>
+                                    <input type="number" class="number" id="EquipmentBackBoostInput" value="0" min="0" max="8">
+                                    <div class="btn btn-xs square" id="EquipmentBackBoostBtn_Plus">
+                                        <i class="fa fa-plus"></i>
+                                    </div>
+                                    <div class="btn btn-xs right" id="EquipmentBackBoostBtn_StepForward">
+                                        <i class="fa fa-step-forward"></i>
+                                    </div>
+                                </div>                    
+                                <!-- Use JQuerry for ProgressBar -->
+                                <div class="progress hide" id="EquipmentBackBoostBar"></div>
+                                <!-- #endregion 未使用 終-->
+                                <!-- Use JQuerry for ProgressBar -->
+                                <div class="progress" id="EquipmentBackBar" style="margin-left: 0px"></div>  
+                            </div>
+                        </div>
+                        <!-- 寵物 -->
+                        <div class="element col-lg-4 col-12">
+                            <div class="input-group" id="EquipmentPetGroup">
+                                <label class="title">寵物-畢帝特地龍</label>
+                                <div class="btn btn-xs left" id="EquipmentPetBtn_StepBackward">
+                                    <i class="fa fa-step-backward"></i>
+                                </div>
+                                <div class="btn btn-xs square" id="EquipmentPetBtn_Minus">
+                                    <i class="fa fa-minus"></i>
+                                </div>
+                                <input type="number" class="number" id="EquipmentPetInput" value="0" min="0" max="10">
+                                <div class="btn btn-xs square" id="EquipmentPetBtn_Plus">
+                                    <i class="fa fa-plus"></i>
+                                </div>
+                                <div class="btn btn-xs right" id="EquipmentPetBtn_StepForward">
+                                    <i class="fa fa-step-forward"></i>
+                                </div>
+                            </div>
+                            <!-- Use JQuerry for ProgressBar -->
+                            <div class="progress" id="EquipmentPetBar"></div>
+                        </div>
+                        <!-- 神器 -->
+                        <div class="element col-lg-4 col-12">
+                            <div class="item-block select-group">
+                                <div class="title">
+                                    <label class="left" for="EquipmentArtifact">神器</label>
+                                    <select class="select" name="" id="EquipmentArtifact">
+                                        <option value="0">無</option>
+                                        <option value="1">金枝</option>
+                                    </select>
+                                </div>
+                                <!-- #region 未使用 起-->
+                                <hr class="hide">
+                                <div class="input-group hide" id="EquipmentArtifactRefiningGroup">
+                                    <div class="filter"></div>
+                                    <label class="left" for="">精煉</label>
+                                    <div class="btn btn-xs left" id="EquipmentArtifactRefiningBtn_StepBackward">
+                                        <i class="fa fa-step-backward"></i>
+                                    </div>
+                                    <div class="btn btn-xs square" id="EquipmentArtifactRefiningBtn_Minus">
+                                        <i class="fa fa-minus"></i>
+                                    </div>
+                                    <input type="number" class="number" id="EquipmentArtifactRefiningInput" value="0" min="0" max="15">
+                                    <div class="btn btn-xs square" id="EquipmentArtifactRefiningBtn_Plus">
+                                        <i class="fa fa-plus"></i>
+                                    </div>
+                                    <div class="btn btn-xs right" id="EquipmentArtifactRefiningBtn_StepForward">
+                                        <i class="fa fa-step-forward"></i>
+                                    </div>
+                                </div>
+                                <!-- Use JQuerry for ProgressBar -->
+                                <div class="progress hide" id="EquipmentArtifactRefiningBar"></div>
+                        
+                                <div class="input-group hide" id="EquipmentArtifactBoostGroup">
+                                    <div class="filter"></div>
+                                    <label class="left" for="">進化</label>
+                                    <div class="btn btn-xs left" id="EquipmentArtifactBoostBtn_StepBackward">
+                                        <i class="fa fa-step-backward"></i>
+                                    </div>
+                                    <div class="btn btn-xs square" id="EquipmentArtifactBoostBtn_Minus">
+                                        <i class="fa fa-minus"></i>
+                                    </div>
+                                    <input type="number" class="number" id="EquipmentArtifactBoostInput" value="0" min="0" max="8">
+                                    <div class="btn btn-xs square" id="EquipmentArtifactBoostBtn_Plus">
+                                        <i class="fa fa-plus"></i>
+                                    </div>
+                                    <div class="btn btn-xs right" id="EquipmentArtifactBoostBtn_StepForward">
+                                        <i class="fa fa-step-forward"></i>
+                                    </div>
+                                </div>
+                                <!-- Use JQuerry for ProgressBar -->
+                                <div class="progress hide" id="EquipmentArtifactBoostBar"></div>
+                                <!-- #endregion 未使用 終-->
+                                <!-- Use JQuerry for ProgressBar -->
+                                <div class="progress" id="EquipmentArtifactBar" style="margin-left: 0px"></div>
+                            </div>
                         </div>
                     </div>
                 </form>
+
                 <!-- 附魔 -->
-                <form class="row block" onclick="readEnchanting()" onmouseup="readEnchanting()" onmouseout="readEnchanting()" ontouchend="readEnchanting()"
-                    ontouchcancel="readEnchanting()">
-                    <div class="col-12 title">附魔（治癒加成）
+                <form class="row block">
+                    <div class="col-12 title">附魔（治療加成）
                         <span id="SumEnchanting">0%</span>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">武器</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('ArmsEnchanting', 0, 0.05)">
+                    <div class="item-block col-lg-4 col-md-6 col-12">
+                        <div class="input-group" id="EnchantingTreatmentAdditionArmsGroup">
+                            <label class="title">武器</label>
+                            <div class="btn btn-xs left" id="EnchantingTreatmentAdditionArmsBtn_StepBackward">
                                 <i class="fa fa-step-backward"></i>
                             </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('ArmsEnchanting', 'less', 0, 0.05, 0.001)"
-                                ontouchstart="btnRangeDown('ArmsEnchanting', 'less', 0, 0.05, 0.001)" onmouseup="btnRangeUp()" onmouseout="btnRangeUp()"
-                                ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()" ontouchmove="CancelEvent(event)">
+                            <div class="btn btn-xs square" id="EnchantingTreatmentAdditionArmsBtn_Minus">
                                 <i class="fa fa-minus"></i>
                             </div>
-                            <div class="number" id="ArmsEnchanting">4.0%</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('ArmsEnchanting', 'plus', 0, 0.05, 0.001)"
-                                ontouchstart="btnRangeDown('ArmsEnchanting', 'plus', 0, 0.05, 0.001)" onmouseup="btnRangeUp()" onmouseout="btnRangeUp()"
-                                ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()" ontouchmove="CancelEvent(event)">
+                            <input type="text" class="float" id="EnchantingTreatmentAdditionArmsInput" value="0" min="0" max="0">
+                            <div class="btn btn-xs square" id="EnchantingTreatmentAdditionArmsBtn_Plus">
                                 <i class="fa fa-plus"></i>
                             </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('ArmsEnchanting', 0.05, 0.05)">
+                            <div class="btn btn-xs right" id="EnchantingTreatmentAdditionArmsBtn_StepForward">
                                 <i class="fa fa-step-forward"></i>
                             </div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="ArmsEnchantingBar" role="progressbar" style="width: 80%;" aria-valuenow="4" aria-valuemin="0"
-                                aria-valuemax="5"></div>
-                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="EnchantingTreatmentAdditionArmsBar"></div>
                     </div>
-
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">披風</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('CloakEnchanting', 0, 0.05)">
+                    
+                    <div class="item-block col-lg-4 col-md-6 col-12">
+                        <div class="input-group" id="EnchantingTreatmentAdditionCloakGroup">
+                            <label class="title">披風</label>
+                            <div class="btn btn-xs left" id="EnchantingTreatmentAdditionCloakBtn_StepBackward">
                                 <i class="fa fa-step-backward"></i>
                             </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('CloakEnchanting', 'less', 0, 0.05, 0.001)"
-                                ontouchstart="btnRangeDown('CloakEnchanting', 'less', 0, 0.05, 0.001)" onmouseup="btnRangeUp()" onmouseout="btnRangeUp()"
-                                ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()" ontouchmove="CancelEvent(event)">
+                            <div class="btn btn-xs square" id="EnchantingTreatmentAdditionCloakBtn_Minus">
                                 <i class="fa fa-minus"></i>
                             </div>
-                            <div class="number" id="CloakEnchanting">4.0%</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('CloakEnchanting', 'plus', 0, 0.05, 0.001)"
-                                ontouchstart="btnRangeDown('CloakEnchanting', 'plus', 0, 0.05, 0.001)" onmouseup="btnRangeUp()" onmouseout="btnRangeUp()"
-                                ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()" ontouchmove="CancelEvent(event)">
+                            <input type="text" class="float" id="EnchantingTreatmentAdditionCloakInput" value="0" min="0" max="0">
+                            <div class="btn btn-xs square" id="EnchantingTreatmentAdditionCloakBtn_Plus">
                                 <i class="fa fa-plus"></i>
                             </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('CloakEnchanting', 0.05, 0.05)">
+                            <div class="btn btn-xs right" id="EnchantingTreatmentAdditionCloakBtn_StepForward">
                                 <i class="fa fa-step-forward"></i>
                             </div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="CloakEnchantingBar" role="progressbar" style="width: 80%;" aria-valuenow="0.04" aria-valuemin="0"
-                                aria-valuemax="0.05"></div>
-                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="EnchantingTreatmentAdditionCloakBar"></div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">鞋子</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('ShoesEnchanting', 0, 0.05)">
+                    <div class="item-block col-lg-4 col-md-6 col-12">
+                        <div class="input-group" id="EnchantingTreatmentAdditionShoesGroup">
+                            <label class="title">鞋子</label>
+                            <div class="btn btn-xs left" id="EnchantingTreatmentAdditionShoesBtn_StepBackward">
                                 <i class="fa fa-step-backward"></i>
                             </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('ShoesEnchanting', 'less', 0, 0.05, 0.001)"
-                                ontouchstart="btnRangeDown('ShoesEnchanting', 'less', 0, 0.05, 0.001)" onmouseup="btnRangeUp()" onmouseout="btnRangeUp()"
-                                ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()" ontouchmove="CancelEvent(event)">
+                            <div class="btn btn-xs square" id="EnchantingTreatmentAdditionShoesBtn_Minus">
                                 <i class="fa fa-minus"></i>
                             </div>
-                            <div class="number" id="ShoesEnchanting">4.0%</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('ShoesEnchanting', 'plus', 0, 0.05, 0.001)"
-                                ontouchstart="btnRangeDown('ShoesEnchanting', 'plus', 0, 0.05, 0.001)" onmouseup="btnRangeUp()" onmouseout="btnRangeUp()"
-                                ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()" ontouchmove="CancelEvent(event)">
+                            <input type="text" class="float" id="EnchantingTreatmentAdditionShoesInput" value="0" min="0" max="0">
+                            <div class="btn btn-xs square" id="EnchantingTreatmentAdditionShoesBtn_Plus">
                                 <i class="fa fa-plus"></i>
                             </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('ShoesEnchanting', 0.05, 0.05)">
+                            <div class="btn btn-xs right" id="EnchantingTreatmentAdditionShoesBtn_StepForward">
                                 <i class="fa fa-step-forward"></i>
                             </div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="ShoesEnchantingBar" role="progressbar" style="width: 80%;" aria-valuenow="4" aria-valuemin="0"
-                                aria-valuemax="5"></div>
-                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="EnchantingTreatmentAdditionShoesBar"></div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">頭飾</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('HeadwearEnchanting', 0, 0.05)">
+                    <div class="item-block col-lg-4 col-md-6 col-12">
+                        <div class="input-group" id="EnchantingTreatmentAdditionHeadGroup">
+                            <label class="title">頭飾</label>
+                            <div class="btn btn-xs left" id="EnchantingTreatmentAdditionHeadBtn_StepBackward">
                                 <i class="fa fa-step-backward"></i>
                             </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('HeadwearEnchanting', 'less', 0, 0.05, 0.001)"
-                                ontouchstart="btnRangeDown('HeadwearEnchanting', 'less', 0, 0.05, 0.001)" onmouseup="btnRangeUp()" onmouseout="btnRangeUp()"
-                                ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()" ontouchmove="CancelEvent(event)">
+                            <div class="btn btn-xs square" id="EnchantingTreatmentAdditionHeadBtn_Minus">
                                 <i class="fa fa-minus"></i>
                             </div>
-                            <div class="number" id="HeadwearEnchanting">4.0%</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('HeadwearEnchanting', 'plus', 0, 0.05, 0.001)"
-                                ontouchstart="btnRangeDown('HeadwearEnchanting', 'plus', 0, 0.05, 0.001)" onmouseup="btnRangeUp()" onmouseout="btnRangeUp()"
-                                ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()" ontouchmove="CancelEvent(event)">
+                            <input type="text" class="float" id="EnchantingTreatmentAdditionHeadInput" value="0" min="0" max="0">
+                            <div class="btn btn-xs square" id="EnchantingTreatmentAdditionHeadBtn_Plus">
                                 <i class="fa fa-plus"></i>
                             </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('HeadwearEnchanting', 0.05, 0.05)">
+                            <div class="btn btn-xs right" id="EnchantingTreatmentAdditionHeadBtn_StepForward">
                                 <i class="fa fa-step-forward"></i>
                             </div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="HeadwearEnchantingBar" role="progressbar" style="width: 80%;" aria-valuenow="4" aria-valuemin="0"
-                                aria-valuemax="5"></div>
-                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="EnchantingTreatmentAdditionHeadBar"></div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">臉飾</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('FaceDecorationEnchanting', 0, 0.05)">
+                    <div class="item-block col-lg-4 col-md-6 col-12">
+                        <div class="input-group" id="EnchantingTreatmentAdditionFaceGroup">
+                            <label class="title">臉飾</label>
+                            <div class="btn btn-xs left" id="EnchantingTreatmentAdditionFaceBtn_StepBackward">
                                 <i class="fa fa-step-backward"></i>
                             </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('FaceDecorationEnchanting', 'less', 0, 0.05, 0.001)"
-                                ontouchstart="btnRangeDown('FaceDecorationEnchanting', 'less', 0, 0.05, 0.001)" onmouseup="btnRangeUp()" onmouseout="btnRangeUp()"
-                                ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()" ontouchmove="CancelEvent(event)">
+                            <div class="btn btn-xs square" id="EnchantingTreatmentAdditionFaceBtn_Minus">
                                 <i class="fa fa-minus"></i>
                             </div>
-                            <div class="number" id="FaceDecorationEnchanting">4.0%</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('FaceDecorationEnchanting', 'plus', 0, 0.05, 0.001)"
-                                ontouchstart="btnRangeDown('FaceDecorationEnchanting', 'plus', 0, 0.05, 0.001)" onmouseup="btnRangeUp()" onmouseout="btnRangeUp()"
-                                ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()" ontouchmove="CancelEvent(event)">
+                            <input type="text" class="float" id="EnchantingTreatmentAdditionFaceInput" value="0" min="0" max="0">
+                            <div class="btn btn-xs square" id="EnchantingTreatmentAdditionFaceBtn_Plus">
                                 <i class="fa fa-plus"></i>
                             </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('FaceDecorationEnchanting', 0.05, 0.05)">
+                            <div class="btn btn-xs right" id="EnchantingTreatmentAdditionFaceBtn_StepForward">
                                 <i class="fa fa-step-forward"></i>
                             </div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="FaceDecorationEnchantingBar" role="progressbar" style="width: 80%;" aria-valuenow="4" aria-valuemin="0"
-                                aria-valuemax="5"></div>
-                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="EnchantingTreatmentAdditionFaceBar"></div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">嘴飾</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('MouthDecorationEnchanting', 0, 0.05)">
+                    <div class="item-block col-lg-4 col-md-6 col-12">
+                        <div class="input-group" id="EnchantingTreatmentAdditionMouthGroup">
+                            <label class="title">嘴飾</label>
+                            <div class="btn btn-xs left" id="EnchantingTreatmentAdditionMouthBtn_StepBackward">
                                 <i class="fa fa-step-backward"></i>
                             </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('MouthDecorationEnchanting', 'less', 0, 0.05, 0.001)"
-                                ontouchstart="btnRangeDown('MouthDecorationEnchanting', 'less', 0, 0.05, 0.001)" onmouseup="btnRangeUp()" onmouseout="btnRangeUp()"
-                                ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()" ontouchmove="CancelEvent(event)">
+                            <div class="btn btn-xs square" id="EnchantingTreatmentAdditionMouthBtn_Minus">
                                 <i class="fa fa-minus"></i>
                             </div>
-                            <div class="number" id="MouthDecorationEnchanting">4.0%</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('MouthDecorationEnchanting', 'plus', 0, 0.05, 0.001)"
-                                ontouchstart="btnRangeDown('MouthDecorationEnchanting', 'plus', 0, 0.05, 0.001)" onmouseup="btnRangeUp()" onmouseout="btnRangeUp()"
-                                ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()" ontouchmove="CancelEvent(event)">
+                            <input type="text" class="float" id="EnchantingTreatmentAdditionMouthInput" value="0" min="0" max="0">
+                            <div class="btn btn-xs square" id="EnchantingTreatmentAdditionMouthBtn_Plus">
                                 <i class="fa fa-plus"></i>
                             </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('MouthDecorationEnchanting', 0.05, 0.05)">
+                            <div class="btn btn-xs right" id="EnchantingTreatmentAdditionMouthBtn_StepForward">
                                 <i class="fa fa-step-forward"></i>
                             </div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="MouthDecorationEnchantingBar" role="progressbar" style="width: 80%;" aria-valuenow="4" aria-valuemin="0"
-                                aria-valuemax="5"></div>
-                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="EnchantingTreatmentAdditionMouthBar"></div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">背飾</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('BackDecorationEnchanting', 0, 0.05)">
+                    <div class="item-block col-lg-4 col-md-6 col-12">
+                        <div class="input-group" id="EnchantingTreatmentAdditionBackGroup">
+                            <label class="title">背飾</label>
+                            <div class="btn btn-xs left" id="EnchantingTreatmentAdditionBackBtn_StepBackward">
                                 <i class="fa fa-step-backward"></i>
                             </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('BackDecorationEnchanting', 'less', 0, 0.05, 0.001)"
-                                ontouchstart="btnRangeDown('BackDecorationEnchanting', 'less', 0, 0.05, 0.001)" onmouseup="btnRangeUp()" onmouseout="btnRangeUp()"
-                                ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()" ontouchmove="CancelEvent(event)">
+                            <div class="btn btn-xs square" id="EnchantingTreatmentAdditionBackBtn_Minus">
                                 <i class="fa fa-minus"></i>
                             </div>
-                            <div class="number" id="BackDecorationEnchanting">4.0%</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('BackDecorationEnchanting', 'plus', 0, 0.05, 0.001)"
-                                ontouchstart="btnRangeDown('BackDecorationEnchanting', 'plus', 0, 0.05, 0.001)" onmouseup="btnRangeUp()" onmouseout="btnRangeUp()"
-                                ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()" ontouchmove="CancelEvent(event)">
+                            <input type="text" class="float" id="EnchantingTreatmentAdditionBackInput" value="0" min="0" max="0">
+                            <div class="btn btn-xs square" id="EnchantingTreatmentAdditionBackBtn_Plus">
                                 <i class="fa fa-plus"></i>
                             </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('BackDecorationEnchanting', 0.05, 0.05)">
+                            <div class="btn btn-xs right" id="EnchantingTreatmentAdditionBackBtn_StepForward">
                                 <i class="fa fa-step-forward"></i>
                             </div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="BackDecorationEnchantingBar" role="progressbar" style="width: 80%;" aria-valuenow="4" aria-valuemin="0"
-                                aria-valuemax="5"></div>
-                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="EnchantingTreatmentAdditionBackBar"></div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 col-12 element">
-                        <div class="input-group">
-                            <div class="label mr-auto">尾飾</div>
-                            <div class="btn btn-xs border-rounded-left bg-brown lighten-2" onclick="btnLimit('TailDecorationEnchanting', 0, 0.05)">
+                    <div class="item-block col-lg-4 col-md-6 col-12">
+                        <div class="input-group" id="EnchantingTreatmentAdditionTailGroup">
+                            <label class="title">尾飾</label>
+                            <div class="btn btn-xs left" id="EnchantingTreatmentAdditionTailBtn_StepBackward">
                                 <i class="fa fa-step-backward"></i>
                             </div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('TailDecorationEnchanting', 'less', 0, 0.05, 0.001)"
-                                ontouchstart="btnRangeDown('TailDecorationEnchanting', 'less', 0, 0.05, 0.001)" onmouseup="btnRangeUp()" onmouseout="btnRangeUp()"
-                                ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()" ontouchmove="CancelEvent(event)">
+                            <div class="btn btn-xs square" id="EnchantingTreatmentAdditionTailBtn_Minus">
                                 <i class="fa fa-minus"></i>
                             </div>
-                            <div class="number" id="TailDecorationEnchanting">4.0%</div>
-                            <div class="btn btn-xs border-square bg-brown lighten-3" onmousedown="btnRangeDown('TailDecorationEnchanting', 'plus', 0, 0.05, 0.001)"
-                                ontouchstart="btnRangeDown('TailDecorationEnchanting', 'plus', 0, 0.05, 0.001)" onmouseup="btnRangeUp()" onmouseout="btnRangeUp()"
-                                ontouchend="btnRangeUp()" ontouchcancel="btnRangeUp()" ontouchmove="CancelEvent(event)">
+                            <input type="text" class="float" id="EnchantingTreatmentAdditionTailInput" value="0" min="0" max="0">
+                            <div class="btn btn-xs square" id="EnchantingTreatmentAdditionTailBtn_Plus">
                                 <i class="fa fa-plus"></i>
                             </div>
-                            <div class="btn btn-xs border-rounded-right bg-brown lighten-2" onclick="btnLimit('TailDecorationEnchanting', 0.05, 0.05)">
+                            <div class="btn btn-xs right" id="EnchantingTreatmentAdditionTailBtn_StepForward">
                                 <i class="fa fa-step-forward"></i>
                             </div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="TailDecorationEnchantingBar" role="progressbar" style="width: 80%;" aria-valuenow="4" aria-valuemin="0"
-                                aria-valuemax="5"></div>
-                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="EnchantingTreatmentAdditionTailBar"></div>
                     </div>
-
                 </form>
+
                 <!-- 卡片 -->
-                <form class="row block" onchange="readCard()">
-                    <div class="col-12 title">卡片</div>
-            
-                    <div class="col-lg-3 col-md-4 col-12 element">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="CardSealOfBaiSuzhen" onchange="checkLimitBar('CardSealOfBaiSuzhen')">
-                            <label class="form-check-label" for="CardSealOfBaiSuzhen">頭飾「封印的白素貞卡片」</label>
+                <form class="row block">
+                    <div class="col-12 title">
+                        <i class="fa fa-plus"></i> 卡片</div>
+                    <div class="details col-12 hide">
+                        <div class="d-flex flex-wrap">
+                            <div class="col-lg-4 col-md-5 col-12">
+                                <div class="card disabled" id="CardCardArmsGlowinghand">
+                                    <div class="title">
+                                        <i class="status fa fa-close"></i>
+                                        <label>【光耀之手卡片】</label>
+                                        <div class="tag">武器</div>
+                                    </div>
+                                    <p>
+                                        <b>治療加成+15%。</b>
+                                    </p>
+                                </div>
+                            </div>
+                    
+                            <div class="col-lg-4 col-md-5 col-12">
+                                <div class="card disabled" id="CardCardHeadSealOfBaiSuzhen">
+                                    <div class="title">
+                                        <i class="status fa fa-close"></i>
+                                        <label>【封印的白素貞卡片】</label>
+                                        <div class="tag">頭飾</div>
+                                    </div>
+                                    <p>
+                                        <b>【治癒術】</b>【光耀之堂】
+                                        <b>效果提升10%</b>，SP消耗+20%
+                                    </p>
+                                </div>
+                            </div>
+                    
+                            <div class="col-lg-4 col-md-5 col-12">
+                                <div class="card disabled" id="CardCardAdventrueWitch">
+                                    <div class="title">
+                                        <i class="status fa fa-close"></i>
+                                        <label>存入【巫婆卡片】</label>
+                                        <div class="tag">冒險</div>
+                                    </div>
+                                    <p>
+                                        <b>聖屬性攻擊+1%。</b>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-5 col-12">
+                                <div class="card disabled" id="CardCardAdventrueAngelPoly">
+                                    <div class="title">
+                                        <i class="status fa fa-close"></i>
+                                        <label>存入【天使波利卡片】</label>
+                                        <div class="tag">冒險</div>
+                                    </div>
+                                    <p>
+                                        <b>聖屬性攻擊+5%。</b>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="CardSealOfBaiSuzhenBar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
-                                aria-valuemax="1"></div>
-                        </div>
+
                     </div>
-                    <div class="col-lg-3 col-md-4 col-12 element">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="CardWitch" onchange="checkLimitBar('CardWitch')">
-                            <label class="form-check-label" for="CardWitch">存入「巫婆卡片」</label>
+                    <div class="item-block col-lg-4 col-md-4 col-12">
+                            <div class="input-group">
+                                <input class="checkbox" type="checkbox" id="CardArmsOneGlowinghand">
+                                <label for="CardArmsOneGlowinghand">武器1「光耀之手卡片」</label>
+                            </div>
+                            <div class="progress" id="CardArmsOneGlowinghandBar"></div>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="CardWitchBar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1"></div>
+                        <div class="item-block col-lg-4 col-md-4 col-12">
+                                <div class="input-group">
+                                    <input class="checkbox" type="checkbox" id="CardArmsTwoGlowinghand">
+                                    <label for="CardArmsTwoGlowinghand">武器2「光耀之手卡片」</label>
+                                </div>
+                                <div class="progress" id="CardArmsTwoGlowinghandBar"></div>
+                            </div>
+                    <div class="item-block col-lg-4 col-md-4 col-12">
+                        <div class="input-group">
+                            <input class="checkbox" type="checkbox" id="CardHeadSealOfBaiSuzhen">
+                            <label for="CardHeadSealOfBaiSuzhen">頭飾「封印的白素貞卡片」</label>
                         </div>
+                        <div class="progress" id="CardHeadSealOfBaiSuzhenBar"></div>
                     </div>
-                    <div class="col-lg-3 col-md-4 col-12 element">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="CardAngelPoly" onchange="checkLimitBar('CardAngelPoly')">
-                            <label class="form-check-label" for="CardAngelPoly">存入「天使波利卡片」</label>
+                    <div class="item-block col-lg-4 col-md-4 col-12">
+                        <div class="input-group">
+                            <input class="checkbox" type="checkbox" id="CardAdventrueWitch">
+                            <label for="CardAdventrueWitch">存入「巫婆卡片」</label>
                         </div>
-                        <div class="progress">
-                            <div class="progress-bar" id="CardAngelPolyBar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
-                                aria-valuemax="1"></div>
+                        <div class="progress" id="CardAdventrueWitchBar"></div>
+                    </div>
+                    <div class="item-block col-lg-4 col-md-4 col-12">
+                        <div class="input-group">
+                            <input class="checkbox" type="checkbox" id="CardAdventrueAngelPoly">
+                            <label for="CardAdventrueAngelPoly">存入「天使波利卡片」</label>
                         </div>
+                        <div class="progress" id="CardAdventrueAngelPolyBar"></div>
                     </div>
                 </form>
             </article>
@@ -763,21 +1058,67 @@
             <footer class="row">
                 <div class="result block col-lg-6 col-md-6 col-12">
                     <div class="title">最終治癒量</div>
-                    <div class="finallycure" id="FinallyCure">0.0</div>
+                    <div class="result" id="ResultCure">0</div>
+                    <div class="status">
+                        <i class="" id="ResultCureStatus"></i>
+                        <div class="value" id="ResultCureStatusValue">-</div>
+                    </div>
                 </div>
                 <div class="details block col-lg-6 col-md-6 col-12">
                     <div class="title">詳情</div>
                     <ul>
-                        <li>基礎治癒量：<a id="BaseCureSum">0</a></li>
-                        <li>治癒加成：<a id="CureAdditionSum">0</a></li>
-                        <li>聖屬性攻擊：<a id="HolyAtkSum">0</a></li>
-                        <li>治癒術-強效：<a id="CureBoostSum">0</a></li>
-                        <li>治癒術-效果提升：<a id="CureSkillEffectUp">0</a></li>
+                        <li>
+                            <i class="fa fa-info" data-placement="left" title="受「治癒術、緊急治療」影響"></i>
+                            <div class="label">基礎治癒量</div>
+                            <div class="value" id="DetailsBaseCure"></div>
+                            <div class="status">
+                                <i class="" id="DetailsBaseCureStatus"></i>
+                                <div class="value" id="DetailsBaseCureStatusValue">-</div>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa fa-info" data-placement="left" title="受「冥想、武器、衣服、頭飾、背飾、寵物、附魔、卡片」影響"></i>
+                            <div class="label">治療加成</div>
+                            <div class="value" id="DetailsTreatmentAddition"></div>
+                            <div class="status">
+                                <i class="" id="DetailsTreatmentAdditionStatus"></i>
+                                <div class="value" id="DetailsTreatmentAdditionStatusValue">-</div>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa fa-info" data-placement="left" title="受「星盤、公會(女神祝福)、頭飾、背飾、冒險存入」影響"></i>
+                            <div class="label">聖屬性攻擊</div>
+                            <div class="value" id="DetailsHolyAtk"></div>
+                            <div class="status">
+                                <i class="" id="DetailsHolyAtkStatus"></i>
+                                <div class="value" id="DetailsHolyAtkStatusValue">-</div>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa fa-info" data-placement="left" title="受「星盤(治癒術-強效)」影響"></i>
+                            <div class="label">治癒量增加</div>
+                            <div class="value" id="DetailsCureAddition"></div>
+                            <div class="status">
+                                <i class="" id="DetailsCureAdditionStatus"></i>
+                                <div class="value" id="DetailsCureAdditionStatusValue">-</div>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa fa-info" data-placement="left" title="受「卡片」影響"></i>
+                            <div class="label">治癒術效果提升</div>
+                            <div class="value" id="DetailsCureSkillEffectUp"></div>
+                            <div class="status">
+                                <i class="" id="DetailsCureSkillEffectUpStatus"></i>
+                                <div class="value" id="DetailsCureSkillEffectUpStatusValue">-</div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </footer>
         </div>
     </section>
+
+    <div id="snackbar"></div>
 
     <section class="filler"></section>
 
@@ -787,7 +1128,9 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+
     <!-- then Popper.js, then Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
