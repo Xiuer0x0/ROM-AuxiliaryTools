@@ -96,6 +96,25 @@ var Data = {
                 holyAtk: 0,
             },
         },
+        shoes: {
+            select: 0,
+            refining: {
+                ui: false,
+                value: 0,
+                min: 0,
+                max: 0,
+            },
+            boost: {
+                ui: false,
+                value: 0,
+                min: 0,
+                max: 0,
+            },
+            effect: {
+                treatmentAddition: 0,
+                holyAtk: 0.01,
+            },
+        },
         head: {
             select: 0,
             refining: {
@@ -238,7 +257,7 @@ var Data = {
 }
 
 var DefaultData = {
-    webVersion: "v2",
+    webVersion: "v2.1",
     base: {
         level: 100,
         int: 250,
@@ -267,6 +286,11 @@ var DefaultData = {
             select: 1,
             refining: 10,
             boost: 4,
+        },
+        shoes: {
+            select: 0,
+            refining: 0,
+            boost: 0,
         },
         head: {
             select: 0,
@@ -355,6 +379,11 @@ function Tools_Save() {
                 select: Data.equipment.clothes.select,
                 refining: Data.equipment.clothes.refining.value,
                 boost: Data.equipment.clothes.boost.value,
+            },
+            shoes: {
+                select: Data.equipment.shoes.select,
+                refining: Data.equipment.shoes.refining.value,
+                boost: Data.equipment.shoes.boost.value,
             },
             head: {
                 select: Data.equipment.head.select,
@@ -519,6 +548,9 @@ function Read_Cookie(enabled) {
     Data.equipment.clothes.select = data.equipment.clothes.select;
     Data.equipment.clothes.refining.value = data.equipment.clothes.refining;
     Data.equipment.clothes.boost.value = data.equipment.clothes.boost;
+    Data.equipment.shoes.select = data.equipment.shoes.select;
+    Data.equipment.shoes.refining.value = data.equipment.shoes.refining;
+    Data.equipment.shoes.boost.value = data.equipment.shoes.boost;
     Data.equipment.head.select = data.equipment.head.select;
     Data.equipment.head.refining.value = data.equipment.head.refining;
     Data.equipment.head.boost.value = data.equipment.head.boost;
@@ -590,6 +622,9 @@ function Set_UI() {
         else if (_id == "EquipmentClothes") {
             _equipment = Data.equipment.clothes;
         }
+        else if (_id == "EquipmentShoes") {
+            _equipment = Data.equipment.shoes;
+        }
         else if (_id == "EquipmentHead") {
             _equipment = Data.equipment.head;
         }
@@ -636,6 +671,7 @@ function Set_UI() {
     //裝備
     setSelect("EquipmentArms");
     setSelect("EquipmentClothes");
+    setSelect("EquipmentShoes");
     setSelect("EquipmentHead");
     setSelect("EquipmentBack");
     View_ProgressBar($("#EquipmentBack").attr("id"), 3, Number($("#EquipmentBack").val()));
@@ -1066,6 +1102,10 @@ function Read_InputValueToData(id, block, value) {
             keyWords = "Clothes";
             equipmentData = Data.equipment.clothes;
         }
+        else if (type.search("Shoes") != -1) {
+            keyWords = "Shoes";
+            equipmentData = Data.equipment.shoes;
+        }
         else if (type.search("Head") != -1) {
             keyWords = "Head";
             equipmentData = Data.equipment.head;
@@ -1201,6 +1241,23 @@ function Read_Select(itemId) {
         }
 
         _equipment = Data.equipment.clothes;
+    }
+    else if (itemId == "EquipmentShoes") {
+        //先初始化，再給值
+        reset(Data.equipment.shoes);
+        Data.equipment.shoes.select = selectValue;
+        switch (selectValue) {
+            case 1: //審判之鞋
+                Data.equipment.shoes.refining.ui = true;
+                Data.equipment.shoes.refining.max = 15;
+                Data.equipment.shoes.boost.ui = false;
+                Data.equipment.shoes.boost.max = 0;
+                break;
+            default :
+                break;
+        }
+
+        _equipment = Data.equipment.shoes;
     }
     else if (itemId == "EquipmentHead") {
         //先初始化，再給值
@@ -1415,7 +1472,7 @@ function Calc_DetailsTreatmentAddition() {
     wearingEffect += Data.equipment.arms.refining.value * Data.equipment.arms.effect.treatmentAddition * 1000;
 
     //精煉效果「紅十字杖」
-    if (Data.equipment.arms.select == 2 && Data.equipment.arms.refining.value >= 13) {
+    if (Data.equipment.arms.select == 2 && Data.equipment.arms.refining.value >= 13 && Data.equipment.arms.boost.value >= 8) {
         wearingEffect += 100;
     }
 
@@ -1471,7 +1528,11 @@ function Calc_DetailsTreatmentAddition() {
 function Calc_DetailsHolyAtk() {
     //因小數問題，數值由千分比小數放大至整數，結果儲存為小數.
     var effect = 0;
-
+    
+    //裝備「審判之鞋」
+    if (Data.equipment.shoes.select == 1 && Data.equipment.shoes.refining.value > 10) {
+        effect += (Data.equipment.shoes.refining.value - 10) * 10;
+    }
     //存入「巫婆卡片」
     if (Data.card.adventrue.witch == true) {
         effect += 10;
@@ -1612,6 +1673,19 @@ function View_DetailsCard(id) {
                         break;
                     default:
                         console.log("Not find card >> " + id + " select:" + Data.equipment.clothes.select);
+                        break;
+                }
+            }
+            else if (id.search("EquipmentShoes") != -1) {
+                view("CardEquipmentShoes1", false);
+                switch (Data.equipment.shoes.select) {
+                    case 1:
+                        if (Data.equipment.shoes.refining.value >= 11) {
+                            view("CardEquipmentShoes1", true);
+                        }
+                        break;
+                    default:
+                        console.log("Not find card >> " + id + " select:" + Data.equipment.shoes.select);
                         break;
                 }
             }
