@@ -64,7 +64,7 @@
             <div class="flag-Modal ml-auto">
                 <!-- Button trigger modal (for Bootstrap)-->
                 <button type="button" class="btn-xs btn-secondary" data-toggle="modal" data-target="#ReleaseNotesModal">
-                    V2
+                    V2.
                 </button>
             
                 <!-- Modal -->
@@ -78,6 +78,12 @@
                                 </button>
                             </div>
                             <div class="modal-body">
+                                <div class="version">V2.1</div>
+                                <ul>
+                                    <li>新增 - 鞋子：審判之鞋</li>
+                                    <li>修正 - 紅十字杖，精煉+13且8階效果之條件判斷異常。</li>
+                                </ul>
+                                <div class="date">2018/08/10</div>
                                 <div class="version">V2</div>
                                 <ul>
                                     <li>新增 - 比較功能、道具重點效果說明。</li>
@@ -337,6 +343,7 @@
                         <i class="fa fa-plus"></i> 裝備</div>
                     <div class="details col-12 hide">
                         <div class="d-flex flex-wrap">
+                            <!--#region 武器 -->
                             <div class="title">武器</div>
                             <div class="col-lg-4 col-md-5 col-12">
                                 <div class="card disabled" id="CardEquipmentArms1">
@@ -369,7 +376,8 @@
                                         <b>治療加成+10%</b>。</p>
                                 </div>
                             </div>
-
+                            <!--#endregion 武器 -->
+                            <!--#region 衣服 -->
                             <div class="title">衣服</div>
                             <div class="col-lg-4 col-md-5 col-12">
                                 <div class="card disabled" id="CardEquipmentClothes1">
@@ -383,7 +391,23 @@
                                     </p>
                                 </div>
                             </div>
-                    
+                            <!--#endregion 衣服 -->
+                            <!--#region 鞋子 -->
+                            <div class="title">鞋子</div>
+                            <div class="col-lg-4 col-md-5 col-12">
+                                <div class="card disabled" id="CardEquipmentShoes1">
+                                    <div class="title">
+                                        <i class="status fa fa-close"></i>
+                                        <label>【審判之鞋+11↑】</label>
+                                        <div class="tag hide">鞋子</div>
+                                    </div>
+                                    <p>
+                                        <b>精煉+10以後，再每精煉+1，聖屬性攻擊+1%</b>（最多5%）
+                                    </p>
+                                </div>
+                            </div>
+                            <!--#endregion 鞋子 -->
+                            <!--#region 頭飾 -->
                             <div class="title">頭飾</div>
                             <div class="col-lg-4 col-md-5 col-12">
                                 <div class="card disabled" id="CardEquipmentHead1">
@@ -397,7 +421,8 @@
                                     </p>
                                 </div>
                             </div>
-
+                            <!--#endregion 頭飾 -->
+                            <!--#region 背飾 -->
                             <div class="title">背飾</div>
                             <div class="col-lg-4 col-md-5 col-12">
                                 <div class="card disabled" id="CardEquipmentBack1">
@@ -434,7 +459,8 @@
                                     </p>
                                 </div>
                             </div>
-
+                            <!--#endregion 背飾 -->
+                            <!--#region 寵物 -->
                             <div class="title">寵物</div>
                             <div class="col-lg-4 col-md-5 col-12">
                                 <div class="card disabled" id="CardEquipmentPet1">
@@ -448,7 +474,8 @@
                                     </p>
                                 </div>
                             </div>
-
+                            <!--#endregion 寵物 -->
+                            <!--#region 神器 -->
                             <div class="title">神器</div>
                             <div class="col-lg-4 col-md-5 col-12">
                                 <div class="card disabled" id="CardEquipmentArtifact">
@@ -462,7 +489,8 @@
                                     </p>
                                 </div>
                             </div>
-
+                            <!--#endregion 神器 -->
+                            <!--#region 套裝效果 -->
                             <div class="title">套裝效果</div>
                             <div class="col-lg-4 col-md-5 col-12">
                                 <div class="card disabled" id="CardEquipmentWearing1">
@@ -488,6 +516,7 @@
                                     </p>
                                 </div>
                             </div>
+                            <!--#endregion 套裝效果 -->
                         </div>
                     </div>
                     <!-- 武器 -->
@@ -590,6 +619,56 @@
                         </div>
                         <!-- Use JQuerry for ProgressBar -->
                         <div class="progress" id="EquipmentClothesBoostBar"></div>
+                    </div>
+                    <!-- 鞋子 -->
+                    <div class="item-block select-group col-lg-4 col-md-6 col-12">
+                        <div class="title">
+                            <label class="left" for="EquipmentShoes">鞋子</label>
+                            <select class="select" name="" id="EquipmentShoes">
+                                <option value="0" selected>無</option>
+                                <option value="1">審判之鞋</option>
+                            </select>
+                        </div>
+                        <hr>
+                        <div class="input-group" id="EquipmentShoesRefiningGroup">
+                            <div class="filter"></div>
+                            <label class="left" for="">精煉</label>
+                            <div class="btn btn-xs left" id="EquipmentShoesRefiningBtn_StepBackward">
+                                <i class="fa fa-step-backward"></i>
+                            </div>
+                            <div class="btn btn-xs square" id="EquipmentShoesRefiningBtn_Minus">
+                                <i class="fa fa-minus"></i>
+                            </div>
+                            <input type="number" class="number" id="EquipmentShoesRefiningInput" value="0" min="0" max="15">
+                            <div class="btn btn-xs square" id="EquipmentShoesRefiningBtn_Plus">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <div class="btn btn-xs right" id="EquipmentShoesRefiningBtn_StepForward">
+                                <i class="fa fa-step-forward"></i>
+                            </div>
+                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="EquipmentShoesRefiningBar"></div>
+
+                        <div class="input-group" id="EquipmentShoesBoostGroup">
+                            <div class="filter"></div>
+                            <label class="left" for="">進化</label>
+                            <div class="btn btn-xs left" id="EquipmentShoesBoostBtn_StepBackward">
+                                <i class="fa fa-step-backward"></i>
+                            </div>
+                            <div class="btn btn-xs square" id="EquipmentShoesBoostBtn_Minus">
+                                <i class="fa fa-minus"></i>
+                            </div>
+                            <input type="number" class="number" id="EquipmentShoesBoostInput" value="0" min="0" max="8">
+                            <div class="btn btn-xs square" id="EquipmentShoesBoostBtn_Plus">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <div class="btn btn-xs right" id="EquipmentShoesBoostBtn_StepForward">
+                                <i class="fa fa-step-forward"></i>
+                            </div>
+                        </div>
+                        <!-- Use JQuerry for ProgressBar -->
+                        <div class="progress" id="EquipmentShoesBoostBar"></div>
                     </div>
                     <!-- 頭飾 -->
                     <div class="item-block select-group col-lg-4 col-md-6 col-12">
