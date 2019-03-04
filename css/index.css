@@ -52,7 +52,9 @@ h3 ~ .tools .card {
 }
 
 .card .card-body > a {
-    float: right;
+    position: absolute;
+    top: 230px;
+    right: 20px;
 }
 
 .card .card-footer {
