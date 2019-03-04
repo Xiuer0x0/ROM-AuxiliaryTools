@@ -1,0 +1,85 @@
+section header div.title img {
+    width: auto;
+}
+
+input.number{
+    text-align: center;
+}
+
+.input-group .input-group-text,
+.input-group .form-control {
+    border: 1px solid #ced4da;
+}
+
+h3 {
+    font-weight: bold;
+}
+
+#RangeInfo {
+    font-size: 0.8rem;
+    margin-left: 10px;
+    color: red;
+}
+
+article .container.d-flex.flex-wrap {
+    margin-bottom: 8px;
+    padding: 0 30px;
+}
+
+article .container.d-flex.flex-wrap .input-group {
+    padding: 0;
+}
+
+article .container.d-flex.flex-wrap .input-group label:nth-child(1) {
+    display: block;
+    width: 90px;
+    text-align: center;
+}
+
+article .container.d-flex.flex-wrap .input-group label.number.form-control {
+    text-align: right;
+}
+
+article .container.d-flex.flex-wrap .input-group * {
+    border-radius: 0;
+}
+
+article .container.d-flex.flex-wrap .input-group .input-group-text:first-child {
+    border-right: 0;
+}
+
+article .container.d-flex.flex-wrap .input-group .input-group-text:last-child {
+    border-left: 0;
+}
+
+footer ul {
+    padding: 0 30px;
+}
+
+footer ul li {
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+footer table, 
+footer th, 
+footer td {
+    border: 1px solid black;
+}
+
+footer table {
+    width: 100%;
+    min-width: 260px;
+    font-size: 14px;
+}
+
+footer table th,
+footer table td {
+    text-align: center;
+    max-width: 20%;
+}
+
+#CashCouponsCost {
+    color: red;
+    text-align: center;
+}

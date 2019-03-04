@@ -1,0 +1,44 @@
+{
+    // 使用 IntelliSense 以得知可用的屬性。
+    // 暫留以檢視現有屬性的描述。
+    // 如需詳細資訊，請瀏覽: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Admin Item",
+            "url": "http://localhost:8080/admin/item",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "cure",
+            "url": "http://localhost:8080/tools/skill_cure",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "refining",
+            "url": "http://localhost:8080/tools/refining",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "wizard",
+            "url": "http://localhost:8080/tools/wizard",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "prayer",
+            "url": "http://localhost:8080/tools/prayer",
+            "webRoot": "${workspaceFolder}"
+        },
+    ]
+}

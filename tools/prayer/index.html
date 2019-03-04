@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="utf-8">
+    <!-- <meta name="robots" content="noindex, nofollow"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+    <title>祈禱費用估算 - ROM Auxiliary Tools</title>
+    <meta name="description" content="ROMobile輔助工具 - 祈禱費用估算">
+    <meta name="keywords" content="RO,手遊,守護永恆的愛,計算機,試算,祈禱">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119541090-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-119541090-1');
+    </script>
+
+    <link rel="icon" type="image/png" href="/img/logo.png">
+
+    <!-- Font CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <!-- JQuery UI CSS -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/css/mystyle-color.css">
+    <link rel="stylesheet" href="/css/mystyle.css">
+    <link rel="stylesheet" href="/tools/prayer/prayer.css">
+
+    <!-- Global site tag (gtag.js) - Google AdSense -->
+    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5682111162363641",
+            enable_page_level_ads: true
+        });
+    </script>
+-->
+</head>
+
+<body>
+    <!-- Use JQuery Load -->
+    <header id="header"></header>
+
+    <section>
+        <header class="container d-flex flex-wrap" style="padding: 0">
+            <div class="title">
+                <img src="/img/item/prayer.png" alt="">祈禱費用</div>
+            <div class="label align-self-end version">EP 5.0</div>
+            <div class="flag-Modal ml-auto">
+                <!-- Button trigger modal (for Bootstrap) -->
+                <button type="button" class="btn-xs btn-secondary" data-toggle="modal" data-target="#ReleaseNotesModal">V0</button>
+                <!-- Modal -->
+                <!-- ReleaseNotesModal -->
+                <div class="modal fade" id="ReleaseNotesModal" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="modal-title">Release Notes</div>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="version">V0</div>
+                                <ul>
+                                    <li>此功能正式上線，對應官方版本為EP5.0。</li>
+                                </ul>
+                                <div class="date">2019/03/04</div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container align-middle">
+            <!--輸入選項-->
+            <article>
+                <h3>計算範圍<span class="mt-auto" id="RangeInfo"></span></h3>
+                <div class="container d-flex flex-wrap">
+                    <div class="input-group col-lg-4 col-md-6 col-12">
+                        <label class="input-group-text" for="LevelMin">當前等級</label>
+                        <input class="number form-control" type="number" min="0" max="150" value="0" id="LevelMin" >
+                    </div>
+                    <div class="input-group col-lg-4 col-md-6 col-12">
+                        <label class="input-group-text" for="LevelMax">目標等級</label>
+                        <input class="number form-control" type="number" min="0" max="150" value="150" id="LevelMax" >
+                    </div>
+                </div>
+                <h3>折抵項目</h3>
+                <div class="container d-flex flex-wrap">
+                    <div class="input-group col-lg-8 col-12">
+                        <label class="input-group-text" for="CashCoupons">信仰之證</label>
+                        <input class="number form-control" type="text" min="0" value="0" id="CashCoupons" >
+                        <!--<span class="input-group-text">i</span>-->
+                    </div>
+                    <div class="input-group col-lg-8 col-12">
+                        <label class="input-group-text">減免Zeny</label>
+                        <label class="number form-control" id="CashCouponsCost">0</label>
+                    </div>
+                </div>
+                
+            </article>
+
+            <!--結果-->
+            <footer>
+                <h3>統計</h3>
+                <ul>
+                    <li>祝福提升效果</li>
+                    <table>
+                        <thead>
+                            <th>生命<br>MaxHp</th>
+                            <th>戰鬥<br>ATK</th>
+                            <th>智慧<br>MATK</th>
+                            <th>生存<br>DEF</th>
+                            <th>抗魔<br>MDEF</th>
+                        </thead>
+                        <tbody id="EffectTable"></tbody>
+                    </table>
+                    <li>所需費用</li>
+                    <table>
+                        <thead>
+                            <th>貢獻</th>
+                            <th>純Zeny</th>
+                            <th>信仰之證 + Zeny</th>
+                        </thead>
+                        <tbody id="CostTable"></tbody>
+                    </table>
+                </ul>
+            </footer>
+        </div>
+    </section>
+
+    <section class="filler"></section>
+
+    <!-- Use JQuery Load -->
+    <footer id="footer"></footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+
+    <!-- then Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+    <!-- My js -->
+    <script src="/js/script.js"></script>
+    <script src="/tools/prayer/prayer.js"></script>
+
+</body>
+
+</html>
