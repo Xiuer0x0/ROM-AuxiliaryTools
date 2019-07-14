@@ -1,33 +1,28 @@
 $(document).ready(function () {
     //讀取頁首頁尾
-    $("#header").load("/header.html #header"),
-    $("#footer").load("/footer.html #footer"),
+    $('#header').load('/header.html #header');
+    $('#footer').load('/footer.html #footer');
+
     //UI set
-    $(".progress")
+    $('.progress')
         .progressbar({
             value: 0,
             max: 100
         })
-        .ready(function () {
-            $(this).find(".ui-progressbar-value").css({
-                "background": "#007bff",
-                "border": 0,
-                "margin": 0,
-            });
-        }),
-    $("input")
+        .find('.ui-progressbar-value').css({
+            "background": "#007bff",
+            "border": 0,
+            "margin": 0,
+        });
+    $('input')
         .focus(function () {
             $(this).select();
             this.style.imeMode = "inactive";
-        }),
-    $("input.number")
-        .keydown(function(e){
-            return CheckKeydown("", e, this);
-        }),
-    $("input.float")
+        })
         .keydown(function(e) {
-            return CheckKeydown("float", e, this)
-        }),
+            return CheckKeydown(this.className, e, this);
+        })
+
     //UI even
     $(window)
         .scroll(function(){
@@ -44,8 +39,14 @@ $(document).ready(function () {
         })
 })
 
+/** input check key down
+ * 基本允許操作「數字、小鍵盤數字、backspace、tab、delete、方向鍵」，可透過type添加字串而外允許.
+ * @param {string} type 'float'允許小數點，'negative'允許負數，'text'全文字輸入.
+ * @param {*} e 
+ * @param {*} item input物件
+ */
 function CheckKeydown(type, e, item) {
-    var code = parseInt(e.keyCode);
+    const code = parseInt(e.keyCode);
 
     if (code == 13) {   //按下Enter，失焦
         $(item).blur();
@@ -58,7 +59,13 @@ function CheckKeydown(type, e, item) {
         code >= 37 && code <= 40) {     //方向鍵
         return true; 
     }
-    else if (type == "float" && (code == 110 || code == 190)) { //小數點
+    else if (type.indexOf('text') !=  -1) { //全文字允許模式
+
+    }
+    else if (type.indexOf('float') != -1 && (code == 110 || code == 190)) { //小數點
+        return true;
+    }
+    else if (type.indexOf('negative') != -1 &&(code == 109 || code == 189)) { //允許負數
         return true;
     }
     else { 
@@ -85,84 +92,111 @@ function NumberFormat(value, type, float) {
     return value;
 }
 
-//真.四捨五入
+/** 真.四捨五入
+ * @param {number} number 數值.
+ * @param {number} float 小數點位數.
+ * @returns {number}
+ */
 function NumberRound(number, float) {
-    var point = Math.pow(10 , float);
+    const point = Math.pow(10 , float);
     return Math.round(number * point) / point;
 }
 
-//數值 → 百分比
+/** 數值 → 百分比
+ * @param {number} number 數值.
+ * @param {number} float 顯示百分比小數位數.
+ * @returns {string}
+ */
 function NumberPercentage(number, float) {
     return NumberRound(number * 100, float) + "%";
 }
-//百分比 → 數值
+/** 百分比 → 數值
+  * @param {string} NumberPercentage 含百分比的數字字串.
+  * @returns {number} 傳回浮點數.
+ */
 function RemovePercentage(NumberPercentage) {
-    if (NumberPercentage.toString().search("%") != -1) {
+    if (NumberPercentage.toString().indexOf("%") != -1) {
         NumberPercentage = Number(NumberPercentage.replace("%", "")) / 100;
     }
     return NumberPercentage;
 }
 
-//數值 → 千分位顯示
+/** 數值 → 千分位顯示
+ * @param {number} number 數值.
+ * @returns {string} 
+ */
 function ThousandthComma(number) {
-    var num = number.toString();
-    var pattern = /(-?\d+)(\d{3})/;
+    const pattern = /(-?\d+)(\d{3})/;
+    let num = number.toString();
 
     while (pattern.test(num)) {
         num = num.replace(pattern, "$1,$2");
     }
+
     return num;
 }
-//千分位顯示 → 數值
+
+/** 千分位數字字串 轉 數值.
+ * @param {string} number 含千分位的數字字串.
+ * @returns {number}
+ */
 function RemoveComma(number) {
     return number.replace(/[,]+/g, '');
+}
+
+/** 字首轉大寫
+ * @param {string} string 
+ * @return {string}
+ */
+function toFristUpper(string) {
+    return string.toLowerCase().replace(/^\S/g, function (s) { return s.toUpperCase(); });
 }
 
 //#endregion 格式化 
 
 //Progress
 function View_ProgressBar(itemId, max, num) {
-    var bar = $("#" + itemId + "Bar");
-    var nowVal = bar.progressbar("value");
-    var endVal;
+    const $bar = $(`#${itemId}Bar`);
+    let nowVal = $bar.progressbar("value");
+    let endVal;
     num = Number(num);
     max = Number(max);
     //console.log(itemId + "_num:" + num);
     //console.log(itemId + "_max:" + max);
     if (num == 0 && max == 0) {
-        bar.progressbar("value", 0);
+        $bar.progressbar("value", 0);
     }
     else {
         endVal = num / max * 100;
-        var plus = true;
+        let plus = true;
         if (nowVal > endVal) { plus = false; }
         else { plus = true; }
-
-        var timer = setInterval(fn, 10);
+        
         function fn() {
             if (plus == true) {
                 if (nowVal > endVal) {
                     nowVal = endVal;
-                    bar.progressbar("value", nowVal);
+                    $bar.progressbar("value", nowVal);
                     clearInterval(timer);
                 }
                 else {
-                    bar.progressbar("value", nowVal);
+                    $bar.progressbar("value", nowVal);
                     nowVal += 3;
                 };
             }
             else {
                 if (nowVal < endVal) {
                     nowVal = endVal;
-                    bar.progressbar("value", nowVal);
+                    $bar.progressbar("value", nowVal);
                     clearInterval(timer);
                 }
                 else {
-                    bar.progressbar("value", nowVal);
+                    $bar.progressbar("value", nowVal);
                     nowVal -= 3;
                 };
             }
         }
+        let timer = setInterval(fn, 10);
     };
 
     
@@ -170,37 +204,52 @@ function View_ProgressBar(itemId, max, num) {
 
 //Snackbar
 function Snackbar(message) {
-    var x = $("#snackbar");
-    x.text(message);
-    x.attr("class", "show");
-
+    const $x = $("#snackbar");
+    $x.text(message);
+    $x.addClass('show');
+    
     function clear(){
-        x.attr("class", "");
+        $x.removeClass();
     }
     setTimeout(clear, 1500);
 }
 
 //#region Cookie
+/** 將資料存入本機Cookie. 
+ * @param {string} cname 名稱
+ * @param {*} cvalue 內容
+ * @param {number} exdays 過期時間（單位：日）
+ */
 function SetCookie(cname, cvalue, exdays) {
-    var d = new Date();
+    let d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toGMTString();
+
+    const expires = "expires=" + d.toGMTString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
+/** 移除本機Cookie.
+ * @param {string} cname 名稱
+ */
 function RemoveCookie(cname) {
-    var d = new Date();
+    let d = new Date();
     d.setTime(d.getTime() - 1);
-    var expires = "expires=" + d.toGMTString();
+
+    const expires = "expires=" + d.toGMTString();
     document.cookie = cname + "=;" + expires + ";path=/";
 }
 
+/** 取得本機Cookie
+ * @param {string} cname 名稱
+ */
 function GetCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
+    const name = cname + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.split(';');
+
+    const n = ca.length;
+    for(let i = 0; i < n; i++) {
+        let c = ca[i];
         while (c.charAt(0) == ' ') {
             c = c.substring(1);
         }

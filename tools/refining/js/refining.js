@@ -2,8 +2,8 @@
 $(document).ready(
     //精煉範圍
     $(function () {
-        var range_min = $("#Refining-min");
-        var range_max = $("#Refining-max");
+        var $Range_Min = $("#Refining-min");
+        var $Range_Max = $("#Refining-max");
         $("#RefiningRangeSlider")
             .slider({
                 range: true,
@@ -12,14 +12,14 @@ $(document).ready(
                 values: [4, 10],
                 //ticks: [0, 4, 10],
                 create: function () {
-                    range_min.text($(this).slider("values", 0));
-                    range_max.text($(this).slider("values", 1));
-                    Read_RefiningRange(range_min, range_max);
+                    $Range_Min.text($(this).slider("values", 0));
+                    $Range_Max.text($(this).slider("values", 1));
+                    Read_RefiningRange($Range_Min, $Range_Max);
                 },
                 slide: function (even, ui) {
-                    range_min.text(ui.values[0]);
-                    range_max.text(ui.values[1]);
-                    Read_RefiningRange(range_min, range_max);
+                    $Range_Min.text(ui.values[0]);
+                    $Range_Max.text(ui.values[1]);
+                    Read_RefiningRange($Range_Min, $Range_Max);
                     Calculation_NeedTotal(refiningMin, refiningMax);
                     Read_HaveNeed("EquipmentQuantity");
                     Read_HaveNeed("ConsumablesQuantity");
@@ -31,7 +31,7 @@ $(document).ready(
                 effect: "slideDown",
                 delay: 250
             })
-        }),
+    }),
     //輸出圖表
     $("#OutputCharts")
         .CanvasJSChart({
@@ -169,11 +169,11 @@ $(document).ready(
 );
 
 //固定參數
-var needEquipment = [0, 0, 0, 0, 1, 2, 3, 4, 6, 10, 0, 0, 0, 0, 0];
-var needConsumables = [1, 1, 1, 1, 5, 10, 15, 25, 50, 85, 0, 0, 0, 0, 0];
-var costRefining = [10000, 20000, 30000, 40000, 100000, 220000, 470000, 910000, 1630000, 2740000, 0, 0, 0, 0, 0];
-var pricesMarketPercentage = [1, 1, 1, 1, 1.51, 2.56, 4.18, 8.56, 14.2, 22.28, 37.48, 64.8, 0, 0, 336.5];
-var pricesMarketPlus = [10000, 55000, 110000, 175000, 221800, 405200, 875800, 1934600, 3551500, 5933400, 14569200, 25694000, 0, 0, 128295200];
+const needEquipment = [0, 0, 0, 0, 1, 2, 3, 4, 6, 10, 0, 0, 0, 0, 0];
+const needConsumables = [1, 1, 1, 1, 5, 10, 15, 25, 50, 85, 0, 0, 0, 0, 0];
+const costRefining = [10000, 20000, 30000, 40000, 100000, 220000, 470000, 910000, 1630000, 2740000, 0, 0, 0, 0, 0];
+const pricesMarketPercentage = [1, 1, 1, 1, 1.51, 2.56, 4.18, 8.56, 14.2, 22.28, 37.48, 64.8, 0, 0, 336.5];
+const pricesMarketPlus = [10000, 55000, 110000, 175000, 221800, 405200, 875800, 1934600, 3551500, 5933400, 14569200, 25694000, 0, 0, 128295200];
 
 /*---------------------------------------- Read ----------------------------------------*/
 

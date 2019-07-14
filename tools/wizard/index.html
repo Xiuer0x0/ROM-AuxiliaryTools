@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="utf-8">
+    <!--<meta name="robots" content="noindex, nofollow">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+    <title>ROM Auxiliary Tools</title>
+    <meta name="description" content="ROMobile輔助工具 - 法師計算機">
+    <meta name="keywords" content="RO,手遊,守護永恆的愛,計算機,魔法師,巫師,超魔導士,咒術士,詠唱,破防">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119541090-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-119541090-1');
+    </script>
+-->
+    <link rel="icon" type="image/png" href="/img/logo.png">
+
+    <!-- Font CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <!-- JQuery UI CSS -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/css/mystyle-color.css">
+    <link rel="stylesheet" href="/css/mystyle.css">
+    <link rel="stylesheet" href="/tools/wizard/css/wizard.css">
+
+    <!-- Global site tag (gtag.js) - Google AdSense -->
+    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5682111162363641",
+            enable_page_level_ads: true
+        });
+    </script>
+-->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+
+    <!-- then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    
+    <!-- My js -->
+    <script src="/js/script.js"></script>
+    <script src="/tools/wizard/js/wizard.js"></script>
+</head>
+
+<body>
+    <!-- Use JQuery Load -->
+    <header id="header"></header>
+
+    <section>
+        <header class="container d-flex flex-wrap" style="padding: 0">
+            <div class="title">
+                <img src="/img/career/wizard.png" alt="">魔法師</div>
+            <div class="label align-self-end version">EP 4.0</div>
+            <div class="label align-self-end tool-group">
+                <div class="btn btn-xs tools" id="tools-save" title="儲存於本地">
+                    <i class="fa fa-save"></i>
+                </div>
+                <div class="btn btn-xs tools" id="tools-load" title="讀取本地記錄">
+                    <i class="fa fa-folder-open-o"></i>
+                </div>
+                <!--<div class="btn btn-xs tools" id="tools-copy" title="複製本地紀錄"><i class="fa fa-copy"></i></div> -->
+                <div class="btn btn-xs tools" id="tools-default" title="恢復本站預設值">
+                    <i class="fa fa-refresh"></i>
+                </div>
+            </div>
+            <div class="flag-Modal ml-auto">
+                <!-- Button trigger modal (for Bootstrap)-->
+                <button type="button" class="btn-xs btn-secondary" data-toggle="modal" data-target="#ReleaseNotesModal">
+                    V0
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="ReleaseNotesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="modal-title">Release Notes</div>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="version">V0</div>
+                                <ul>
+                                    <li>此功能正式上線，對應官方版本為EP4.0。</li>
+                                </ul>
+                                <div class="date">2018/08/XX</div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container align-middle">
+            <article>
+
+                <div class="container">
+
+                </div>
+
+            </article>
+
+            <footer class="row">
+
+            </footer>
+
+        </div>
+
+    </section>
+
+    <div id="snackbar"></div>
+
+    <section class="filler"></section>
+
+    <!-- Use JQuery Load -->
+    <footer id="footer"></footer>
+
+
+</body>
+
+
+</html>

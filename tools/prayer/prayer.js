@@ -23,6 +23,9 @@ $.ajax({
     }
 })
 
+/** 切割CSV的資料 
+ * @param {String} data CSV 資料
+ */
 function PrayerDataSplit(data) {
     const rows = data.split(/\r?\n|\r/);
     const n = rows.length;
@@ -47,6 +50,11 @@ function PrayerDataSplit(data) {
     return rData;
 }
 
+/** 計算統計資料
+ * @param {Array} data PrayerData
+ * @param {Number} min 當前等級
+ * @param {Number} max 目標等級
+ */
 function calc_sumData(data, min, max) {
     let sum = {
         maxHP: 0,
@@ -59,6 +67,7 @@ function calc_sumData(data, min, max) {
         cashCoupons: 0,
         remainder: 0,
     }
+
     let i = min + 1;
 
     for(; i <= max; i++) {
@@ -72,6 +81,7 @@ function calc_sumData(data, min, max) {
         sum.cashCoupons     += data[i].cashCoupons;
         sum.remainder       += data[i].remainder;
     }
+
     //小數問題
     sum.atk     /= 10;
     sum.matk    /= 10;
@@ -81,23 +91,28 @@ function calc_sumData(data, min, max) {
     return sum;
 }
 
-function calc_CashCoupons(sumData) {
-    if (sumData.zeny > -CashCoupons.cost) {
-        sumData.zeny += CashCoupons.cost;
+/** 計算折抵項目
+ * @param {Object} sData 統計資料
+ * @returns {Object} 回傳折抵後的結果
+ */
+function calc_CashCoupons(sData) {
+    let data = JSON.parse(JSON.stringify(sData));
+    if (data.zeny > -CashCoupons.cost) {
+        data.zeny += CashCoupons.cost;
     }
     else {
-        sumData.zeny = sumData.remainder;
+        data.zeny = data.remainder;
     }
     
 
-    if (sumData.cashCoupons > CashCoupons.ticket) {
-        sumData.cashCoupons -= CashCoupons.ticket;
+    if (data.cashCoupons > CashCoupons.ticket) {
+        data.cashCoupons -= CashCoupons.ticket;
     }
     else {
-        sumData.cashCoupons = 0;
+        data.cashCoupons = 0;
     }
     
-    return sumData;
+    return data;
 }
 
 function view_EffectTable(calcData) {
@@ -172,10 +187,9 @@ $(function() {
             }
             else {
                 sumData = calc_sumData(PrayerData, levelMin, levelMax);
-                sumData = calc_CashCoupons(sumData);
 
                 view_EffectTable(sumData);
-                view_CostTable(sumData)
+                view_CostTable(calc_CashCoupons(sumData))
             }
         })
 
@@ -185,13 +199,11 @@ $(function() {
             this.select();
         })
         .focusout(function() {
-            CashCoupons.ticket = this.value;
+            CashCoupons.ticket = Number(this.value);
             CashCoupons.cost = CashCoupons.ticket * -2000;
             $('#CashCouponsCost').text(ThousandthComma(CashCoupons.cost));
             this.value = ThousandthComma(this.value);
-            
-            calc_CashCoupons(sumData);
-            
-            view_CostTable(sumData);
+
+            view_CostTable(calc_CashCoupons(sumData));
         })
 })

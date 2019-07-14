@@ -1,0 +1,17 @@
+diff a/index.html b/index.html	(rejected hunks)
+@@ -33,6 +33,15 @@
+     <link rel="stylesheet" href="/ROM-AuxiliaryTools/css/mystyle.css">
+     <link rel="stylesheet" href="css/cure.css">
+ 
++    <!-- Global site tag (gtag.js) - Google AdSense -->
++    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
++    <script>
++        (adsbygoogle = window.adsbygoogle || []).push({
++            google_ad_client: "ca-pub-5682111162363641",
++            enable_page_level_ads: true
++        });
++    </script>
++
+ </head>
+ 
+ <body>
